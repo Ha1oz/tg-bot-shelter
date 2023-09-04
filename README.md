@@ -105,7 +105,3 @@ You cannot choose both shelters.
 
 
 ### Happy animal adoption and we are waiting for you again!!!
-
-
-
- 
