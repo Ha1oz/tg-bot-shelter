@@ -3,6 +3,8 @@ package pro.sky.telegrambot.listener;
 import com.pengrad.telegrambot.TelegramBot;
 import com.pengrad.telegrambot.UpdatesListener;
 import com.pengrad.telegrambot.model.Update;
+import com.pengrad.telegrambot.model.request.KeyboardButton;
+import com.pengrad.telegrambot.model.request.ReplyKeyboardMarkup;
 import com.pengrad.telegrambot.request.SendMessage;
 import com.pengrad.telegrambot.response.SendResponse;
 import org.slf4j.Logger;
@@ -17,6 +19,9 @@ import java.util.List;
 public class TelegramBotUpdatesListener implements UpdatesListener {
 
     private Logger logger = LoggerFactory.getLogger(TelegramBotUpdatesListener.class);
+
+    private final String BUTTON_CATSHELTER = "Приют для кошек";
+    private final String BUTTON_DOGSHELTER = "Приют для собак";
 
     @Autowired
     private TelegramBot telegramBot;
@@ -39,7 +44,13 @@ public class TelegramBotUpdatesListener implements UpdatesListener {
                     "Выбери приют";
 
             if (incomingMessage.equalsIgnoreCase("/start")) {
-                SendMessage message = new SendMessage(chatId, welcomeMessage);
+                SendMessage message = new SendMessage(chatId, welcomeMessage)
+                        .replyMarkup(new ReplyKeyboardMarkup(
+                                        new KeyboardButton(BUTTON_CATSHELTER),
+                                        new KeyboardButton(BUTTON_DOGSHELTER))
+                                .oneTimeKeyboard(true)
+                        );
+
                 SendResponse response = telegramBot.execute(message);
             }
         });
