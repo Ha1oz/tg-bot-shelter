@@ -3,6 +3,7 @@ package pro.sky.telegrambot.listener;
 import com.pengrad.telegrambot.TelegramBot;
 import com.pengrad.telegrambot.UpdatesListener;
 import com.pengrad.telegrambot.model.Update;
+import com.pengrad.telegrambot.model.request.Keyboard;
 import com.pengrad.telegrambot.model.request.KeyboardButton;
 import com.pengrad.telegrambot.model.request.ReplyKeyboardMarkup;
 import com.pengrad.telegrambot.request.SendMessage;
@@ -20,9 +21,6 @@ public class TelegramBotUpdatesListener implements UpdatesListener {
 
     private Logger logger = LoggerFactory.getLogger(TelegramBotUpdatesListener.class);
 
-    private final String BUTTON_CATSHELTER = "Приют для кошек";
-    private final String BUTTON_DOGSHELTER = "Приют для собак";
-
     @Autowired
     private TelegramBot telegramBot;
 
@@ -39,21 +37,49 @@ public class TelegramBotUpdatesListener implements UpdatesListener {
             String incomingMessage = update.message().text();
             Long chatId = update.message().chat().id();
 
-            String welcomeMessage = update.message().chat().firstName() +
-                    ", привет! Я бот-помощник и я помогу тебе выбрать верного друга!" +
-                    "Выбери приют";
-
             if (incomingMessage.equalsIgnoreCase("/start")) {
-                SendMessage message = new SendMessage(chatId, welcomeMessage)
-                        .replyMarkup(new ReplyKeyboardMarkup(
-                                        new KeyboardButton(BUTTON_CATSHELTER),
-                                        new KeyboardButton(BUTTON_DOGSHELTER))
-                                .oneTimeKeyboard(true)
-                        );
+                welcomeMessage(update, chatId);
+            }
 
-                SendResponse response = telegramBot.execute(message);
+            if (incomingMessage.equalsIgnoreCase("Приют для кошек")) {
+                catShelterMenu(chatId);
+
+            }
+
+            if (incomingMessage.equalsIgnoreCase("Приют для собак")) {
+                dogShelterMenu(chatId);
             }
         });
         return UpdatesListener.CONFIRMED_UPDATES_ALL;
+    }
+
+    public void welcomeMessage(Update update, Long chatId) {
+        SendMessage message = new SendMessage(chatId, update.message().chat().firstName() +
+                ", привет! Я бот-помощник и я помогу тебе выбрать верного друга! \n" +
+                "Выбери приют")
+                .replyMarkup(new ReplyKeyboardMarkup(
+                        new KeyboardButton("Приют для кошек"),
+                        new KeyboardButton("Приют для собак"))
+                        .oneTimeKeyboard(true)
+                );
+        SendResponse response = telegramBot.execute(message);
+    }
+
+    public void catShelterMenu(Long chatId) {
+        SendMessage message = new SendMessage(chatId, "Что Вы хотите узнать?")
+                .replyMarkup(new ReplyKeyboardMarkup(new String[][]{
+                        {"Информация о приюте", "Как взять питомца из приюта"},
+                        {"Прислать отчет о питомце", "Позвать волонтера"}
+                }));
+        SendResponse response = telegramBot.execute(message);
+    }
+
+    public void dogShelterMenu(Long chatId) {
+        SendMessage message = new SendMessage(chatId, "Что Вы хотите узнать?")
+                .replyMarkup(new ReplyKeyboardMarkup(new String[][]{
+                        {"Информация о приюте", "Как взять питомца из приюта"},
+                        {"Прислать отчет о питомце", "Позвать волонтера"}
+                }));
+        SendResponse response = telegramBot.execute(message);
     }
 }
