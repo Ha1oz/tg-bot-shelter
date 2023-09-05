@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pro.sky.telegrambot.handler.ChainHandler;
 
 import javax.annotation.PostConstruct;
 import java.util.List;
@@ -22,6 +23,8 @@ public class TelegramBotUpdatesListener implements UpdatesListener {
 
     @Autowired
     private TelegramBot telegramBot;
+    @Autowired
+    private List<ChainHandler> chainHandlers;
 
     @PostConstruct
     public void init() {
@@ -33,52 +36,13 @@ public class TelegramBotUpdatesListener implements UpdatesListener {
         updates.forEach(update -> {
             logger.info("Processing update: {}", update);
 
-            String incomingMessage = update.message().text();
-            Long chatId = update.message().chat().id();
-
-            if (incomingMessage.equalsIgnoreCase("/start")) {
-                welcomeMessage(update, chatId);
-            }
-
-            if (incomingMessage.equalsIgnoreCase("Приют для кошек")) {
-                catShelterMenu(chatId);
-
-            }
-
-            if (incomingMessage.equalsIgnoreCase("Приют для собак")) {
-                dogShelterMenu(chatId);
-            }
+            chainHandlers.stream()
+                    .filter(handler -> handler.check(update))
+                    .forEach(handler -> {
+                        SendMessage sendMessage = handler.handle(update);
+                        telegramBot.execute(sendMessage);
+                    });
         });
         return UpdatesListener.CONFIRMED_UPDATES_ALL;
-    }
-
-    public void welcomeMessage(Update update, Long chatId) {
-        SendMessage message = new SendMessage(chatId, update.message().chat().firstName() +
-                ", привет! Я бот-помощник и я помогу тебе выбрать верного друга! \n" +
-                "Выбери приют")
-                .replyMarkup(new ReplyKeyboardMarkup(
-                        new KeyboardButton("Приют для кошек"),
-                        new KeyboardButton("Приют для собак"))
-                        .oneTimeKeyboard(true)
-                );
-        SendResponse response = telegramBot.execute(message);
-    }
-
-    public void catShelterMenu(Long chatId) {
-        SendMessage message = new SendMessage(chatId, "Что Вы хотите узнать?")
-                .replyMarkup(new ReplyKeyboardMarkup(new String[][]{
-                        {"Информация о приюте", "Как взять питомца из приюта"},
-                        {"Прислать отчет о питомце", "Позвать волонтера"}
-                }));
-        SendResponse response = telegramBot.execute(message);
-    }
-
-    public void dogShelterMenu(Long chatId) {
-        SendMessage message = new SendMessage(chatId, "Что Вы хотите узнать?")
-                .replyMarkup(new ReplyKeyboardMarkup(new String[][]{
-                        {"Информация о приюте", "Как взять питомца из приюта"},
-                        {"Прислать отчет о питомце", "Позвать волонтера"}
-                }));
-        SendResponse response = telegramBot.execute(message);
     }
 }
