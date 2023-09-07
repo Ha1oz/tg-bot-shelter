@@ -3,18 +3,22 @@ package pro.sky.telegrambot.listener;
 import com.pengrad.telegrambot.TelegramBot;
 import com.pengrad.telegrambot.UpdatesListener;
 import com.pengrad.telegrambot.model.Update;
-import com.pengrad.telegrambot.model.request.KeyboardButton;
-import com.pengrad.telegrambot.model.request.ReplyKeyboardMarkup;
+import com.pengrad.telegrambot.request.EditMessageText;
 import com.pengrad.telegrambot.request.SendMessage;
-import com.pengrad.telegrambot.response.SendResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pro.sky.telegrambot.handler.callback.CallbackChainHandler;
+import pro.sky.telegrambot.handler.message.MessageChainHandler;
 
 import javax.annotation.PostConstruct;
 import java.util.List;
 
+/**
+ * "Слушатель" обновлений Telegram бота.
+ * Обрабатывает полученные обновления, передавая их соответствующим обработчикам цепочки сообщений и колбэков.
+ */
 @Service
 public class TelegramBotUpdatesListener implements UpdatesListener {
 
@@ -23,62 +27,46 @@ public class TelegramBotUpdatesListener implements UpdatesListener {
     @Autowired
     private TelegramBot telegramBot;
 
+    @Autowired
+    private List<MessageChainHandler> messageChainHandlers;
+    @Autowired
+    private List<CallbackChainHandler> callbackChainHandlers;
+
+    /**
+     * Инициализирует "слушателя" обновлений Telegram бота.
+     * Устанавливает этот объект в качестве слушателя для Telegram бота после завершения создания службы.
+     */
     @PostConstruct
     public void init() {
         telegramBot.setUpdatesListener(this);
     }
 
+    /**
+     * Обрабатывает полученные обновления Telegram бота.
+     * Передает каждое обновление соответствующим обработчикам цепочки сообщений и колбэков для дальнейшей обработки.
+     *
+     * @param updates Список обновлений от Telegram API
+     * @return число, определяющее, какие обновления Telegram API были успешно обработаны
+     */
     @Override
     public int process(List<Update> updates) {
         updates.forEach(update -> {
             logger.info("Processing update: {}", update);
+            // Process your updates here
+            messageChainHandlers.stream()
+                    .filter(h -> h.check(update))
+                    .forEach(h -> {
+                        SendMessage message = h.handle(update);
+                        telegramBot.execute(message);
+            });
 
-            String incomingMessage = update.message().text();
-            Long chatId = update.message().chat().id();
-
-            if (incomingMessage.equalsIgnoreCase("/start")) {
-                welcomeMessage(update, chatId);
-            }
-
-            if (incomingMessage.equalsIgnoreCase("Приют для кошек")) {
-                catShelterMenu(chatId);
-
-            }
-
-            if (incomingMessage.equalsIgnoreCase("Приют для собак")) {
-                dogShelterMenu(chatId);
-            }
+            callbackChainHandlers.stream()
+                    .filter(h -> h.check(update))
+                    .forEach(h -> {
+                        EditMessageText message = h.handle(update);
+                        telegramBot.execute(message);
+                    });
         });
         return UpdatesListener.CONFIRMED_UPDATES_ALL;
-    }
-
-    public void welcomeMessage(Update update, Long chatId) {
-        SendMessage message = new SendMessage(chatId, update.message().chat().firstName() +
-                ", привет! Я бот-помощник и я помогу тебе выбрать верного друга! \n" +
-                "Выбери приют")
-                .replyMarkup(new ReplyKeyboardMarkup(
-                        new KeyboardButton("Приют для кошек"),
-                        new KeyboardButton("Приют для собак"))
-                        .oneTimeKeyboard(true)
-                );
-        SendResponse response = telegramBot.execute(message);
-    }
-
-    public void catShelterMenu(Long chatId) {
-        SendMessage message = new SendMessage(chatId, "Что Вы хотите узнать?")
-                .replyMarkup(new ReplyKeyboardMarkup(new String[][]{
-                        {"Информация о приюте", "Как взять питомца из приюта"},
-                        {"Прислать отчет о питомце", "Позвать волонтера"}
-                }));
-        SendResponse response = telegramBot.execute(message);
-    }
-
-    public void dogShelterMenu(Long chatId) {
-        SendMessage message = new SendMessage(chatId, "Что Вы хотите узнать?")
-                .replyMarkup(new ReplyKeyboardMarkup(new String[][]{
-                        {"Информация о приюте", "Как взять питомца из приюта"},
-                        {"Прислать отчет о питомце", "Позвать волонтера"}
-                }));
-        SendResponse response = telegramBot.execute(message);
     }
 }
