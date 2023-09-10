@@ -17,6 +17,10 @@ import pro.sky.telegrambot.handler.message.MessageChainHandler;
 import javax.annotation.PostConstruct;
 import java.util.List;
 
+/**
+ * Слушатель обновлений Telegram бота.
+ * Обрабатывает полученные обновления, передавая их соответствующим обработчикам цепочки сообщений и колбэков.
+ */
 @Service
 public class TelegramBotUpdatesListener implements UpdatesListener {
 
@@ -30,11 +34,22 @@ public class TelegramBotUpdatesListener implements UpdatesListener {
     @Autowired
     private List<CallbackChainHandler> callbackChainHandlers;
 
+    /**
+     * Инициализирует слушателя обновлений Telegram бота.
+     * Устанавливает этот объект в качестве слушателя для Telegram бота после завершения создания службы.
+     */
     @PostConstruct
     public void init() {
         telegramBot.setUpdatesListener(this);
     }
 
+    /**
+     * Обрабатывает полученные обновления Telegram бота.
+     * Передает каждое обновление соответствующим обработчикам цепочки сообщений и колбэков для дальнейшей обработки.
+     *
+     * @param updates Список обновлений от Telegram API
+     * @return число, определяющее, какие обновления Telegram API были успешно обработаны
+     */
     @Override
     public int process(List<Update> updates) {
         updates.forEach(update -> {

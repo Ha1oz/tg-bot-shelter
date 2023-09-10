@@ -6,12 +6,30 @@ import com.pengrad.telegrambot.model.request.InlineKeyboardButton;
 import com.pengrad.telegrambot.model.request.InlineKeyboardMarkup;
 import com.pengrad.telegrambot.request.EditMessageText;
 
+/**
+ * Обработчик для колбэков связанных с приютами.
+ */
 public class ShelterCallbackHandler implements CallbackChainHandler{
+
+    /**
+     * Проверяет, соответствует ли колбэк необходимым условиям обработчика приютов.
+     *
+     * @param update Обновление от Telegram API
+     * @return true, если колбэк соответствует условиям обработчика приютов, иначе false.
+     */
     @Override
     public boolean check(Update update) {
         CallbackQuery callbackQuery = update.callbackQuery();
         return callbackQuery != null && callbackQuery.data().startsWith("shelter");
     }
+
+    /**
+     * Обрабатывает колбэк связанный с приютами и возвращает EditMessageText объект с обновленным текстом сообщения или
+     * null, если колбэк не обрабатывается обработчиком.
+     *
+     * @param update Обновление от Telegram API
+     * @return EditMessageText объект с обновленным текстом сообщения или null, если колбэк не обрабатывается обработчиком.
+     */
     @Override
     public EditMessageText handle(Update update) {
         CallbackQuery callbackQuery = update.callbackQuery();

@@ -13,24 +13,44 @@ import pro.sky.telegrambot.handler.message.StartMessageHandler;
 
 import java.util.List;
 
+/**
+ * Конфигурация Telegram бота.
+ */
 @Configuration
 public class TelegramBotConfiguration {
 
     @Value("${telegram.bot.token}")
     private String token;
 
+    /**
+     * Создает и настраивает экземпляр Telegram бота.
+     *
+     * @return TelegramBot объект Telegram бота.
+     */
     @Bean
     public TelegramBot telegramBot() {
         TelegramBot bot = new TelegramBot(token);
         bot.execute(new DeleteMyCommands());
         return bot;
     }
+
+    /**
+     * Создает список обработчиков цепочки сообщений.
+     *
+     * @return Список обработчиков цепочки сообщений.
+     */
     @Bean
     public List<MessageChainHandler> messageChainHandlers() {
         return List.of(
                 new StartMessageHandler()
         );
     }
+
+    /**
+     * Создает список обработчиков цепочки колбэков.
+     *
+     * @return Список обработчиков цепочки колбэков.
+     */
     @Bean
     public List<CallbackChainHandler> callbackChainHandlers() {
         return List.of(
