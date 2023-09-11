@@ -48,7 +48,7 @@ public class PetsController {
     public Pet findPetById(@PathVariable Long id) {
         Pet pet = petsService.findPetById(id);
 
-        if (pet.isEmpty()) {
+        if (pet == null) {
             return (Pet) ResponseEntity.status(HttpStatus.NOT_FOUND).build().getBody();
         }
         return ResponseEntity.status(HttpStatus.FOUND).body(findPetById(id)).getBody();
@@ -77,7 +77,7 @@ public class PetsController {
      * @param id Идентификатор питомца для удаления.
      * @return Подтверждение успешного удаления питомца.
      */
-    @DeleteMapping("id")
+    @DeleteMapping("{id}")
     public Pet deletePet(@PathVariable Long id) {
         petsService.deletePet(id);
         return (Pet) ResponseEntity.status(HttpStatus.OK);

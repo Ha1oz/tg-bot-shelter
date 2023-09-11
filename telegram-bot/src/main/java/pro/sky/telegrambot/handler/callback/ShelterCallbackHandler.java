@@ -28,7 +28,8 @@ public class ShelterCallbackHandler implements CallbackChainHandler{
      * null, если колбэк не обрабатывается обработчиком.
      *
      * @param update Обновление от Telegram API
-     * @return EditMessageText объект с обновленным текстом сообщения или null, если колбэк не обрабатывается обработчиком.
+     * @return EditMessageText объект с обновленным текстом сообщения или null, если колбэк не обрабатывается
+     * обработчиком.
      */
     @Override
     public EditMessageText handle(Update update) {
