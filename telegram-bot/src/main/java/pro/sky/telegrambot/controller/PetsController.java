@@ -82,4 +82,7 @@ public class PetsController {
         petsService.deletePet(id);
         return (Pet) ResponseEntity.status(HttpStatus.OK);
     }
+
+    //TO DO
+    // Возможно стоит добавить поиск по типу питомца (выводить только кошек или только собак)
 }
