@@ -50,7 +50,7 @@ public class PetsController {
     public Pet findPetById(@PathVariable Long id) {
         Optional<Pet> pet = petsService.findPetById(id);
 
-        if (pet == null) {
+        if (pet.isEmpty()) {
             return (Pet) ResponseEntity.status(HttpStatus.NOT_FOUND).build().getBody();
         }
         return ResponseEntity.status(HttpStatus.FOUND).body(findPetById(id)).getBody();

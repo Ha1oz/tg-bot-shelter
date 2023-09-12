@@ -5,8 +5,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import pro.sky.telegrambot.model.Pet;
 import pro.sky.telegrambot.repositories.PetsRepository;
-import pro.sky.telegrambot.service.PetsService;
-
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -17,7 +15,7 @@ public class PetsServiceTest {
     @Mock
     private PetsRepository petsRepository;
 
-    private PetsService petsService;
+    private final PetsService petsService;
 
     public PetsServiceTest() {
         MockitoAnnotations.openMocks(this);
