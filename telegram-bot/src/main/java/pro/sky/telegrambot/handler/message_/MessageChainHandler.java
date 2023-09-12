@@ -1,4 +1,4 @@
-package pro.sky.telegrambot.handler.message;
+package pro.sky.telegrambot.handler.message_;
 
 import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.request.SendMessage;
@@ -17,6 +17,8 @@ public interface MessageChainHandler {
      */
     boolean check(Update update);
 
+
+
     /**
      * Обрабатывает обновление и возвращает SendMessage объект с ответным сообщением или null, если обновление не
      * обрабатывается обработчиком.
@@ -25,4 +27,6 @@ public interface MessageChainHandler {
      * @return SendMessage объект с ответным сообщением или null, если обновление не обрабатывается обработчиком.
      */
     SendMessage handle(Update update);
+
+
 }

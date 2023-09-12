@@ -1,4 +1,5 @@
-package pro.sky.telegrambot.handler.callback;
+package pro.sky.telegrambot.handler.callback_0_level;
+
 
 import com.pengrad.telegrambot.model.CallbackQuery;
 import com.pengrad.telegrambot.model.Update;
@@ -9,7 +10,7 @@ import com.pengrad.telegrambot.request.EditMessageText;
 /**
  * Обработчик для колбэков связанных с приютами.
  */
-public class ShelterCallbackHandler implements CallbackChainHandler{
+public class ShelterCatCallbackHandlerImpl implements CallbackChainHandler{
 
     /**
      * Проверяет, соответствует ли колбэк необходимым условиям обработчика приютов.
@@ -20,7 +21,7 @@ public class ShelterCallbackHandler implements CallbackChainHandler{
     @Override
     public boolean check(Update update) {
         CallbackQuery callbackQuery = update.callbackQuery();
-        return callbackQuery != null && callbackQuery.data().startsWith("shelter");
+        return callbackQuery != null && callbackQuery.data().startsWith("shelter_cat");
     }
 
     /**
@@ -33,20 +34,19 @@ public class ShelterCallbackHandler implements CallbackChainHandler{
     @Override
     public EditMessageText handle(Update update) {
         CallbackQuery callbackQuery = update.callbackQuery();
-
         String[] params = callbackQuery.data().split("_");
         Long chatId = callbackQuery.message().chat().id();
         Integer messageId = callbackQuery.message().messageId();
+
+
         InlineKeyboardMarkup inlineKeyboard = new InlineKeyboardMarkup(
-                new InlineKeyboardButton("Info").callbackData("info_" + params[1]),
-                new InlineKeyboardButton("Get animal").callbackData("get_" + params[1]),
+                new InlineKeyboardButton("Info").callbackData("info_cat" + params[1]),
+                new InlineKeyboardButton("Get animal").callbackData("get_cat" + params[1]),
                 new InlineKeyboardButton("Report").callbackData("report"),
                 new InlineKeyboardButton("Call volunteer").callbackData("volunteer")
         );
-
         EditMessageText editMessage = new EditMessageText(chatId, messageId, "Updated for " + params[1])
                 .replyMarkup(inlineKeyboard);
-
         return editMessage;
     }
 }
