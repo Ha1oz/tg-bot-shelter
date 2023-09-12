@@ -58,5 +58,4 @@ public class TelegramBotConfiguration {
                 new VolunteerCallbackHandler()
         );
     }
-
 }

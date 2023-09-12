@@ -87,6 +87,10 @@ public class Pet {
         return breed;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public void setBreed(String breed) {
         this.breed = breed;
     }
