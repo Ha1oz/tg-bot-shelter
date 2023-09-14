@@ -53,5 +53,4 @@ public class StartMessageHandlerImpl implements MessageChainHandler {
 
         return sendMessage;
     }
-
 }

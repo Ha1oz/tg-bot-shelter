@@ -22,8 +22,7 @@ public class Pet {
 
     }
 
-    public Pet(Long id, String name, int age, String typeOfPet, String breed, boolean isHealthy) {
-        this.id = id;
+    public Pet(String name, int age, String typeOfPet, String breed, boolean isHealthy) {
         this.name = name;
         this.age = age;
         this.typeOfPet = typeOfPet;
@@ -57,6 +56,10 @@ public class Pet {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
