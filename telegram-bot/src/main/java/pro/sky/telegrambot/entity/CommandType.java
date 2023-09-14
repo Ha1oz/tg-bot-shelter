@@ -17,6 +17,7 @@ public enum CommandType {
 
     RULES_CALLBACK("Rules_"), DOCUMENTS_CALLBACK("documents_"),
     TRANSPORTING_CALLBACK("transporting_"), ARRANGE_FOR_ADULT("forAdultAnimal_"),
+    ARRANGE_FOR_PUPPY("forPuppy_"), ARRANGE_FOR_KITTEN("forKitten_"),
     ARRANGE_FOR_DISABILITIES("forAnAnimalWithDisabilities_"),
     ADVICE_FROM_DOG_HANDLER("dogHandler_"), PROVEN_DOG_HANDLER("provenDogHandlers_"),
     REASON_FOR_REFUSAL("reasonsForRefusal_"),

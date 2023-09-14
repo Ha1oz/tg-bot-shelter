@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import pro.sky.telegrambot.model.Pet;
-import pro.sky.telegrambot.repositories.PetsRepository;
+import pro.sky.telegrambot.repository.PetsRepository;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
