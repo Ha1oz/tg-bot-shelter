@@ -16,6 +16,8 @@ import pro.sky.telegrambot.handler.callback_1_level.answer.*;
 import pro.sky.telegrambot.handler.api.MessageChainHandler;
 import pro.sky.telegrambot.handler.message.StartMessageHandlerImpl;
 
+
+
 import java.util.List;
 
 /**
@@ -26,6 +28,7 @@ public class TelegramBotConfiguration {
 
     @Value("${telegram.bot.token}")
     private String token;
+
 
     /**
      * Создает и настраивает экземпляр Telegram бота.
@@ -77,7 +80,7 @@ public class TelegramBotConfiguration {
                 new AnswerPassCallbackHandler(),
                 new AnswerSafetyGuideCallbackHandler(),
                 new AnswerSendContactCallbackHandler(),
-                new AnswerAboutShelterCallbackHandler()
+                new AnswerAboutShelterCallbackHandler(  )
         );
     }
 }

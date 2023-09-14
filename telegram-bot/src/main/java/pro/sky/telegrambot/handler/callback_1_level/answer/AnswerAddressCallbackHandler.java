@@ -44,60 +44,33 @@ public class AnswerAddressCallbackHandler implements CallbackChainHandler {
 
         //TODO подтягивать текст об адресе из БД, в зависимости от выбранного варианта в меню (cat или dog)
         String addressText = "*Address*:\\n Burnakovsky passage, 16\n" +
-                "Burnakovsky proezd, 16, Nizhny Novgorod, 603079.";
+                "Burnakovsky proezd, 16, Nizhny Novgorod, 603079.|" +
+                "*Address*:\\nVladimir region, Kameshkovsky m.r.n., city of Kameshkovo, Kameshkovo, Korunova str., 52, p. 3, FL/ROOM 2/6.";
 
-        EditMessageText editMessage = new EditMessageText(
-                chatId,
-                messageId,
-                addressText
-        ).replyMarkup(keyboard);
-        return editMessage;
+
+        String[] text = addressText.split("\\|");
+
+        return switch (params[1]) {
+            case "cat" -> {
+                EditMessageText editMessage = new EditMessageText(
+                        chatId,
+                        messageId,
+                        text[0]
+                ).replyMarkup(keyboard);
+                yield editMessage;
+            }
+            case "dog"-> {
+                EditMessageText editMessage  = new EditMessageText(
+                        chatId,
+                        messageId,
+                        text[1]
+                ).replyMarkup(keyboard);
+                yield editMessage ;
+            }
+            default -> throw new IllegalStateException("Unexpected value: " + params[1]);
+        };
     }
 }
 
-//    StartMessageHandlerImpl StartMessageHandlerImpl = new StartMessageHandlerImpl();
-//        StartMessageHandlerImpl.handle(update);
-//        if (update.callbackQuery().data().equals("shelter_cats"))
-//
-//
-//
-//        {
-//            EditMessageText editMessage = new EditMessageText(
-//                    chatId,
-//                    messageId,
-//                    "Address:\nVladimir region, Kameshkovsky m.r.n., city of Kameshkovo, Kameshkovo, Korunova str., 52, p. 3, FL/ROOM 2/6."
-//            );
-//            return editMessage;
-//
-//        } else {
-//            EditMessageText editMessage = new EditMessageText(
-//                    chatId,
-//                    messageId,
-//                    "g, 52, p. 3, FL/ROOM 2/6."
-//            );
-//            return editMessage;
-//        }
-//    }
 
 
-
-
-
-
-
-//            @Override
-//        public void actionPerformed(ActionEvent e) {
-//            if(){
-//                allCheckBoxesSelected = false;
-//                allButton.setText("Select all");
-//            } else {
-//                allCheckBoxesSelected = true;
-//                allButton.setText("Unselect all");
-//                NodeSelectionCheckBoxJDialog.this.pack();
-//            }
-//        }
-//
-//
-//
-//
-//

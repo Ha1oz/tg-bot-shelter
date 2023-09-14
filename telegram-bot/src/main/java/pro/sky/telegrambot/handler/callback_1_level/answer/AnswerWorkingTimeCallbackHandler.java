@@ -46,18 +46,43 @@ public class AnswerWorkingTimeCallbackHandler implements CallbackChainHandler {
                 "Tuesday:  " + "08:30–19:30\n" +
                 "Wednesday:  " + "08:30–19:30\n" +
                 "Thursday:  " + "08:30–19:30\n" +
-                "Friday:  " +"08:30–19:30\n" +
+                "Friday:  " + "08:30–19:30\n" +
+                "Saturday:  " + "Выходной\n" +
+                "Sunday:  " + "Выходной\n " +
+                "*WITH A BREAK FOR LUNCH EVERY DAY (13.00-14.00)!*| " +
+
+        "Schedule:\nMonday:  " + "07:30–19:30\n" +
+                "Tuesday:  " + "07:30–19:30\n" +
+                "Wednesday:  " + "07:30–19:30\n" +
+                "Thursday:  " + "07:30–19:30\n" +
+                "Friday:  " +"07:30–19:30\n" +
                 "Saturday:  " +  "Выходной\n" +
                 "Sunday:  " + "Выходной\n "+
-                "*WITH A BREAK FOR LUNCH EVERY DAY (13.00-14.00)!*.";
+                "*WITHOUT A BREAK FOR LUNCH!*.";
 
-        EditMessageText editMessage = new EditMessageText(
-                chatId,
-                messageId,
-                workingTimeText
-        ).replyMarkup(keyboard);
-        return editMessage;
+        String[] text = workingTimeText.split("\\|");
+
+        return switch (params[1]) {
+            case "cat" -> {
+                EditMessageText editMessage = new EditMessageText(
+                        chatId,
+                        messageId,
+                        text[0]
+                ).replyMarkup(keyboard);
+                yield editMessage;
+            }
+            case "dog" -> {
+                EditMessageText editMessage = new EditMessageText(
+                        chatId,
+                        messageId,
+                        text[1]
+                ).replyMarkup(keyboard);
+                yield editMessage;
+            }
+            default -> throw new IllegalStateException("Unexpected value: " + params[1]);
+        };
     }
 }
+
 
 

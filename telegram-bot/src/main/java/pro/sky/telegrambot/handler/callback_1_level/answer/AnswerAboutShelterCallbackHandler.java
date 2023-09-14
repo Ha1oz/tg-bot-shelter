@@ -9,6 +9,8 @@ import pro.sky.telegrambot.entity.CommandType;
 import pro.sky.telegrambot.handler.api.CallbackChainHandler;
 
 public class AnswerAboutShelterCallbackHandler implements CallbackChainHandler {
+
+
     /**
      * Проверяет, соответствует ли колбэк необходимым условиям обработчика волонтерства.
      *
@@ -44,17 +46,42 @@ public class AnswerAboutShelterCallbackHandler implements CallbackChainHandler {
         String aboutShelterText = "Our shelter:\nYelets City Public Organization \"Fluffy cats\" " +
                 "we have good cats" +
                 "is a private shelter where ONE person helps animals and supports them for their money and charity," +
-                " and can also take them home.";
+                " and can also take them home. |" +
 
-        EditMessageText editMessage = new EditMessageText(
-                chatId,
-                messageId,
-                aboutShelterText
-        ).replyMarkup(keyboard);
+                "Our shelter: \nYelets City Public Organization  \"Puffy dogs \" \" +\n" +
+                "\"we have good dogs\" +\n" +
+                "\"is a private shelter where ONE person helps animals and supports" +
+                " them for their money and charity,\" +\n" +
+                "\" and can also take them home.";
 
-        return editMessage;
+        String[] text = aboutShelterText.split("\\|");
+
+
+        return switch (params[1]) {
+            case "cat" -> {
+                EditMessageText editMessage = new EditMessageText(
+                        chatId,
+                        messageId,
+                        text[0]
+                ).replyMarkup(keyboard);
+                yield editMessage;
+            }
+            case "dog"-> {
+                EditMessageText editMessage  = new EditMessageText(
+                        chatId,
+                        messageId,
+                        text[1]
+                ).replyMarkup(keyboard);
+                yield editMessage ;
+            }
+            default -> throw new IllegalStateException("Unexpected value: " + params[1]);
+        };
     }
 }
+
+
+
+
 
 
 

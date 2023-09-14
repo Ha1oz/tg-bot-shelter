@@ -43,16 +43,35 @@ public class AnswerArriveCallbackHandler implements CallbackChainHandler {
 
         //TODO: из БД
         String arriveInfoText = "Driving directions:\n" +
-                "https://yandex.ru/maps/org/sostradaniye/1269196542/?ll=43.911780%2C56.322539&z=16.";
+                "https://yandex.ru/maps/47/nizhny-novgorod/house/krasnoselskaya_ulitsa_11a/YEoYfwBoT0MHQFtsfX9xeXhrYQ==/?ll=43.978659%2C56.308485&z=16.|" +
+                "https://yandex.ru/maps/10662/kameshkovo/house/ulitsa_korunovoy_52/YEgYdgdoTUcCQFtsfX9zcX5lZw==/?ll=41.007326%2C56.319930&z=17.35.";
 
-        EditMessageText editMessage = new EditMessageText(
-                chatId,
-                messageId,
-                arriveInfoText
-        ).replyMarkup(keyboard);
-        return editMessage;
+        String[] text = arriveInfoText.split("\\|");
+
+        return switch (params[1]) {
+            case "cat" -> {
+                EditMessageText editMessage = new EditMessageText(
+                        chatId,
+                        messageId,
+                        text[0]
+                ).replyMarkup(keyboard);
+                yield editMessage;
+            }
+            case "dog"-> {
+                EditMessageText editMessage  = new EditMessageText(
+                        chatId,
+                        messageId,
+                        text[1]
+                ).replyMarkup(keyboard);
+                yield editMessage ;
+            }
+            default -> throw new IllegalStateException("Unexpected value: " + params[1]);
+        };
     }
 }
+
+
+
 
 
 

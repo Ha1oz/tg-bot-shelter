@@ -44,16 +44,32 @@ public class AnswerPassCallbackHandler implements CallbackChainHandler {
 
         // TODO: из БД
         String carPassInfo = "*Our contact details for registration of a car pass*:\n" +
-                "Pass  manager  Varvara Nikolaevich, phone +79578653400.";
+                "Pass  manager  Varvara Nikolaevich, phone +79578653400.|  *Our contact details for registration of a car pass*\n: Pass registration manager Vasily Nikolaevich, phone +79878653432.";
 
-        EditMessageText editMessage = new EditMessageText(
-                chatId,
-                messageId,
-                carPassInfo
-        ).replyMarkup(keyboard);
-        return editMessage;
+        String[] text = carPassInfo.split("\\|");
+
+        return switch (params[1]) {
+            case "cat" -> {
+                EditMessageText editMessage = new EditMessageText(
+                        chatId,
+                        messageId,
+                        text[0]
+                ).replyMarkup(keyboard);
+                yield editMessage;
+            }
+            case "dog"-> {
+                EditMessageText editMessage  = new EditMessageText(
+                        chatId,
+                        messageId,
+                        text[1]
+                ).replyMarkup(keyboard);
+                yield editMessage ;
+            }
+            default -> throw new IllegalStateException("Unexpected value: " + params[1]);
+        };
     }
 }
+
 
 
 
