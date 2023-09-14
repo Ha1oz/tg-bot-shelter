@@ -1,5 +1,4 @@
-package pro.sky.telegrambot.handler.callback_0_level;
-
+package pro.sky.telegrambot.handler.callback_2_level;
 
 import com.pengrad.telegrambot.model.CallbackQuery;
 import com.pengrad.telegrambot.model.Update;
@@ -12,7 +11,7 @@ import pro.sky.telegrambot.handler.api.CallbackChainHandler;
 /**
  * Обработчик для колбэков связанных с приютами.
  */
-public class ShelterCallbackHandler implements CallbackChainHandler {
+public class ShelterGetPetCallbackHandler implements CallbackChainHandler {
 
     /**
      * Проверяет, соответствует ли колбэк необходимым условиям обработчика приютов.
@@ -23,7 +22,7 @@ public class ShelterCallbackHandler implements CallbackChainHandler {
     @Override
     public boolean check(Update update) {
         CallbackQuery callbackQuery = update.callbackQuery();
-        return callbackQuery != null && callbackQuery.data().startsWith(CommandType.SHELTER_CALLBACK.getCommand());
+        return callbackQuery != null && callbackQuery.data().startsWith(CommandType.GET_CALLBACK.getCommand());
     }
 
     /**
@@ -31,8 +30,7 @@ public class ShelterCallbackHandler implements CallbackChainHandler {
      * null, если колбэк не обрабатывается обработчиком.
      *
      * @param update Обновление от Telegram API
-     * @return EditMessageText объект с обновленным текстом сообщения или null, если колбэк не обрабатывается
-     * обработчиком.
+     * @return EditMessageText объект с обновленным текстом сообщения или null, если колбэк не обрабатывается обработчиком.
      */
     @Override
     public EditMessageText handle(Update update) {
@@ -40,20 +38,40 @@ public class ShelterCallbackHandler implements CallbackChainHandler {
         String[] params = callbackQuery.data().split("_");
         Long chatId = callbackQuery.message().chat().id();
         Integer messageId = callbackQuery.message().messageId();
-
-
-        InlineKeyboardMarkup inlineKeyboard = new InlineKeyboardMarkup(
-                new InlineKeyboardButton("Info").callbackData(CommandType.INFO_CALLBACK.getCommand()
+        InlineKeyboardMarkup inlineKeyboard =
+                new InlineKeyboardMarkup(
+                        new InlineKeyboardButton("Rules").callbackData(CommandType.RULES_CALLBACK.getCommand()
+                                + params[1]),
+                        new InlineKeyboardButton("Documents for adopt").callbackData(CommandType.DOCUMENTS_CALLBACK.getCommand()
+                                + params[1])
+                );
+        inlineKeyboard.addRow(
+                new InlineKeyboardButton("Transporting").callbackData(CommandType.TRANSPORTING_CALLBACK.getCommand()
                         + params[1]),
-                new InlineKeyboardButton("Get pet").callbackData(CommandType.GET_CALLBACK.getCommand()
+                new InlineKeyboardButton("How to arrive").callbackData(CommandType.ARRIVE_CALLBACK.getCommand()
+                        + params[1])
+
+        );
+        inlineKeyboard.addRow(
+                new InlineKeyboardButton("Car pass").callbackData(CommandType.CAR_PASS_CALLBACK.getCommand()
                         + params[1]),
-                new InlineKeyboardButton("Report").callbackData(CommandType.REPORT_CALLBACK.getCommand()
+                new InlineKeyboardButton("Safety guide").callbackData(CommandType.SAFETY_GUIDE_CALLBACK.getCommand()
+                        + params[1])
+
+        );
+        inlineKeyboard.addRow(
+                new InlineKeyboardButton("Send contact").callbackData(CommandType.SEND_CONTACT_CALLBACK.getCommand()
                         + params[1]),
                 new InlineKeyboardButton("Call volunteer").callbackData(CommandType.VOLUNTEER_CALLBACK.getCommand()
                         + callbackQuery.data())
         );
-        EditMessageText editMessage = new EditMessageText(chatId, messageId, "Updated for " + params[1])
+        inlineKeyboard.addRow(
+                new InlineKeyboardButton("Back").callbackData(CommandType.START_CALLBACK.getCommand())
+        );
+
+        EditMessageText editMessage = new EditMessageText(chatId, messageId, "Updated info shelter for " + params[1])
                 .replyMarkup(inlineKeyboard);
         return editMessage;
+
     }
 }
