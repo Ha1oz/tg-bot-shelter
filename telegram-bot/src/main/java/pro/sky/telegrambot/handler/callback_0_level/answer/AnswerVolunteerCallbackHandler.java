@@ -1,11 +1,18 @@
-package pro.sky.telegrambot.handler.callback_1_level.cat.answer;
+package pro.sky.telegrambot.handler.callback_0_level.answer;
 
 import com.pengrad.telegrambot.model.CallbackQuery;
 import com.pengrad.telegrambot.model.Update;
+import com.pengrad.telegrambot.model.request.InlineKeyboardButton;
+import com.pengrad.telegrambot.model.request.InlineKeyboardMarkup;
 import com.pengrad.telegrambot.request.EditMessageText;
-import pro.sky.telegrambot.handler.callback_0_level.CallbackChainHandler;
+import pro.sky.telegrambot.entity.CommandType;
+import pro.sky.telegrambot.handler.api.CallbackChainHandler;
 
-public class AnswerScheduleCatCallbackHandler implements CallbackChainHandler {
+/**
+ * Обработчик для колбэков связанных с волонтерством.
+ */
+public class AnswerVolunteerCallbackHandler implements CallbackChainHandler {
+
     /**
      * Проверяет, соответствует ли колбэк необходимым условиям обработчика волонтерства.
      *
@@ -15,7 +22,7 @@ public class AnswerScheduleCatCallbackHandler implements CallbackChainHandler {
     @Override
     public boolean check(Update update) {
         CallbackQuery callbackQuery = update.callbackQuery();
-        return callbackQuery != null && callbackQuery.data().startsWith("about_schedule_cat");
+        return callbackQuery != null && callbackQuery.data().startsWith(CommandType.VOLUNTEER_CALLBACK.getCommand());
     }
 
     /**
@@ -30,20 +37,19 @@ public class AnswerScheduleCatCallbackHandler implements CallbackChainHandler {
         CallbackQuery callbackQuery = update.callbackQuery();
         Long chatId = callbackQuery.message().chat().id();
         Integer messageId = callbackQuery.message().messageId();
+
+        String backParam = callbackQuery.data().substring(CommandType.VOLUNTEER_CALLBACK.getCommand().length());
+
+        InlineKeyboardMarkup keyboard = new InlineKeyboardMarkup(
+            new InlineKeyboardButton("Back").callbackData(backParam)
+        );
+
         EditMessageText editMessage = new EditMessageText(
                 chatId,
                 messageId,
-                "*Schedule*:\nMonday:  " + "08:30–19:30\n" +
-                     "Tuesday:  " + "08:30–19:30\n" +
-                     "Wednesday:  " + "08:30–19:30\n" +
-                     "Thursday:  " + "08:30–19:30\n" +
-                     "Friday:  " +"08:30–19:30\n" +
-                     "Saturday:  " +  "Выходной\n" +
-                     "Sunday:  " + "Выходной\n "+
-                     "*WITH A BREAK FOR LUNCH EVERY DAY (13.00-14.00)!*."
-        );
+                "Contact:\nSome info about the contact. Like phone number, email address etc."
+        ).replyMarkup(keyboard);
+
         return editMessage;
     }
 }
-
-

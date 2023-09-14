@@ -1,14 +1,18 @@
-package pro.sky.telegrambot.handler.callback_1_level.dog;
+package pro.sky.telegrambot.handler.callback_0_level;
+
 
 import com.pengrad.telegrambot.model.CallbackQuery;
 import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.model.request.InlineKeyboardButton;
 import com.pengrad.telegrambot.model.request.InlineKeyboardMarkup;
 import com.pengrad.telegrambot.request.EditMessageText;
-import pro.sky.telegrambot.handler.callback_0_level.CallbackChainHandler;
+import pro.sky.telegrambot.entity.CommandType;
+import pro.sky.telegrambot.handler.api.CallbackChainHandler;
 
-public class ShelterInfoDogCallbackHandler implements CallbackChainHandler {
-
+/**
+ * Обработчик для колбэков связанных с приютами.
+ */
+public class ShelterCallbackHandler implements CallbackChainHandler {
 
     /**
      * Проверяет, соответствует ли колбэк необходимым условиям обработчика приютов.
@@ -19,7 +23,7 @@ public class ShelterInfoDogCallbackHandler implements CallbackChainHandler {
     @Override
     public boolean check(Update update) {
         CallbackQuery callbackQuery = update.callbackQuery();
-        return callbackQuery != null && callbackQuery.data().startsWith("info_dog");
+        return callbackQuery != null && callbackQuery.data().startsWith(CommandType.SHELTER_CALLBACK.getCommand());
     }
 
     /**
@@ -27,7 +31,8 @@ public class ShelterInfoDogCallbackHandler implements CallbackChainHandler {
      * null, если колбэк не обрабатывается обработчиком.
      *
      * @param update Обновление от Telegram API
-     * @return EditMessageText объект с обновленным текстом сообщения или null, если колбэк не обрабатывается обработчиком.
+     * @return EditMessageText объект с обновленным текстом сообщения или null, если колбэк не обрабатывается
+     * обработчиком.
      */
     @Override
     public EditMessageText handle(Update update) {
@@ -35,32 +40,20 @@ public class ShelterInfoDogCallbackHandler implements CallbackChainHandler {
         String[] params = callbackQuery.data().split("_");
         Long chatId = callbackQuery.message().chat().id();
         Integer messageId = callbackQuery.message().messageId();
-        InlineKeyboardMarkup inlineKeyboard =
-                new InlineKeyboardMarkup(
-                        new InlineKeyboardButton("Our shelter").callbackData("our_shelter_dog" + params[1]),
-                        new InlineKeyboardButton("Schedule").callbackData("about_schedule_dog" + params[1])
-                );
-        inlineKeyboard.addRow(
-                new InlineKeyboardButton("Our address").callbackData("address_dog" + params[1]),
-                new InlineKeyboardButton("Driving directions").callbackData("driving_dog")
 
-        );
-        inlineKeyboard.addRow(
-                new InlineKeyboardButton("Our contacts").callbackData("our_contact_dog"),
-                new InlineKeyboardButton("Recommendations").callbackData("recommendations_dog")
 
-        );
-        inlineKeyboard.addRow(
-                new InlineKeyboardButton("To accept contact").callbackData("contact" ),
-                new InlineKeyboardButton("Call volunteer").callbackData("volunteer")
-
+        InlineKeyboardMarkup inlineKeyboard = new InlineKeyboardMarkup(
+                new InlineKeyboardButton("Info").callbackData(CommandType.INFO_CALLBACK.getCommand()
+                        + params[1]),
+                new InlineKeyboardButton("Get animal").callbackData(CommandType.GET_CALLBACK.getCommand()
+                        + params[1]),
+                new InlineKeyboardButton("Report").callbackData(CommandType.REPORT_CALLBACK.getCommand()
+                        + params[1]),
+                new InlineKeyboardButton("Call volunteer").callbackData(CommandType.VOLUNTEER_CALLBACK.getCommand()
+                        + callbackQuery.data())
         );
         EditMessageText editMessage = new EditMessageText(chatId, messageId, "Updated for " + params[1])
                 .replyMarkup(inlineKeyboard);
         return editMessage;
-
     }
 }
-
-
-

@@ -1,12 +1,12 @@
-package pro.sky.telegrambot.handler.callback_1_level.dog.answer;
+package pro.sky.telegrambot.handler.callback_1_level.answer;
 
 import com.pengrad.telegrambot.model.CallbackQuery;
 import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.request.EditMessageText;
-import pro.sky.telegrambot.handler.callback_0_level.CallbackChainHandler;
+import pro.sky.telegrambot.entity.CommandType;
+import pro.sky.telegrambot.handler.api.CallbackChainHandler;
 
-public class AnswerOurContactsDogCallbackHandler implements CallbackChainHandler {
-
+public class AnswerSendContactCallbackHandler implements CallbackChainHandler {
     /**
      * Проверяет, соответствует ли колбэк необходимым условиям обработчика волонтерства.
      *
@@ -16,7 +16,7 @@ public class AnswerOurContactsDogCallbackHandler implements CallbackChainHandler
     @Override
     public boolean check(Update update) {
         CallbackQuery callbackQuery = update.callbackQuery();
-        return callbackQuery != null && callbackQuery.data().startsWith("our_contact_dog");
+        return callbackQuery != null && callbackQuery.data().startsWith(CommandType.SEND_CONTACT_CALLBACK.getCommand());
     }
 
     /**
@@ -34,15 +34,11 @@ public class AnswerOurContactsDogCallbackHandler implements CallbackChainHandler
         EditMessageText editMessage = new EditMessageText(
                 chatId,
                 messageId,
-                "*Our contact details for registration of a car pass*:\n Pass registration manager Vasily Nikolaevich, phone +79878653432."
+                "Please, write your contact details for communication (enter your contact-phone starting from 9) and we will definitely call you back!"
+
         );
         return editMessage;
     }
 }
-
-
-
-
-
 
 

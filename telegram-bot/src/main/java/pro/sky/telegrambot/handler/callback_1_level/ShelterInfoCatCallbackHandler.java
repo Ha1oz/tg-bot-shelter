@@ -1,4 +1,4 @@
-package pro.sky.telegrambot.handler.callback_1_level.cat;
+package pro.sky.telegrambot.handler.callback_1_level;
 
 
 
@@ -7,7 +7,8 @@ import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.model.request.InlineKeyboardButton;
 import com.pengrad.telegrambot.model.request.InlineKeyboardMarkup;
 import com.pengrad.telegrambot.request.EditMessageText;
-import pro.sky.telegrambot.handler.callback_0_level.CallbackChainHandler;
+import pro.sky.telegrambot.entity.CommandType;
+import pro.sky.telegrambot.handler.api.CallbackChainHandler;
 
 /**
  * Обработчик для колбэков связанных с приютами.
@@ -23,7 +24,7 @@ public class ShelterInfoCatCallbackHandler implements CallbackChainHandler {
     @Override
     public boolean check(Update update) {
         CallbackQuery callbackQuery = update.callbackQuery();
-        return callbackQuery != null && callbackQuery.data().startsWith("info_cat");
+        return callbackQuery != null && callbackQuery.data().startsWith(CommandType.INFO_CALLBACK.getCommand());
     }
 
     /**
@@ -41,25 +42,36 @@ public class ShelterInfoCatCallbackHandler implements CallbackChainHandler {
         Integer messageId = callbackQuery.message().messageId();
         InlineKeyboardMarkup inlineKeyboard =
                 new InlineKeyboardMarkup(
-                        new InlineKeyboardButton("Our shelter").callbackData("our_shelter_cat" + params[1]),
-                        new InlineKeyboardButton("Schedule").callbackData("about_schedule_cat" + params[1])
+                        new InlineKeyboardButton("Our shelter").callbackData(CommandType.ABOUT_SHELTER_CALLBACK.getCommand()
+                                + params[1]),
+                        new InlineKeyboardButton("Working time").callbackData(CommandType.WORKING_TIME_CALLBACK.getCommand()
+                                + params[1])
                 );
         inlineKeyboard.addRow(
-                new InlineKeyboardButton("Our address").callbackData("address_cat" + params[1]),
-                new InlineKeyboardButton("Driving directions").callbackData("driving_cat")
+                new InlineKeyboardButton("Our address").callbackData(CommandType.ADDRESS_CALLBACK.getCommand()
+                        + params[1]),
+                new InlineKeyboardButton("How to arrive").callbackData(CommandType.ARRIVE_CALLBACK.getCommand()
+                        + params[1])
 
         );
         inlineKeyboard.addRow(
-                new InlineKeyboardButton("Our contacts").callbackData("our_contacts_cat"),
-                new InlineKeyboardButton("Recommendations").callbackData("recommendations_cat")
+                new InlineKeyboardButton("Car pass").callbackData(CommandType.CAR_PASS_CALLBACK.getCommand()
+                        + params[1]),
+                new InlineKeyboardButton("Safety guide").callbackData(CommandType.SAFETY_GUIDE_CALLBACK.getCommand()
+                        + params[1])
 
         );
         inlineKeyboard.addRow(
-                new InlineKeyboardButton("To accept contact").callbackData("contact" ),
-                new InlineKeyboardButton("Call volunteer").callbackData("volunteer")
-
+                new InlineKeyboardButton("Send contact").callbackData(CommandType.SEND_CONTACT_CALLBACK.getCommand()
+                        + params[1]),
+                new InlineKeyboardButton("Call volunteer").callbackData(CommandType.VOLUNTEER_CALLBACK.getCommand()
+                        + callbackQuery.data())
         );
-        EditMessageText editMessage = new EditMessageText(chatId, messageId, "Updated for " + params[1])
+        inlineKeyboard.addRow(
+                new InlineKeyboardButton("Back").callbackData(CommandType.START_CALLBACK.getCommand())
+        );
+
+        EditMessageText editMessage = new EditMessageText(chatId, messageId, "Updated info shelter for " + params[1])
                 .replyMarkup(inlineKeyboard);
         return editMessage;
 

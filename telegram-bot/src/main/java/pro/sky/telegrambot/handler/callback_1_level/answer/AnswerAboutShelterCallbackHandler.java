@@ -1,11 +1,14 @@
-package pro.sky.telegrambot.handler.callback_1_level.dog.answer;
+package pro.sky.telegrambot.handler.callback_1_level.answer;
 
 import com.pengrad.telegrambot.model.CallbackQuery;
 import com.pengrad.telegrambot.model.Update;
+import com.pengrad.telegrambot.model.request.InlineKeyboardButton;
+import com.pengrad.telegrambot.model.request.InlineKeyboardMarkup;
 import com.pengrad.telegrambot.request.EditMessageText;
-import pro.sky.telegrambot.handler.callback_0_level.CallbackChainHandler;
+import pro.sky.telegrambot.entity.CommandType;
+import pro.sky.telegrambot.handler.api.CallbackChainHandler;
 
-public class AnswerOurShelterDogCallbackHandlerImpl implements CallbackChainHandler {
+public class AnswerAboutShelterCallbackHandler implements CallbackChainHandler {
     /**
      * Проверяет, соответствует ли колбэк необходимым условиям обработчика волонтерства.
      *
@@ -15,7 +18,7 @@ public class AnswerOurShelterDogCallbackHandlerImpl implements CallbackChainHand
     @Override
     public boolean check(Update update) {
         CallbackQuery callbackQuery = update.callbackQuery();
-        return callbackQuery != null && callbackQuery.data().startsWith("our_shelter_dog");
+        return callbackQuery != null && callbackQuery.data().startsWith(CommandType.ABOUT_SHELTER_CALLBACK.getCommand());
     }
 
     /**
@@ -30,14 +33,25 @@ public class AnswerOurShelterDogCallbackHandlerImpl implements CallbackChainHand
         CallbackQuery callbackQuery = update.callbackQuery();
         Long chatId = callbackQuery.message().chat().id();
         Integer messageId = callbackQuery.message().messageId();
+        String[] params = callbackQuery.data().split("_");
+
+        InlineKeyboardMarkup keyboard = new InlineKeyboardMarkup(
+                new InlineKeyboardButton("Back").callbackData(CommandType.INFO_CALLBACK.getCommand()
+                        + params[1])
+        );
+
+        //TODO: из БД
+        String aboutShelterText = "Our shelter:\nYelets City Public Organization \"Fluffy cats\" " +
+                "we have good cats" +
+                "is a private shelter where ONE person helps animals and supports them for their money and charity," +
+                " and can also take them home.";
 
         EditMessageText editMessage = new EditMessageText(
                 chatId,
                 messageId,
-                "Our shelter:\nYelets City Public Organization \"Fluffy Homebody\" " +
-                        "is a private shelter where ONE person helps animals and supports them for their money and charity," +
-                        " and can also take them home."
-        );
+                aboutShelterText
+        ).replyMarkup(keyboard);
+
         return editMessage;
     }
 }
