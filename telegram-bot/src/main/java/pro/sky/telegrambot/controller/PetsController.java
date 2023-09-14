@@ -47,14 +47,14 @@ public class PetsController {
      * @param id Идентификатор питомца.
      * @return Питомец с указанным идентификатором, если найден, в противном случае возвращает 404 ошибку.
      */
-    @GetMapping("{id}")
-    public Pet findPetById(@PathVariable Long id) {
+    @GetMapping("/{id}")
+    public ResponseEntity<Pet> findPetById(@PathVariable Long id) {
         Optional<Pet> pet = petsService.findPetById(id);
 
         if (pet.isEmpty()) {
-            return (Pet) ResponseEntity.status(HttpStatus.NOT_FOUND).build().getBody();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
-        return ResponseEntity.status(HttpStatus.FOUND).body(findPetById(id)).getBody();
+        return ResponseEntity.status(HttpStatus.FOUND).body(pet.get());
     }
 
     /**
@@ -64,14 +64,14 @@ public class PetsController {
      * @param id  Идентификатор редактируемого питомца.
      * @return Обновленный питомец, если редактирование выполнено успешно, в противном случаи возвращает 404 ошибку.
      */
-    @PutMapping("{id}")
-    public Pet editPet(@RequestBody Pet pet, @PathVariable Long id) {
+    @PutMapping("/{id}")
+    public ResponseEntity<Pet> editPet(@RequestBody Pet pet, @PathVariable Long id) {
         Pet foundPet = petsService.editPet(pet);
 
         if (foundPet == null) {
-            return (Pet) ResponseEntity.status(HttpStatus.NOT_FOUND).build().getBody();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
-        return ResponseEntity.status(HttpStatus.FOUND).body(findPetById(id)).getBody();
+        return ResponseEntity.status(HttpStatus.FOUND).body(foundPet);
     }
 
     /**
@@ -80,7 +80,7 @@ public class PetsController {
      * @param id Идентификатор питомца для удаления.
      * @return Подтверждение успешного удаления питомца.
      */
-    @DeleteMapping("{id}")
+    @DeleteMapping("/{id}")
     public Pet deletePet(@PathVariable Long id) {
         petsService.deletePet(id);
         return (Pet) ResponseEntity.status(HttpStatus.OK);

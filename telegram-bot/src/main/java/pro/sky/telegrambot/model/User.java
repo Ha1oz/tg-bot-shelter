@@ -1,59 +1,29 @@
 package pro.sky.telegrambot.model;
 
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
-@Entity(name = "users")
+@Entity(name="users")
+@Getter
+@Setter
 public class User {
 
     @Id
+    @Setter(AccessLevel.NONE)
     private Long chatId;
 
     private String name;
-    private Long petId;
+    @OneToOne
+    private Pet pet;
     private String phoneNumber;
     private String mail;
 
     public User() {
-    }
-
-    public Long getChatId() {
-        return chatId;
-    }
-
-    public void setChatId(Long chatId) {
-        this.chatId = chatId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Long getPetId() {
-        return petId;
-    }
-
-    public void setPetId(Long petId) {
-        this.petId = petId;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public String getMail() {
-        return mail;
-    }
-
-    public void setMail(String mail) {
-        this.mail = mail;
     }
 }

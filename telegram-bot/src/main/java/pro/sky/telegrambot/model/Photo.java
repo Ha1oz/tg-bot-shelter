@@ -1,43 +1,35 @@
 package pro.sky.telegrambot.model;
 
 import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.stereotype.Service;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import java.util.Arrays;
 import java.util.Objects;
 
-@Entity(name = "pets")
+@Entity
 @Getter
 @Setter
-@AllArgsConstructor
-public class Pet {
-
+public class Photo {
     @Id
     @GeneratedValue
     @Getter(AccessLevel.NONE)
     @Setter(AccessLevel.NONE)
     private Long id;
-
-    private String name;
-    private int age;
-    private String petType;
-    private String breed;
-    private boolean isHealthy;
-
-    public Pet() {
-    }
+    private long fileSize;
+    private String mediaType;
+    private byte[] data;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Pet pet = (Pet) o;
-        return Objects.equals(id, pet.id);
+        Photo photo = (Photo) o;
+        return Objects.equals(id, photo.id);
     }
 
     @Override
@@ -47,13 +39,11 @@ public class Pet {
 
     @Override
     public String toString() {
-        return "Pet{" +
+        return "Photo{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
-                ", age=" + age +
-                ", petType='" + petType + '\'' +
-                ", breed='" + breed + '\'' +
-                ", isHealthy=" + isHealthy +
+                ", fileSize=" + fileSize +
+                ", mediaType='" + mediaType + '\'' +
+                ", data=" + Arrays.toString(data) +
                 '}';
     }
 }
