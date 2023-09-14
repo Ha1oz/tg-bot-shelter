@@ -6,8 +6,9 @@ import com.pengrad.telegrambot.model.Message;
 import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.model.request.InlineKeyboardMarkup;
 import com.pengrad.telegrambot.request.EditMessageText;
-import org.junit.Test;
+import org.testng.annotations.Test;
 import org.mockito.Mockito;
+import pro.sky.telegrambot.handler.callback_0_level.ShelterCallbackHandler;
 
 import static org.junit.Assert.*;
 

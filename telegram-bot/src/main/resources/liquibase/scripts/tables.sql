@@ -19,9 +19,9 @@ create table users (
     mail varchar
 );
 
-create table volunteers(
+create table volunteers (
     id serial primary key,
     chatId bigint,
-    name varchar;
-);
+    name varchar
+)
 

@@ -10,26 +10,26 @@ import static org.mockito.Mockito.when;
 public class StartMessageHandlerTest {
 
     @Test
-    public void testCheckShouldReturnTrueWhenMessageContainsStartCommand() {
+    public void testCheckStart() {
         Update update = mock(Update.class);
         Message message = mock(Message.class);
         when(update.message()).thenReturn(message);
         when(message.text()).thenReturn("/start");
 
-        StartMessageHandler handler = new StartMessageHandler();
+        StartMessageHandlerImpl handler = new StartMessageHandlerImpl();
         boolean result = handler.check(update);
 
         assertEquals(true, result);
     }
 
     @Test
-    public void testCheckShouldReturnFalseWhenMessageDoesNotContainStartCommand() {
+    public void testCheckNotStart() {
         Update update = mock(Update.class);
         Message message = mock(Message.class);
         when(update.message()).thenReturn(message);
         when(message.text()).thenReturn("Hello");
 
-        StartMessageHandler handler = new StartMessageHandler();
+        StartMessageHandlerImpl handler = new StartMessageHandlerImpl();
         boolean result = handler.check(update);
 
         assertEquals(false, result);
