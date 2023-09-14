@@ -1,4 +1,4 @@
-package pro.sky.telegrambot.handler.callback;
+package pro.sky.telegrambot.handler.callback_0_level;
 
 import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.request.EditMessageText;
