@@ -67,6 +67,7 @@ public class ShelterInfoCallbackHandler implements CallbackChainHandler {
                 new InlineKeyboardButton("Call volunteer").callbackData(CommandType.VOLUNTEER_CALLBACK.getCommand()
                         + callbackQuery.data())
         );
+
         inlineKeyboard.addRow(
                 new InlineKeyboardButton("Back").callbackData(CommandType.START_CALLBACK.getCommand())
         );
