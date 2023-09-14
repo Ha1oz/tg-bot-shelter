@@ -22,8 +22,7 @@ public class Pet {
 
     }
 
-    public Pet(Long id, String name, int age, String typeOfPet, String breed, boolean isHealthy) {
-        this.id = id;
+    public Pet(String name, int age, String typeOfPet, String breed, boolean isHealthy) {
         this.name = name;
         this.age = age;
         this.typeOfPet = typeOfPet;
@@ -85,10 +84,6 @@ public class Pet {
 
     public String getBreed() {
         return breed;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public void setBreed(String breed) {
