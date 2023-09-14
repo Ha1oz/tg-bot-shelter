@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.*;
 import pro.sky.telegrambot.model.Pet;
 import pro.sky.telegrambot.service.PetsService;
 
+import java.util.Optional;
+
 
 /**
  * Контроллер для обработки HTTP-запросов, связанных с питомцами.
@@ -47,9 +49,9 @@ public class PetsController {
      */
     @GetMapping("{id}")
     public Pet findPetById(@PathVariable Long id) {
-        Pet pet = petsService.findPetById(id);
+        Optional<Pet> pet = petsService.findPetById(id);
 
-        if (pet == null) {
+        if (pet.isEmpty()) {
             return (Pet) ResponseEntity.status(HttpStatus.NOT_FOUND).build().getBody();
         }
         return ResponseEntity.status(HttpStatus.FOUND).body(findPetById(id)).getBody();
