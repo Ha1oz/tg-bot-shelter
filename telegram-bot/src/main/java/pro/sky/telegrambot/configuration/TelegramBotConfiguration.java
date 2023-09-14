@@ -68,7 +68,7 @@ public class TelegramBotConfiguration {
                 new AnswerGetCallbackHandler(),
                 new AnswerStartCallbackHandler(),
 
-                new ShelterInfoCatCallbackHandler(),
+                new ShelterInfoCallbackHandler(),
 
                 new AnswerAddressCallbackHandler(),
                 new AnswerWorkingTimeCallbackHandler(),

@@ -15,8 +15,12 @@ public enum CommandType {
 
     // callback_2_level
 
-    RULES_CALLBACK("Rules_"), DOCUMENTS_CALLBACK("Documents for adopt"),
-    TRANSPORTING_CALLBACK("Transporting"),
+    RULES_CALLBACK("Rules_"), DOCUMENTS_CALLBACK("documents_"),
+    TRANSPORTING_CALLBACK("transporting_"), ARRANGE_FOR_ADULT("forAdultAnimal_"),
+    ARRANGE_FOR_DISABILITIES("forAnAnimalWithDisabilities_"),
+    ADVICE_FROM_DOG_HANDLER("dogHandler_"), PROVEN_DOG_HANDLER("provenDogHandlers_"),
+    REASON_FOR_REFUSAL("reasonsForRefusal_"),
+
 
     //MESSAGE
     START_MESSAGE("/start"), FORM_MESSAGE("/form");

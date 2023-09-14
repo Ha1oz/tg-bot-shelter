@@ -13,7 +13,7 @@ import pro.sky.telegrambot.handler.api.CallbackChainHandler;
 /**
  * Обработчик для колбэков связанных с приютами.
  */
-public class ShelterInfoCatCallbackHandler implements CallbackChainHandler {
+public class ShelterInfoCallbackHandler implements CallbackChainHandler {
 
     /**
      * Проверяет, соответствует ли колбэк необходимым условиям обработчика приютов.

@@ -40,33 +40,55 @@ public class ShelterGetPetCallbackHandler implements CallbackChainHandler {
         Integer messageId = callbackQuery.message().messageId();
         InlineKeyboardMarkup inlineKeyboard =
                 new InlineKeyboardMarkup(
-                        new InlineKeyboardButton("Rules").callbackData(CommandType.RULES_CALLBACK.getCommand()
+                        new InlineKeyboardButton("Rules")
+                                .callbackData(CommandType.RULES_CALLBACK.getCommand()
                                 + params[1]),
-                        new InlineKeyboardButton("Documents for adopt").callbackData(CommandType.DOCUMENTS_CALLBACK.getCommand()
+                        new InlineKeyboardButton("Documents for adopt")
+                                .callbackData(CommandType.DOCUMENTS_CALLBACK.getCommand()
                                 + params[1])
                 );
         inlineKeyboard.addRow(
-                new InlineKeyboardButton("Transporting").callbackData(CommandType.TRANSPORTING_CALLBACK.getCommand()
+                new InlineKeyboardButton("Transporting")
+                        .callbackData(CommandType.TRANSPORTING_CALLBACK.getCommand()
                         + params[1]),
-                new InlineKeyboardButton("How to arrive").callbackData(CommandType.ARRIVE_CALLBACK.getCommand()
+                new InlineKeyboardButton("How arrange a home for an adult animal")
+                        .callbackData(CommandType.ARRANGE_FOR_ADULT.getCommand()
                         + params[1])
 
         );
+//        - Бот может выдать советы кинолога по первичному общению с собакой
+//        *(неактуально для кошачьего приюта, реализовать только для приюта для собак).*
+//        - Бот может выдать рекомендации по проверенным кинологам для дальнейшего обращения к ним
+//        *(неактуально для кошачьего приюта, реализовать только для приюта для собак).*
         inlineKeyboard.addRow(
-                new InlineKeyboardButton("Car pass").callbackData(CommandType.CAR_PASS_CALLBACK.getCommand()
+                new InlineKeyboardButton("for an animal with disabilities")
+                        .callbackData(CommandType.ARRANGE_FOR_DISABILITIES.getCommand()
                         + params[1]),
-                new InlineKeyboardButton("Safety guide").callbackData(CommandType.SAFETY_GUIDE_CALLBACK.getCommand()
+                new InlineKeyboardButton("Advice from a dog handler").callbackData(CommandType
+                        .ADVICE_FROM_DOG_HANDLER.getCommand()
                         + params[1])
-
         );
+
         inlineKeyboard.addRow(
-                new InlineKeyboardButton("Send contact").callbackData(CommandType.SEND_CONTACT_CALLBACK.getCommand()
+                new InlineKeyboardButton("Proven dog handlers").callbackData(CommandType
+                        .PROVEN_DOG_HANDLER.getCommand()
                         + params[1]),
-                new InlineKeyboardButton("Call volunteer").callbackData(CommandType.VOLUNTEER_CALLBACK.getCommand()
+                new InlineKeyboardButton("Reasons for refusal").callbackData(CommandType
+                        .REASON_FOR_REFUSAL.getCommand()
+                        + params[1])
+        );
+
+        inlineKeyboard.addRow(
+                new InlineKeyboardButton("Send contact")
+                        .callbackData(CommandType.SEND_CONTACT_CALLBACK.getCommand()
+                        + params[1]),
+                new InlineKeyboardButton("Call volunteer")
+                        .callbackData(CommandType.VOLUNTEER_CALLBACK.getCommand()
                         + callbackQuery.data())
         );
         inlineKeyboard.addRow(
-                new InlineKeyboardButton("Back").callbackData(CommandType.START_CALLBACK.getCommand())
+                new InlineKeyboardButton("Back")
+                        .callbackData(CommandType.START_CALLBACK.getCommand())
         );
 
         EditMessageText editMessage = new EditMessageText(chatId, messageId, "Updated info shelter for " + params[1])
