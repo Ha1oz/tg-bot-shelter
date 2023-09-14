@@ -1,4 +1,4 @@
-package pro.sky.telegrambot.handler.message_;
+package pro.sky.telegrambot.handler.message;
 
 import com.pengrad.telegrambot.TelegramBot;
 import com.pengrad.telegrambot.model.Message;
@@ -7,13 +7,12 @@ import com.pengrad.telegrambot.request.SendMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import pro.sky.telegrambot.handler.api.MessageChainHandler;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-public class StartMessagePhoneHandlerImpl implements MessageChainHandlerReg {
+public class StartMessagePhoneHandlerImpl implements MessageChainHandler {
     private Logger logger = LoggerFactory.getLogger(StartMessagePhoneHandlerImpl.class);
-    @Autowired
-    private TelegramBot telegramBot;
 
     /**
      * Проверяет, соответствует ли сообщение команде /start.
@@ -21,7 +20,6 @@ public class StartMessagePhoneHandlerImpl implements MessageChainHandlerReg {
      * @param update Обновление от Telegram API
      * @return true, если сообщение содержит команду /start, иначе false.
      */
-
 
     @Override
     public boolean check(Update update) {

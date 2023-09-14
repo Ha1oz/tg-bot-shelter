@@ -6,17 +6,15 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import pro.sky.telegrambot.handler.callback_0_level.*;
-import pro.sky.telegrambot.handler.callback_0_level.answer.AnswerGetCallbackHandlerImpl;
-import pro.sky.telegrambot.handler.callback_0_level.answer.AnswerReportCallbackHandlerImpl;
-import pro.sky.telegrambot.handler.callback_0_level.answer.AnswerVolunteerCallbackHandlerImpl;
-import pro.sky.telegrambot.handler.callback_1_level.cat.ShelterInfoCatCallbackHandler;
-import pro.sky.telegrambot.handler.callback_1_level.cat.answer.*;
-import pro.sky.telegrambot.handler.callback_1_level.dog.ShelterInfoDogCallbackHandler;
-import pro.sky.telegrambot.handler.callback_1_level.dog.answer.*;
-import pro.sky.telegrambot.handler.message_.MessageChainHandler;
-import pro.sky.telegrambot.handler.message_.MessageChainHandlerReg;
-import pro.sky.telegrambot.handler.message_.StartMessageHandlerImpl;
-import pro.sky.telegrambot.handler.message_.StartMessagePhoneHandlerImpl;
+import pro.sky.telegrambot.handler.callback_0_level.answer.AnswerGetCallbackHandler;
+import pro.sky.telegrambot.handler.callback_0_level.answer.AnswerReportCallbackHandler;
+import pro.sky.telegrambot.handler.callback_0_level.answer.AnswerStartCallbackHandler;
+import pro.sky.telegrambot.handler.callback_0_level.answer.AnswerVolunteerCallbackHandler;
+import pro.sky.telegrambot.handler.api.CallbackChainHandler;
+import pro.sky.telegrambot.handler.callback_1_level.*;
+import pro.sky.telegrambot.handler.callback_1_level.answer.*;
+import pro.sky.telegrambot.handler.api.MessageChainHandler;
+import pro.sky.telegrambot.handler.message.StartMessageHandlerImpl;
 
 import java.util.List;
 
@@ -55,15 +53,6 @@ public class TelegramBotConfiguration {
         );
     }
 
-    @Bean
-    public List<MessageChainHandlerReg> messageChainHandlersReg() {
-        return List.of(
-                new StartMessagePhoneHandlerImpl()
-
-
-        );
-    }
-
     /**
      * Создает список обработчиков цепочки колбэков.
      *
@@ -72,40 +61,23 @@ public class TelegramBotConfiguration {
     @Bean
     public List<CallbackChainHandler> callbackChainHandlers() {
         return List.of(
-                new ShelterCatCallbackHandlerImpl(),
-                new  ShelterDogCallbackHandlerImpl(),
+                new ShelterCallbackHandler(),
 
-                new AnswerVolunteerCallbackHandlerImpl(),
-                new AnswerReportCallbackHandlerImpl(),
-                new AnswerGetCallbackHandlerImpl(),
+                new AnswerVolunteerCallbackHandler(),
+                new AnswerReportCallbackHandler(),
+                new AnswerGetCallbackHandler(),
+                new AnswerStartCallbackHandler(),
 
                 new ShelterInfoCatCallbackHandler(),
-                new ShelterInfoDogCallbackHandler(),
 
-
-
-                new AnswerOurShelterDogCallbackHandlerImpl(),
-                new AnswerScheduleDogCallbackHandler(),
-                new AnswerAddressDogCallbackHandler(),
-                new AnswerDrivingDogCallbackHandler(),
-                new AnswerOurContactsDogCallbackHandler(),
-                new AnswerRecommendationsDogCallbackHandler(),
-                new AnswerAcceptDogCallbackHandler(),
-
-                new AnswerAddressCatCallbackHandler(),
-
-
-
-                new AnswerScheduleCatCallbackHandler(),
-                new AnswerAddressCatCallbackHandler(),
-                new AnswerDrivingCatCallbackHandler(),
-                new AnswerOurContactsCatCallbackHandler(),
-                new AnswerRecommendationsCatCallbackHandler(),
-                new AnswerAcceptCatCallbackHandler(),
-                new AnswerOurShelterCatCallbackHandlerImpl()
-
-
-
+                new AnswerAddressCallbackHandler(),
+                new AnswerWorkingTimeCallbackHandler(),
+                new AnswerAddressCallbackHandler(),
+                new AnswerArriveCallbackHandler(),
+                new AnswerPassCallbackHandler(),
+                new AnswerSafetyGuideCallbackHandler(),
+                new AnswerSendContactCallbackHandler(),
+                new AnswerAboutShelterCallbackHandler()
         );
     }
 }

@@ -1,13 +1,14 @@
-package pro.sky.telegrambot.handler.callback_1_level.cat.answer;
+package pro.sky.telegrambot.handler.callback_1_level.answer;
 
 import com.pengrad.telegrambot.model.CallbackQuery;
 import com.pengrad.telegrambot.model.Update;
+import com.pengrad.telegrambot.model.request.InlineKeyboardButton;
+import com.pengrad.telegrambot.model.request.InlineKeyboardMarkup;
 import com.pengrad.telegrambot.request.EditMessageText;
-import pro.sky.telegrambot.handler.callback_0_level.CallbackChainHandler;
+import pro.sky.telegrambot.entity.CommandType;
+import pro.sky.telegrambot.handler.api.CallbackChainHandler;
 
-//import static jdk.internal.org.jline.terminal.Terminal.MouseTracking.Button;
-
-public class AnswerAddressCatCallbackHandler implements CallbackChainHandler {
+public class AnswerAddressCallbackHandler implements CallbackChainHandler {
     /**
      * Проверяет, соответствует ли колбэк необходимым условиям обработчика волонтерства.
      *
@@ -17,7 +18,7 @@ public class AnswerAddressCatCallbackHandler implements CallbackChainHandler {
     @Override
     public boolean check(Update update) {
         CallbackQuery callbackQuery = update.callbackQuery();
-        return callbackQuery != null && callbackQuery.data().startsWith("address_cat");
+        return callbackQuery != null && callbackQuery.data().startsWith(CommandType.ADDRESS_CALLBACK.getCommand());
     }
 
     /**
@@ -29,15 +30,27 @@ public class AnswerAddressCatCallbackHandler implements CallbackChainHandler {
      */
     @Override
     public EditMessageText handle(Update update) {
+
         CallbackQuery callbackQuery = update.callbackQuery();
         Long chatId = callbackQuery.message().chat().id();
         Integer messageId = callbackQuery.message().messageId();
+
+        String[] params = callbackQuery.data().split("_");
+
+        InlineKeyboardMarkup keyboard = new InlineKeyboardMarkup(
+                new InlineKeyboardButton("Back").callbackData(CommandType.INFO_CALLBACK.getCommand()
+                        + params[1])
+        );
+
+        //TODO подтягивать текст об адресе из БД, в зависимости от выбранного варианта в меню (cat или dog)
+        String addressText = "*Address*:\\n Burnakovsky passage, 16\n" +
+                "Burnakovsky proezd, 16, Nizhny Novgorod, 603079.";
+
         EditMessageText editMessage = new EditMessageText(
                 chatId,
                 messageId,
-                "*Address*:\\n Burnakovsky passage, 16\n" +
-                        "Burnakovsky proezd, 16, Nizhny Novgorod, 603079."
-        );
+                addressText
+        ).replyMarkup(keyboard);
         return editMessage;
     }
 }

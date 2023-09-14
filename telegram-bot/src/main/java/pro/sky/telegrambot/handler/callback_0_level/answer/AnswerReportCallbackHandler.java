@@ -1,11 +1,13 @@
-package pro.sky.telegrambot.handler.callback_1_level.cat.answer;
+package pro.sky.telegrambot.handler.callback_0_level.answer;
 
 import com.pengrad.telegrambot.model.CallbackQuery;
 import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.request.EditMessageText;
-import pro.sky.telegrambot.handler.callback_0_level.CallbackChainHandler;
+import pro.sky.telegrambot.entity.CommandType;
+import pro.sky.telegrambot.handler.api.CallbackChainHandler;
 
-public class AnswerOurShelterCatCallbackHandlerImpl implements CallbackChainHandler {
+public class AnswerReportCallbackHandler implements CallbackChainHandler {
+
     /**
      * Проверяет, соответствует ли колбэк необходимым условиям обработчика волонтерства.
      *
@@ -14,8 +16,8 @@ public class AnswerOurShelterCatCallbackHandlerImpl implements CallbackChainHand
      */
     @Override
     public boolean check(Update update) {
-        CallbackQuery callbackQuery = update.callbackQuery();
-        return callbackQuery != null && callbackQuery.data().startsWith("our_shelter_cat");
+        CallbackQuery callbackQuery  = update.callbackQuery();
+        return callbackQuery != null && callbackQuery.data().startsWith(CommandType.REPORT_CALLBACK.getCommand());
     }
 
     /**
@@ -27,21 +29,15 @@ public class AnswerOurShelterCatCallbackHandlerImpl implements CallbackChainHand
      */
     @Override
     public EditMessageText handle(Update update) {
-        CallbackQuery callbackQuery = update.callbackQuery();
-        Long chatId = callbackQuery.message().chat().id();
-        Integer messageId = callbackQuery.message().messageId();
-
+        CallbackQuery callbackQuery  = update.callbackQuery();
+        Long chatId = callbackQuery .message().chat().id();
+        Integer messageId = callbackQuery .message().messageId();
         EditMessageText editMessage = new EditMessageText(
                 chatId,
                 messageId,
-                "Our shelter:\nYelets City Public Organization \"Fluffy cats\" " +
-                        "we have good cats" +
-                        "is a private shelter where ONE person helps animals and supports them for their money and charity," +
-                        " and can also take them home."
+                "Report"
         );
         return editMessage;
     }
 }
-
-
 

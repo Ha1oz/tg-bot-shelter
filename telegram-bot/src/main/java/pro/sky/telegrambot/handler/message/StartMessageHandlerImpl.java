@@ -1,6 +1,5 @@
-package pro.sky.telegrambot.handler.message_;
+package pro.sky.telegrambot.handler.message;
 
-import com.pengrad.telegrambot.TelegramBot;
 import com.pengrad.telegrambot.model.Message;
 import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.model.request.InlineKeyboardButton;
@@ -8,7 +7,9 @@ import com.pengrad.telegrambot.model.request.InlineKeyboardMarkup;
 import com.pengrad.telegrambot.request.SendMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import pro.sky.telegrambot.entity.CommandType;
+import pro.sky.telegrambot.entity.PetType;
+import pro.sky.telegrambot.handler.api.MessageChainHandler;
 import pro.sky.telegrambot.listener.TelegramBotUpdatesListener;
 
 /**
@@ -17,8 +18,6 @@ import pro.sky.telegrambot.listener.TelegramBotUpdatesListener;
  */
 public class StartMessageHandlerImpl implements MessageChainHandler {
     private Logger logger = LoggerFactory.getLogger(TelegramBotUpdatesListener.class);
-    @Autowired
-    private TelegramBot telegramBot;
 
     /**
      * Проверяет, соответствует ли сообщение команде /start.
@@ -29,9 +28,7 @@ public class StartMessageHandlerImpl implements MessageChainHandler {
     @Override
     public boolean check(Update update) {
         Message message = update.message();
-        return message != null && message.text().contains("/start");
-
-
+        return message != null && message.text().contains(CommandType.START_MESSAGE.getCommand());
     }
 
     /**
@@ -46,8 +43,10 @@ public class StartMessageHandlerImpl implements MessageChainHandler {
         Long chatId = message.chat().id();
         String firstName = message.chat().firstName();
         InlineKeyboardMarkup inlineKeyboard = new InlineKeyboardMarkup(
-                new InlineKeyboardButton("Cats").callbackData("shelter_cats"),
-                new InlineKeyboardButton("Dogs").callbackData("shelter_dogs")
+                new InlineKeyboardButton("Cats").callbackData(CommandType.SHELTER_CALLBACK.getCommand()
+                        + PetType.CAT.getPet()),
+                new InlineKeyboardButton("Dogs").callbackData(CommandType.SHELTER_CALLBACK.getCommand()
+                        + PetType.DOG.getPet())
         );
         SendMessage sendMessage = new SendMessage(chatId, "Hello, choose your option")
                 .replyMarkup(inlineKeyboard);

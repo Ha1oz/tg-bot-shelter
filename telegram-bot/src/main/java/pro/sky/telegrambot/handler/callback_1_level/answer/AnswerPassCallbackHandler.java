@@ -1,11 +1,14 @@
-package pro.sky.telegrambot.handler.callback_1_level.cat.answer;
+package pro.sky.telegrambot.handler.callback_1_level.answer;
 
 import com.pengrad.telegrambot.model.CallbackQuery;
 import com.pengrad.telegrambot.model.Update;
+import com.pengrad.telegrambot.model.request.InlineKeyboardButton;
+import com.pengrad.telegrambot.model.request.InlineKeyboardMarkup;
 import com.pengrad.telegrambot.request.EditMessageText;
-import pro.sky.telegrambot.handler.callback_0_level.CallbackChainHandler;
+import pro.sky.telegrambot.entity.CommandType;
+import pro.sky.telegrambot.handler.api.CallbackChainHandler;
 
-public class AnswerOurContactsCatCallbackHandler implements CallbackChainHandler {
+public class AnswerPassCallbackHandler implements CallbackChainHandler {
 
     /**
      * Проверяет, соответствует ли колбэк необходимым условиям обработчика волонтерства.
@@ -16,7 +19,7 @@ public class AnswerOurContactsCatCallbackHandler implements CallbackChainHandler
     @Override
     public boolean check(Update update) {
         CallbackQuery callbackQuery = update.callbackQuery();
-        return callbackQuery != null && callbackQuery.data().startsWith("our_contacts_cat");
+        return callbackQuery != null && callbackQuery.data().startsWith(CommandType.CAR_PASS_CALLBACK.getCommand());
     }
 
     /**
@@ -31,11 +34,23 @@ public class AnswerOurContactsCatCallbackHandler implements CallbackChainHandler
         CallbackQuery callbackQuery = update.callbackQuery();
         Long chatId = callbackQuery.message().chat().id();
         Integer messageId = callbackQuery.message().messageId();
+
+        String[] params = callbackQuery.data().split("_");
+
+        InlineKeyboardMarkup keyboard = new InlineKeyboardMarkup(
+                new InlineKeyboardButton("Back").callbackData(CommandType.INFO_CALLBACK.getCommand()
+                        + params[1])
+        );
+
+        // TODO: из БД
+        String carPassInfo = "*Our contact details for registration of a car pass*:\n" +
+                "Pass  manager  Varvara Nikolaevich, phone +79578653400.";
+
         EditMessageText editMessage = new EditMessageText(
                 chatId,
                 messageId,
-                "*Our contact details for registration of a car pass*:\n Pass  manager  Varvara Nikolaevich, phone +79578653400."
-        );
+                carPassInfo
+        ).replyMarkup(keyboard);
         return editMessage;
     }
 }
