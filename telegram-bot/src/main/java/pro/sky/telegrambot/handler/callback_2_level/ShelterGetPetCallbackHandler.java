@@ -58,7 +58,7 @@ public class ShelterGetPetCallbackHandler implements CallbackChainHandler {
 
         );
 
-        if (params[1].equalsIgnoreCase(String.valueOf(PetType.DOG))) {
+        if (params[1].equalsIgnoreCase(PetType.DOG.getPet())) {
             inlineKeyboard.addRow(
                     new InlineKeyboardButton("Arrange for puppy")
                             .callbackData(CommandType.ARRANGE_FOR_PUPPY.getCommand()
@@ -66,7 +66,7 @@ public class ShelterGetPetCallbackHandler implements CallbackChainHandler {
             );
         }
 
-        if (params[1].equalsIgnoreCase(String.valueOf(PetType.CAT))) {
+        if (params[1].equalsIgnoreCase(PetType.CAT.getPet())) {
             inlineKeyboard.addRow(
                     new InlineKeyboardButton("Arrange for kitten")
                             .callbackData(CommandType.ARRANGE_FOR_KITTEN.getCommand()
@@ -74,7 +74,7 @@ public class ShelterGetPetCallbackHandler implements CallbackChainHandler {
             );
         }
 
-        if (params[1].equalsIgnoreCase(String.valueOf(PetType.DOG))) {
+        if (params[1].equalsIgnoreCase(PetType.DOG.getPet())) {
             inlineKeyboard.addRow(
                     new InlineKeyboardButton("Proven dog handlers").callbackData(CommandType
                             .PROVEN_DOG_HANDLER.getCommand()
