@@ -6,6 +6,7 @@ import com.pengrad.telegrambot.model.request.InlineKeyboardButton;
 import com.pengrad.telegrambot.model.request.InlineKeyboardMarkup;
 import com.pengrad.telegrambot.request.EditMessageText;
 import pro.sky.telegrambot.entity.CommandType;
+import pro.sky.telegrambot.entity.PetType;
 import pro.sky.telegrambot.handler.api.CallbackChainHandler;
 
 /**
@@ -57,7 +58,7 @@ public class ShelterGetPetCallbackHandler implements CallbackChainHandler {
 
         );
 
-        if (params[1].equalsIgnoreCase("dog")) {
+        if (params[1].equalsIgnoreCase(String.valueOf(PetType.DOG))) {
             inlineKeyboard.addRow(
                     new InlineKeyboardButton("Arrange for puppy")
                             .callbackData(CommandType.ARRANGE_FOR_PUPPY.getCommand()
@@ -65,7 +66,7 @@ public class ShelterGetPetCallbackHandler implements CallbackChainHandler {
             );
         }
 
-        if (params[1].equalsIgnoreCase("cat")) {
+        if (params[1].equalsIgnoreCase(String.valueOf(PetType.CAT))) {
             inlineKeyboard.addRow(
                     new InlineKeyboardButton("Arrange for kitten")
                             .callbackData(CommandType.ARRANGE_FOR_KITTEN.getCommand()
@@ -73,7 +74,7 @@ public class ShelterGetPetCallbackHandler implements CallbackChainHandler {
             );
         }
 
-        if (params[1].equalsIgnoreCase("dog")) {
+        if (params[1].equalsIgnoreCase(String.valueOf(PetType.DOG))) {
             inlineKeyboard.addRow(
                     new InlineKeyboardButton("Proven dog handlers").callbackData(CommandType
                             .PROVEN_DOG_HANDLER.getCommand()
