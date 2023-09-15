@@ -6,7 +6,10 @@ import com.pengrad.telegrambot.model.request.InlineKeyboardButton;
 import com.pengrad.telegrambot.model.request.InlineKeyboardMarkup;
 import com.pengrad.telegrambot.request.EditMessageText;
 import pro.sky.telegrambot.entity.CommandType;
+import pro.sky.telegrambot.entity.PetType;
 import pro.sky.telegrambot.handler.api.CallbackChainHandler;
+
+import static pro.sky.telegrambot.constants.Constants.*;
 
 public class AnswerWorkingTimeCallbackHandler implements CallbackChainHandler {
     /**
@@ -40,47 +43,26 @@ public class AnswerWorkingTimeCallbackHandler implements CallbackChainHandler {
                 new InlineKeyboardButton("Back").callbackData(CommandType.INFO_CALLBACK.getCommand()
                         + params[1])
         );
+        return processAnimal(params[1], chatId, messageId);
+    }
+//TODO подтягивать текст
+    private EditMessageText processAnimal(String petType, Long chatId,  Integer messageId) {
 
-        //TODO: из БД
-        String workingTimeText = "*Schedule*:\nMonday:  " + "08:30–19:30\n" +
-                "Tuesday:  " + "08:30–19:30\n" +
-                "Wednesday:  " + "08:30–19:30\n" +
-                "Thursday:  " + "08:30–19:30\n" +
-                "Friday:  " + "08:30–19:30\n" +
-                "Saturday:  " + "Выходной\n" +
-                "Sunday:  " + "Выходной\n " +
-                "*WITH A BREAK FOR LUNCH EVERY DAY (13.00-14.00)!*| " +
+        if (petType.equals(PetType.CAT.getPet())) {
+            EditMessageText editMessage = new EditMessageText(
+                    chatId,
+                    messageId,
+                    TEXTCATWORKINGTIME);
+            return editMessage;
 
-        "Schedule:\nMonday:  " + "07:30–19:30\n" +
-                "Tuesday:  " + "07:30–19:30\n" +
-                "Wednesday:  " + "07:30–19:30\n" +
-                "Thursday:  " + "07:30–19:30\n" +
-                "Friday:  " +"07:30–19:30\n" +
-                "Saturday:  " +  "Выходной\n" +
-                "Sunday:  " + "Выходной\n "+
-                "*WITHOUT A BREAK FOR LUNCH!*.";
-
-        String[] text = workingTimeText.split("\\|");
-
-        return switch (params[1]) {
-            case "cat" -> {
-                EditMessageText editMessage = new EditMessageText(
-                        chatId,
-                        messageId,
-                        text[0]
-                ).replyMarkup(keyboard);
-                yield editMessage;
-            }
-            case "dog" -> {
-                EditMessageText editMessage = new EditMessageText(
-                        chatId,
-                        messageId,
-                        text[1]
-                ).replyMarkup(keyboard);
-                yield editMessage;
-            }
-            default -> throw new IllegalStateException("Unexpected value: " + params[1]);
-        };
+        } else if (petType.equals(PetType.DOG.getPet())) {
+            EditMessageText editMessage = new EditMessageText(
+                    chatId,
+                    messageId,
+                    TEXTDOGWORKINGTIME);
+            return editMessage;
+        }
+        return  null;
     }
 }
 

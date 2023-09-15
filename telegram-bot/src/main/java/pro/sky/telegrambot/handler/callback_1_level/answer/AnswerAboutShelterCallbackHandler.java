@@ -6,10 +6,17 @@ import com.pengrad.telegrambot.model.request.InlineKeyboardButton;
 import com.pengrad.telegrambot.model.request.InlineKeyboardMarkup;
 import com.pengrad.telegrambot.request.EditMessageText;
 import pro.sky.telegrambot.entity.CommandType;
+import pro.sky.telegrambot.entity.PetType;
+import pro.sky.telegrambot.constants.Constants;
 import pro.sky.telegrambot.handler.api.CallbackChainHandler;
+
+import static pro.sky.telegrambot.constants.Constants.TEXTCATSHELTER;
+import static pro.sky.telegrambot.constants.Constants.TEXTDOGSHELTER;
 
 public class AnswerAboutShelterCallbackHandler implements CallbackChainHandler {
 
+    private PetType petType;
+    private Constants constants;
 
     /**
      * Проверяет, соответствует ли колбэк необходимым условиям обработчика волонтерства.
@@ -41,43 +48,35 @@ public class AnswerAboutShelterCallbackHandler implements CallbackChainHandler {
                 new InlineKeyboardButton("Back").callbackData(CommandType.INFO_CALLBACK.getCommand()
                         + params[1])
         );
+        return processAnimal(params[1], chatId, messageId);
+    }
+    //TODO: из БД
+    private EditMessageText processAnimal(String petType, Long chatId,  Integer messageId) {
 
-        //TODO: из БД
-        String aboutShelterText = "Our shelter:\nYelets City Public Organization \"Fluffy cats\" " +
-                "we have good cats" +
-                "is a private shelter where ONE person helps animals and supports them for their money and charity," +
-                " and can also take them home. |" +
+        if (petType.equals(PetType.CAT.getPet())) {
+            EditMessageText editMessage = new EditMessageText(
+                    chatId,
+                    messageId,
+                    TEXTCATSHELTER);
+            return editMessage;
 
-                "Our shelter: \nYelets City Public Organization  \"Puffy dogs \" \" +\n" +
-                "\"we have good dogs\" +\n" +
-                "\"is a private shelter where ONE person helps animals and supports" +
-                " them for their money and charity,\" +\n" +
-                "\" and can also take them home.";
-
-        String[] text = aboutShelterText.split("\\|");
-
-
-        return switch (params[1]) {
-            case "cat" -> {
-                EditMessageText editMessage = new EditMessageText(
-                        chatId,
-                        messageId,
-                        text[0]
-                ).replyMarkup(keyboard);
-                yield editMessage;
-            }
-            case "dog"-> {
-                EditMessageText editMessage  = new EditMessageText(
-                        chatId,
-                        messageId,
-                        text[1]
-                ).replyMarkup(keyboard);
-                yield editMessage ;
-            }
-            default -> throw new IllegalStateException("Unexpected value: " + params[1]);
-        };
+        } else if (petType.equals(PetType.DOG.getPet())) {
+            EditMessageText editMessage = new EditMessageText(
+                    chatId,
+                    messageId,
+                    TEXTDOGSHELTER);
+            return editMessage;
+        }
+        return  null ;
     }
 }
+
+
+
+
+
+
+
 
 
 

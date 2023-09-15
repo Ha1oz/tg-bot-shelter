@@ -6,7 +6,10 @@ import com.pengrad.telegrambot.model.request.InlineKeyboardButton;
 import com.pengrad.telegrambot.model.request.InlineKeyboardMarkup;
 import com.pengrad.telegrambot.request.EditMessageText;
 import pro.sky.telegrambot.entity.CommandType;
+import pro.sky.telegrambot.entity.PetType;
 import pro.sky.telegrambot.handler.api.CallbackChainHandler;
+
+import static pro.sky.telegrambot.constants.Constants.*;
 
 public class AnswerArriveCallbackHandler implements CallbackChainHandler {
     /**
@@ -40,35 +43,37 @@ public class AnswerArriveCallbackHandler implements CallbackChainHandler {
                 new InlineKeyboardButton("Back").callbackData(CommandType.INFO_CALLBACK.getCommand()
                         + params[1])
         );
+        return processAnimal(params[1], chatId, messageId);
+    }
+//TODO подтягивать текст об адресе из БД, в зависимости от выбранного варианта в меню (cat или dog)
 
-        //TODO: из БД
-        String arriveInfoText = "Driving directions:\n" +
-                "https://yandex.ru/maps/47/nizhny-novgorod/house/krasnoselskaya_ulitsa_11a/YEoYfwBoT0MHQFtsfX9xeXhrYQ==/?ll=43.978659%2C56.308485&z=16.|" +
-                "https://yandex.ru/maps/10662/kameshkovo/house/ulitsa_korunovoy_52/YEgYdgdoTUcCQFtsfX9zcX5lZw==/?ll=41.007326%2C56.319930&z=17.35.";
 
-        String[] text = arriveInfoText.split("\\|");
+    private EditMessageText processAnimal(String petType, Long chatId,  Integer messageId) {
 
-        return switch (params[1]) {
-            case "cat" -> {
-                EditMessageText editMessage = new EditMessageText(
-                        chatId,
-                        messageId,
-                        text[0]
-                ).replyMarkup(keyboard);
-                yield editMessage;
-            }
-            case "dog"-> {
-                EditMessageText editMessage  = new EditMessageText(
-                        chatId,
-                        messageId,
-                        text[1]
-                ).replyMarkup(keyboard);
-                yield editMessage ;
-            }
-            default -> throw new IllegalStateException("Unexpected value: " + params[1]);
-        };
+        if (petType.equals(PetType.CAT.getPet())) {
+            EditMessageText editMessage = new EditMessageText(
+                    chatId,
+                    messageId,
+                    TEXTCATARRIVE);
+            return editMessage;
+
+        } else if (petType.equals(PetType.DOG.getPet())) {
+            EditMessageText editMessage = new EditMessageText(
+                    chatId,
+                    messageId,
+                    TEXTDOGARRIVE);
+            return editMessage;
+        }
+        return  null ;
     }
 }
+
+
+
+
+
+
+
 
 
 

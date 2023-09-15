@@ -6,7 +6,10 @@ import com.pengrad.telegrambot.model.request.InlineKeyboardButton;
 import com.pengrad.telegrambot.model.request.InlineKeyboardMarkup;
 import com.pengrad.telegrambot.request.EditMessageText;
 import pro.sky.telegrambot.entity.CommandType;
+import pro.sky.telegrambot.entity.PetType;
 import pro.sky.telegrambot.handler.api.CallbackChainHandler;
+
+import static pro.sky.telegrambot.constants.Constants.*;
 
 public class AnswerAddressCallbackHandler implements CallbackChainHandler {
     /**
@@ -42,33 +45,28 @@ public class AnswerAddressCallbackHandler implements CallbackChainHandler {
                         + params[1])
         );
 
-        //TODO подтягивать текст об адресе из БД, в зависимости от выбранного варианта в меню (cat или dog)
-        String addressText = "*Address*:\\n Burnakovsky passage, 16\n" +
-                "Burnakovsky proezd, 16, Nizhny Novgorod, 603079.|" +
-                "*Address*:\\nVladimir region, Kameshkovsky m.r.n., city of Kameshkovo, Kameshkovo, Korunova str., 52, p. 3, FL/ROOM 2/6.";
+        return processAnimal(params[1], chatId, messageId);
+    }
+//TODO подтягивать текст об адресе из БД, в зависимости от выбранного варианта в меню (cat или dog)
 
 
-        String[] text = addressText.split("\\|");
+    private EditMessageText processAnimal(String petType, Long chatId,  Integer messageId) {
 
-        return switch (params[1]) {
-            case "cat" -> {
-                EditMessageText editMessage = new EditMessageText(
-                        chatId,
-                        messageId,
-                        text[0]
-                ).replyMarkup(keyboard);
-                yield editMessage;
-            }
-            case "dog"-> {
-                EditMessageText editMessage  = new EditMessageText(
-                        chatId,
-                        messageId,
-                        text[1]
-                ).replyMarkup(keyboard);
-                yield editMessage ;
-            }
-            default -> throw new IllegalStateException("Unexpected value: " + params[1]);
-        };
+        if (petType.equals(PetType.CAT.getPet())) {
+            EditMessageText editMessage = new EditMessageText(
+                    chatId,
+                    messageId,
+                    TEXTCATADRESS);
+            return editMessage;
+
+        } else if (petType.equals(PetType.DOG.getPet())) {
+            EditMessageText editMessage = new EditMessageText(
+                    chatId,
+                    messageId,
+                    TEXTDOGADRESS);
+            return editMessage;
+        }
+        return  null ;
     }
 }
 

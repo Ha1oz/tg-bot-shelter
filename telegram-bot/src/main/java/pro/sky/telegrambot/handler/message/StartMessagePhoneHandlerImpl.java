@@ -51,7 +51,7 @@ public class StartMessagePhoneHandlerImpl implements MessageChainHandler {
             }
         } catch (IllegalStateException e) {
             logger.error("Could not parse MAT date {}, expected format [{}].", matcher, message);
-            SendMessage sendMessage = new SendMessage(chatId, "Контакт не сохранен: недопустимые символы или неверно введен  номер телефона ");
+            SendMessage sendMessage = new SendMessage(chatId, "Контакт не сохранен: недопустимые символы или неверно введен номер телефона ");
             return sendMessage;
         }
 
