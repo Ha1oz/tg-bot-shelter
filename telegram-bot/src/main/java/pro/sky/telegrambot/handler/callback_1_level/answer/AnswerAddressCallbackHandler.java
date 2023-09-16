@@ -6,7 +6,10 @@ import com.pengrad.telegrambot.model.request.InlineKeyboardButton;
 import com.pengrad.telegrambot.model.request.InlineKeyboardMarkup;
 import com.pengrad.telegrambot.request.EditMessageText;
 import pro.sky.telegrambot.entity.CommandType;
+import pro.sky.telegrambot.entity.PetType;
 import pro.sky.telegrambot.handler.api.CallbackChainHandler;
+
+import static pro.sky.telegrambot.constants.Constants.*;
 
 public class AnswerAddressCallbackHandler implements CallbackChainHandler {
     /**
@@ -42,62 +45,30 @@ public class AnswerAddressCallbackHandler implements CallbackChainHandler {
                         + params[1])
         );
 
-        //TODO подтягивать текст об адресе из БД, в зависимости от выбранного варианта в меню (cat или dog)
-        String addressText = "*Address*:\\n Burnakovsky passage, 16\n" +
-                "Burnakovsky proezd, 16, Nizhny Novgorod, 603079.";
+        return processAnimal(params[1], chatId, messageId);
+    }
+//TODO подтягивать текст об адресе из БД, в зависимости от выбранного варианта в меню (cat или dog)
 
-        EditMessageText editMessage = new EditMessageText(
-                chatId,
-                messageId,
-                addressText
-        ).replyMarkup(keyboard);
-        return editMessage;
+
+    private EditMessageText processAnimal(String petType, Long chatId,  Integer messageId) {
+
+        if (petType.equals(PetType.CAT.getPet())) {
+            EditMessageText editMessage = new EditMessageText(
+                    chatId,
+                    messageId,
+                    TEXTCATADRESS);
+            return editMessage;
+
+        } else if (petType.equals(PetType.DOG.getPet())) {
+            EditMessageText editMessage = new EditMessageText(
+                    chatId,
+                    messageId,
+                    TEXTDOGADRESS);
+            return editMessage;
+        }
+        return  null ;
     }
 }
 
-//    StartMessageHandlerImpl StartMessageHandlerImpl = new StartMessageHandlerImpl();
-//        StartMessageHandlerImpl.handle(update);
-//        if (update.callbackQuery().data().equals("shelter_cats"))
-//
-//
-//
-//        {
-//            EditMessageText editMessage = new EditMessageText(
-//                    chatId,
-//                    messageId,
-//                    "Address:\nVladimir region, Kameshkovsky m.r.n., city of Kameshkovo, Kameshkovo, Korunova str., 52, p. 3, FL/ROOM 2/6."
-//            );
-//            return editMessage;
-//
-//        } else {
-//            EditMessageText editMessage = new EditMessageText(
-//                    chatId,
-//                    messageId,
-//                    "g, 52, p. 3, FL/ROOM 2/6."
-//            );
-//            return editMessage;
-//        }
-//    }
 
 
-
-
-
-
-
-//            @Override
-//        public void actionPerformed(ActionEvent e) {
-//            if(){
-//                allCheckBoxesSelected = false;
-//                allButton.setText("Select all");
-//            } else {
-//                allCheckBoxesSelected = true;
-//                allButton.setText("Unselect all");
-//                NodeSelectionCheckBoxJDialog.this.pack();
-//            }
-//        }
-//
-//
-//
-//
-//

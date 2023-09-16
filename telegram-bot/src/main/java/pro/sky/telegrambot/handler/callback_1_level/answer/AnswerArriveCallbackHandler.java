@@ -6,7 +6,10 @@ import com.pengrad.telegrambot.model.request.InlineKeyboardButton;
 import com.pengrad.telegrambot.model.request.InlineKeyboardMarkup;
 import com.pengrad.telegrambot.request.EditMessageText;
 import pro.sky.telegrambot.entity.CommandType;
+import pro.sky.telegrambot.entity.PetType;
 import pro.sky.telegrambot.handler.api.CallbackChainHandler;
+
+import static pro.sky.telegrambot.constants.Constants.*;
 
 public class AnswerArriveCallbackHandler implements CallbackChainHandler {
     /**
@@ -40,19 +43,40 @@ public class AnswerArriveCallbackHandler implements CallbackChainHandler {
                 new InlineKeyboardButton("Back").callbackData(CommandType.INFO_CALLBACK.getCommand()
                         + params[1])
         );
+        return processAnimal(params[1], chatId, messageId);
+    }
+//TODO подтягивать текст об адресе из БД, в зависимости от выбранного варианта в меню (cat или dog)
 
-        //TODO: из БД
-        String arriveInfoText = "Driving directions:\n" +
-                "https://yandex.ru/maps/org/sostradaniye/1269196542/?ll=43.911780%2C56.322539&z=16.";
 
-        EditMessageText editMessage = new EditMessageText(
-                chatId,
-                messageId,
-                arriveInfoText
-        ).replyMarkup(keyboard);
-        return editMessage;
+    private EditMessageText processAnimal(String petType, Long chatId,  Integer messageId) {
+
+        if (petType.equals(PetType.CAT.getPet())) {
+            EditMessageText editMessage = new EditMessageText(
+                    chatId,
+                    messageId,
+                    TEXTCATARRIVE);
+            return editMessage;
+
+        } else if (petType.equals(PetType.DOG.getPet())) {
+            EditMessageText editMessage = new EditMessageText(
+                    chatId,
+                    messageId,
+                    TEXTDOGARRIVE);
+            return editMessage;
+        }
+        return  null ;
     }
 }
+
+
+
+
+
+
+
+
+
+
 
 
 
