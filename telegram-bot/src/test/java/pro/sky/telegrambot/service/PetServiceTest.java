@@ -4,22 +4,22 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import pro.sky.telegrambot.model.Pet;
-import pro.sky.telegrambot.repository.PetsRepository;
+import pro.sky.telegrambot.repository.PetRepository;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
-public class PetsServiceTest {
+public class PetServiceTest {
 
     @Mock
-    private PetsRepository petsRepository;
+    private PetRepository petRepository;
 
-    private final PetsService petsService;
+    private final PetService petService;
 
-    public PetsServiceTest() {
+    public PetServiceTest() {
         MockitoAnnotations.openMocks(this);
-        petsService = new PetsService(petsRepository);
+        petService = new PetService(petRepository);
     }
 
     @Test
@@ -27,13 +27,13 @@ public class PetsServiceTest {
         Pet pet = new Pet();
         pet.setName("Вася");
 
-        when(petsRepository.save(any(Pet.class))).thenReturn(pet);
+        when(petRepository.save(any(Pet.class))).thenReturn(pet);
 
-        Pet addedPet = petsService.addPet(pet);
+        Pet addedPet = petService.addPet(pet);
 
         assertEquals("Вася", addedPet.getName());
 
-        verify(petsRepository, times(1)).save(any(Pet.class));
+        verify(petRepository, times(1)).save(any(Pet.class));
     }
 
     @Test
@@ -42,13 +42,13 @@ public class PetsServiceTest {
         pet.setId(1L);
         pet.setName("Вася");
 
-        when(petsRepository.findById(1L)).thenReturn(Optional.of(pet));
+        when(petRepository.findById(1L)).thenReturn(Optional.of(pet));
 
-        Optional<Pet> foundPet = petsService.findPetById(1L);
+        Optional<Pet> foundPet = petService.findPetById(1L);
 
         assertEquals("Вася", foundPet.get().getName());
 
-        verify(petsRepository, times(1)).findById(1L);
+        verify(petRepository, times(1)).findById(1L);
     }
 
     @Test
@@ -57,19 +57,19 @@ public class PetsServiceTest {
         pet.setId(1L);
         pet.setName("Вася");
 
-        when(petsRepository.save(any(Pet.class))).thenReturn(pet);
+        when(petRepository.save(any(Pet.class))).thenReturn(pet);
 
-        Pet editedPet = petsService.editPet(pet);
+        Pet editedPet = petService.editPet(pet);
 
         assertEquals("Вася", editedPet.getName());
 
-        verify(petsRepository, times(1)).save(any(Pet.class));
+        verify(petRepository, times(1)).save(any(Pet.class));
     }
 
     @Test
     public void testDeletePet() {
-        petsService.deletePet(1L);
+        petService.deletePet(1L);
 
-        verify(petsRepository, times(1)).deleteById(1L);
+        verify(petRepository, times(1)).deleteById(1L);
     }
 }
