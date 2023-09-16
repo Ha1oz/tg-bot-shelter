@@ -3,6 +3,9 @@ package pro.sky.telegrambot.model;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+/**
+ * Модель, представляющая пользователя.
+ */
 @Entity(name = "users")
 public class User {
 
@@ -12,7 +15,6 @@ public class User {
     private String name;
     private Long petId;
     private String phoneNumber;
-    private String mail;
 
     public User() {
     }
@@ -49,11 +51,4 @@ public class User {
         this.phoneNumber = phoneNumber;
     }
 
-    public String getMail() {
-        return mail;
-    }
-
-    public void setMail(String mail) {
-        this.mail = mail;
-    }
 }

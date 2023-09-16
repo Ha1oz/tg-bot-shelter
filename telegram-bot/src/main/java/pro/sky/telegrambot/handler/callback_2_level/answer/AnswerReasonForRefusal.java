@@ -22,7 +22,7 @@ public class AnswerReasonForRefusal implements CallbackChainHandler {
 @Override
 public boolean check(Update update) {
     CallbackQuery callbackQuery = update.callbackQuery();
-    return callbackQuery != null && callbackQuery.data().startsWith(CommandType.DOCUMENTS_CALLBACK.getCommand());
+    return callbackQuery != null && callbackQuery.data().startsWith(CommandType.REASON_FOR_REFUSAL.getCommand());
 }
 
 /**

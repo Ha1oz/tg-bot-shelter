@@ -5,6 +5,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.util.Objects;
 
+/**
+ * Модель, представляющая питомца.
+ */
 @Entity(name = "pets")
 public class Pet {
 
@@ -22,6 +25,15 @@ public class Pet {
 
     }
 
+    /**
+     * Конструктор класса Pet.
+     *
+     * @param name       Имя питомца
+     * @param age        Возраст питомца
+     * @param typeOfPet  Тип питомца
+     * @param breed      Порода питомца
+     * @param isHealthy  Признак здоровья питомца
+     */
     public Pet(String name, int age, String typeOfPet, String breed, boolean isHealthy) {
         this.name = name;
         this.age = age;
@@ -34,6 +46,11 @@ public class Pet {
         return id;
     }
 
+    /**
+     * Возвращает строковое представление объекта Pet.
+     *
+     * @return Строковое представление объекта Pet.
+     */
     @Override
     public String toString() {
         return "Pets{" +
@@ -45,6 +62,12 @@ public class Pet {
                 '}';
     }
 
+    /**
+     * Проверяет, равен ли данный объект Pet указанному объекту.
+     *
+     * @param o Объект для сравнения
+     * @return true, если объекты равны, иначе false
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -53,6 +76,11 @@ public class Pet {
         return Objects.equals(id, pet.id);
     }
 
+    /**
+     * Возвращает хэш-код объекта Pet.
+     *
+     * @return Хэш-код объекта Pet.
+     */
     @Override
     public int hashCode() {
         return Objects.hash(id);
