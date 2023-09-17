@@ -23,4 +23,28 @@ create table volunteers (
     id serial primary key,
     chatId bigint,
     name varchar
+);
+create table shelters (
+    id serial primary key,
+    descriptionOfCatShelter varchar,
+    descriptionOfDogShelter varchar,
+    workingTimeOfCatShelter varchar,
+    workingTimeOfDogShelter varchar,
+    addressOfCatShelter varchar,
+    addressOfDogShelter  varchar,
+    arriveOfCatShelter  varchar,
+    arriveOfDogShelter  varchar,
+    passOfCatShelter  varchar,
+    passOfDogShelter  varchar,
+    safetyGuideOfCatShelter varchar,
+    safetyGuideOfDogShelter  varchar,
+    sendContact  varchar,
+    volunteerCall  varchar
+
 )
+
+
+
+
+
+

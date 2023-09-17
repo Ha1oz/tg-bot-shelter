@@ -8,6 +8,8 @@ import com.pengrad.telegrambot.request.EditMessageText;
 import pro.sky.telegrambot.entity.CommandType;
 import pro.sky.telegrambot.handler.api.CallbackChainHandler;
 
+import static pro.sky.telegrambot.constants.Constants.ARRANGEFORANANIMAL;
+
 /**
 * Обработчик для колбэков, связанных с рекомендациями по обустройству дома для животного с ограниченными возможностями.
 */
@@ -47,14 +49,9 @@ public EditMessageText handle(Update update) {
     );
 
     //TODO: из БД
-    String rulesText = "Для обустройства дома для животного с ограниченными возможностями, воспользуйтесь следующими " +
-            "рекомендациями:\n" +
-            "1. ... \n" +
-            "2. ... \n" +
-            "...\n" +
-            "n. ...";
 
-    EditMessageText editMessage = new EditMessageText(chatId, messageId, rulesText)
+
+    EditMessageText editMessage = new EditMessageText(chatId, messageId, ARRANGEFORANANIMAL)
             .replyMarkup(keyboard);
 
     return editMessage;

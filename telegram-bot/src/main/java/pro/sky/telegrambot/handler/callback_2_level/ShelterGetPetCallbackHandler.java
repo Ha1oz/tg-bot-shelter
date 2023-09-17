@@ -46,8 +46,11 @@ public class ShelterGetPetCallbackHandler implements CallbackChainHandler {
                                 + params[1]),
                         new InlineKeyboardButton("Documents for adopt")
                                 .callbackData(CommandType.DOCUMENTS_CALLBACK.getCommand()
-                                + params[1])
+                                        + params[1])
+
+
                 );
+
         inlineKeyboard.addRow(
                 new InlineKeyboardButton("Transporting")
                         .callbackData(CommandType.TRANSPORTING_CALLBACK.getCommand()

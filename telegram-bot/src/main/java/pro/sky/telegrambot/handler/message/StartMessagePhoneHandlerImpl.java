@@ -41,15 +41,10 @@ public class StartMessagePhoneHandlerImpl implements MessageChainHandler {
     public SendMessage handle(Update update) {
         Message message = update.message();
         Long chatId = message.chat().id();
-//        Pattern pattern = Pattern.compile  ("\\d{10}|(?:\\d{3}-){2}\\d{4}|\\(\\d{3}\\)\\d{3}-?\\d{4}");
-
 
         Pattern pattern = Pattern.compile ("^(\\+\\d{1,3}( )?)?((\\(\\d{3}\\))|\\d{3})[- .]?\\d{3}[- .]?\\d{4}$"
                 + "|^(\\+\\d{1,3}( )?)?(\\d{3}[ ]?){2}\\d{3}$"
                 + "|^(\\+\\d{1,3}( )?)?(\\d{3}[ ]?)(\\d{2}[ ]?){2}\\d{2}$");
-
-
-
 
         Matcher matcher = pattern.matcher( message.toString());
 

@@ -1,6 +1,7 @@
 package pro.sky.telegrambot.service;
 
 import org.springframework.stereotype.Service;
+
 import pro.sky.telegrambot.model.Pet;
 import pro.sky.telegrambot.repository.PetsRepository;
 
@@ -14,6 +15,7 @@ public class PetsService {
     public PetsService(PetsRepository petsRepository) {
         this.petsRepository = petsRepository;
     }
+
 
     public Pet addPet(Pet pet) {
         return petsRepository.save(pet);
@@ -30,5 +32,9 @@ public class PetsService {
     public void deletePet(Long id) {
         petsRepository.deleteById(id);
     }
-    // TO DO Добавить методы
-}
+
+    public Optional<Pet> findPetByType(String petOfType) {
+        return petsRepository.findById(petOfType);
+    }
+
+ }

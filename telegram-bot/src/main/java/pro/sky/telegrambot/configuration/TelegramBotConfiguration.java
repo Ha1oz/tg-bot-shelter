@@ -17,6 +17,7 @@ import pro.sky.telegrambot.handler.api.MessageChainHandler;
 import pro.sky.telegrambot.handler.callback_2_level.ShelterGetPetCallbackHandler;
 import pro.sky.telegrambot.handler.callback_2_level.answer.*;
 import pro.sky.telegrambot.handler.message.StartMessageHandlerImpl;
+import pro.sky.telegrambot.handler.message.StartMessagePhoneHandlerImpl;
 
 import java.util.List;
 
@@ -49,7 +50,8 @@ public class TelegramBotConfiguration {
     @Bean
     public List<MessageChainHandler> messageChainHandlers() {
         return List.of(
-                new StartMessageHandlerImpl()
+                new StartMessageHandlerImpl(),
+                new StartMessagePhoneHandlerImpl()
         );
     }
 

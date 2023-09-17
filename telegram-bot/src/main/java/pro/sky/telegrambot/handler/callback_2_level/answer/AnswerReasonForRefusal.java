@@ -8,6 +8,8 @@ import com.pengrad.telegrambot.request.EditMessageText;
 import pro.sky.telegrambot.entity.CommandType;
 import pro.sky.telegrambot.handler.api.CallbackChainHandler;
 
+import static pro.sky.telegrambot.constants.Constants.REASONFORREFUSAL;
+
 /**
 * Обработчик для колбэков, связанных с причинами отказа.
 */
@@ -45,13 +47,9 @@ public EditMessageText handle(Update update) {
     );
 
     //TODO: из БД
-    String rulesText = "Причины, почему Вам могут отказать и не дать забрать животное из приюта:\n" +
-            "1. ...\n" +
-            "2. ...\n" +
-            "...\n" +
-            "n. ...\n ";
 
-    EditMessageText editMessage = new EditMessageText(chatId, messageId, rulesText)
+    EditMessageText editMessage = new EditMessageText(chatId, messageId, REASONFORREFUSAL
+    )
             .replyMarkup(keyboard);
 
     return editMessage;
