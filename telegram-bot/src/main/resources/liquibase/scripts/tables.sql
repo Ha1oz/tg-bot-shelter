@@ -24,4 +24,3 @@ create table volunteers (
     chatId bigint,
     name varchar
 )
-

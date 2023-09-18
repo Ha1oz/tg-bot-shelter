@@ -15,13 +15,20 @@ import pro.sky.telegrambot.handler.api.CallbackChainHandler;
 import pro.sky.telegrambot.handler.callback_1_level.*;
 import pro.sky.telegrambot.handler.callback_1_level.answer.*;
 import pro.sky.telegrambot.handler.api.MessageChainHandler;
+
+import pro.sky.telegrambot.handler.callback_2_level.ShelterGetPetCallbackHandler;
+import pro.sky.telegrambot.handler.callback_2_level.answer.*;
+
 import pro.sky.telegrambot.handler.message.ReportMessageHandler;
+
 import pro.sky.telegrambot.handler.message.StartMessageHandlerImpl;
 import pro.sky.telegrambot.handler.message.StartMessagePhoneHandlerImpl;
 import pro.sky.telegrambot.repository.PhotoRepository;
 import pro.sky.telegrambot.service.PhotoService;
 import pro.sky.telegrambot.service.ReportService;
 import pro.sky.telegrambot.service.UserService;
+
+
 
 import java.util.List;
 
@@ -41,6 +48,7 @@ public class TelegramBotConfiguration {
 
     @Value("${telegram.bot.token}")
     private String token;
+
 
     /**
      * Создает и настраивает экземпляр Telegram бота.
@@ -83,7 +91,7 @@ public class TelegramBotConfiguration {
                 new AnswerGetCallbackHandler(),
                 new AnswerStartCallbackHandler(),
 
-                new ShelterInfoCatCallbackHandler(),
+                new ShelterInfoCallbackHandler(),
 
                 new AnswerAddressCallbackHandler(),
                 new AnswerWorkingTimeCallbackHandler(),
@@ -92,7 +100,21 @@ public class TelegramBotConfiguration {
                 new AnswerPassCallbackHandler(),
                 new AnswerSafetyGuideCallbackHandler(),
                 new AnswerSendContactCallbackHandler(),
-                new AnswerAboutShelterCallbackHandler()
+          
+                new AnswerAboutShelterCallbackHandler(),
+
+                new ShelterGetPetCallbackHandler(),
+
+                new AnswerRulesForMeetingAnimal(),
+                new AnswerDocumentsForAdoptAnimal(),
+                new AnswerRecommendationsForTransportingAnimal(),
+                new AnswerArrangeForAnAdultAnimal(),
+                new AnswerArrangeForPuppy(),
+                new AnswerArrangeForKitten(),
+                new AnswerProvenDogHandlers(),
+                new AnswerAdviceFromADogHandler(),
+                new AnswerArrangeForAnAnimalWithDisabilities(),
+                new AnswerReasonForRefusal()
         );
     }
 }

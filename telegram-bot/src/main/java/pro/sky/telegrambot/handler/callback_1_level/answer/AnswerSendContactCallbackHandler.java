@@ -34,7 +34,8 @@ public class AnswerSendContactCallbackHandler implements CallbackChainHandler {
         EditMessageText editMessage = new EditMessageText(
                 chatId,
                 messageId,
-                "Please, write your contact details for communication (enter your contact-phone starting from 9) and we will definitely call you back!"
+                "Please, write your contact details for communication (enter your contact-phone starting from 9) " +
+                        "and we will definitely call you back!"
 
         );
         return editMessage;

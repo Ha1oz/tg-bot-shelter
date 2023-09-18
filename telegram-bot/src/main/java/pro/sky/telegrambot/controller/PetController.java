@@ -15,8 +15,8 @@ import java.util.Optional;
  * Включает основные CRUD-запросы.
  */
 @RestController
-@RequestMapping("/pets")
-public class PetsController {
+@RequestMapping("/pet")
+public class PetController {
 
     private final PetService petService;
 
@@ -25,7 +25,8 @@ public class PetsController {
      *
      * @param petService Сервис для работы с питомцами.
      */
-    public PetsController(PetService petService) {
+
+    public PetController(PetService petService) {
         this.petService = petService;
     }
 
@@ -47,7 +48,8 @@ public class PetsController {
      * @param id Идентификатор питомца.
      * @return Питомец с указанным идентификатором, если найден, в противном случае возвращает 404 ошибку.
      */
-    @GetMapping("/{id}")
+    @GetMapping("{id}")
+
     public ResponseEntity<Pet> findPetById(@PathVariable Long id) {
         Optional<Pet> pet = petService.findPetById(id);
 
@@ -64,7 +66,8 @@ public class PetsController {
      * @param id  Идентификатор редактируемого питомца.
      * @return Обновленный питомец, если редактирование выполнено успешно, в противном случаи возвращает 404 ошибку.
      */
-    @PutMapping("/{id}")
+
+    @PutMapping("{id}")
     public ResponseEntity<Pet> editPet(@RequestBody Pet pet, @PathVariable Long id) {
         Pet foundPet = petService.editPet(pet);
 
@@ -80,7 +83,7 @@ public class PetsController {
      * @param id Идентификатор питомца для удаления.
      * @return Подтверждение успешного удаления питомца.
      */
-    @DeleteMapping("/{id}")
+    @DeleteMapping("{id}")
     public Pet deletePet(@PathVariable Long id) {
         petService.deletePet(id);
         return (Pet) ResponseEntity.status(HttpStatus.OK);

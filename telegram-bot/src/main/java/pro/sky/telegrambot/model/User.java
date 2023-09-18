@@ -3,12 +3,15 @@ package pro.sky.telegrambot.model;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
-
 import javax.persistence.*;
 
+/**
+ * Модель, представляющая пользователя.
+ */
 @Entity(name="users")
 @Getter
 @Setter
+
 public class User {
 
     @Id
@@ -20,7 +23,6 @@ public class User {
 
     private String name;
     private String phoneNumber;
-    private String mail;
 
     public User() {
     }

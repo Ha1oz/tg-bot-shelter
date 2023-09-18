@@ -45,7 +45,7 @@ public class ShelterCallbackHandler implements CallbackChainHandler {
         InlineKeyboardMarkup inlineKeyboard = new InlineKeyboardMarkup(
                 new InlineKeyboardButton("Info").callbackData(CommandType.INFO_CALLBACK.getCommand()
                         + params[1]),
-                new InlineKeyboardButton("Get animal").callbackData(CommandType.GET_CALLBACK.getCommand()
+                new InlineKeyboardButton("Get pet").callbackData(CommandType.GET_CALLBACK.getCommand()
                         + params[1]),
                 new InlineKeyboardButton("Report").callbackData(CommandType.REPORT_CALLBACK.getCommand()
                         + params[1]),

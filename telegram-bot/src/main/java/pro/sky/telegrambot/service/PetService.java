@@ -2,33 +2,33 @@ package pro.sky.telegrambot.service;
 
 import org.springframework.stereotype.Service;
 import pro.sky.telegrambot.model.Pet;
-import pro.sky.telegrambot.repository.PetsRepository;
+import pro.sky.telegrambot.repository.PetRepository;
 
 import java.util.Optional;
 
 @Service
 public class PetService {
 
-    private final PetsRepository petsRepository;
+    private final PetRepository petRepository;
 
-    public PetService(PetsRepository petsRepository) {
-        this.petsRepository = petsRepository;
+    public PetService(PetRepository petRepository) {
+        this.petRepository = petRepository;
     }
 
     public Pet addPet(Pet pet) {
-        return petsRepository.save(pet);
+        return petRepository.save(pet);
     }
 
     public Optional<Pet> findPetById(Long id) {
-        return petsRepository.findById(id);
+        return petRepository.findById(id);
     }
 
     public Pet editPet(Pet pet) {
-        return petsRepository.save(pet);
+        return petRepository.save(pet);
     }
 
     public void deletePet(Long id) {
-        petsRepository.deleteById(id);
+        petRepository.deleteById(id);
     }
     // TO DO Добавить методы
 }

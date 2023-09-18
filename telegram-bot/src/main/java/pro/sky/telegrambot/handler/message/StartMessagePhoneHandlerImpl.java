@@ -1,12 +1,11 @@
 package pro.sky.telegrambot.handler.message;
 
-import com.pengrad.telegrambot.TelegramBot;
 import com.pengrad.telegrambot.model.Message;
 import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.request.SendMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import pro.sky.telegrambot.handler.api.MessageChainHandler;
 
 import java.util.regex.Matcher;
@@ -27,9 +26,7 @@ public class StartMessagePhoneHandlerImpl implements MessageChainHandler {
 
         return message != null && message.text().startsWith("9");
 
-
     }
-
 
     /**
      * Обрабатывает сообщение с командой /start и возвращает сообщение с клавиатурой выбора приюта.
@@ -41,15 +38,10 @@ public class StartMessagePhoneHandlerImpl implements MessageChainHandler {
     public SendMessage handle(Update update) {
         Message message = update.message();
         Long chatId = message.chat().id();
-//        Pattern pattern = Pattern.compile  ("\\d{10}|(?:\\d{3}-){2}\\d{4}|\\(\\d{3}\\)\\d{3}-?\\d{4}");
-
 
         Pattern pattern = Pattern.compile ("^(\\+\\d{1,3}( )?)?((\\(\\d{3}\\))|\\d{3})[- .]?\\d{3}[- .]?\\d{4}$"
                 + "|^(\\+\\d{1,3}( )?)?(\\d{3}[ ]?){2}\\d{3}$"
                 + "|^(\\+\\d{1,3}( )?)?(\\d{3}[ ]?)(\\d{2}[ ]?){2}\\d{2}$");
-
-
-
 
         Matcher matcher = pattern.matcher( message.toString());
 
@@ -59,7 +51,7 @@ public class StartMessagePhoneHandlerImpl implements MessageChainHandler {
             }
         } catch (IllegalStateException e) {
             logger.error("Could not parse MAT date {}, expected format [{}].", matcher, message);
-            SendMessage sendMessage = new SendMessage(chatId, "Контакт не сохранен: недопустимые символы  ");
+            SendMessage sendMessage = new SendMessage(chatId, "Контакт не сохранен: недопустимые символы или неверно введен номер телефона ");
             return sendMessage;
         }
 

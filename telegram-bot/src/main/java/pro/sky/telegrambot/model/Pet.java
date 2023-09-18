@@ -11,6 +11,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import java.util.Objects;
 
+/**
+ * Модель, представляющая питомца.
+ */
 @Entity(name = "pets")
 @Getter
 @Setter
@@ -28,8 +31,52 @@ public class Pet {
     private boolean isHealthy;
 
     public Pet() {
+
     }
 
+    /**
+     * Конструктор класса Pet.
+     *
+     * @param name       Имя питомца
+     * @param age        Возраст питомца
+     * @param typeOfPet  Тип питомца
+     * @param breed      Порода питомца
+     * @param isHealthy  Признак здоровья питомца
+     */
+    public Pet(String name, int age, String typeOfPet, String breed, boolean isHealthy) {
+        this.name = name;
+        this.age = age;
+        this.petType = typeOfPet;
+        this.breed = breed;
+        this.isHealthy = isHealthy;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    /**
+     * Возвращает строковое представление объекта Pet.
+     *
+     * @return Строковое представление объекта Pet.
+     */
+    @Override
+    public String toString() {
+        return "Pets{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", age=" + age +
+                ", typeOfPet='" + petType + '\'' +
+                ", breed='" + breed + '\'' +
+                '}';
+    }
+
+    /**
+     * Проверяет, равен ли данный объект Pet указанному объекту.
+     *
+     * @param o Объект для сравнения
+     * @return true, если объекты равны, иначе false
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -38,20 +85,13 @@ public class Pet {
         return Objects.equals(id, pet.id);
     }
 
+    /**
+     * Возвращает хэш-код объекта Pet.
+     *
+     * @return Хэш-код объекта Pet.
+     */
     @Override
     public int hashCode() {
         return Objects.hash(id);
-    }
-
-    @Override
-    public String toString() {
-        return "Pet{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", age=" + age +
-                ", petType='" + petType + '\'' +
-                ", breed='" + breed + '\'' +
-                ", isHealthy=" + isHealthy +
-                '}';
     }
 }
