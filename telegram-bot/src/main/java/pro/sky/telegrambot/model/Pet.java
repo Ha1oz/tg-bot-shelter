@@ -19,8 +19,6 @@ public class Pet {
 
     @Id
     @GeneratedValue
-    @Getter(AccessLevel.NONE)
-    @Setter(AccessLevel.NONE)
     private Long id;
 
     private String name;

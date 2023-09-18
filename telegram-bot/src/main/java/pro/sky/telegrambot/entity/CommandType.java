@@ -13,6 +13,6 @@ public enum CommandType {
     ARRIVE_CALLBACK("arrive_"), SAFETY_GUIDE_CALLBACK("guide_"),
     WORKING_TIME_CALLBACK("workingTime_"), ABOUT_SHELTER_CALLBACK("about_"),
     //MESSAGE
-    START_MESSAGE("/start"), FORM_MESSAGE("/form");
+    START_MESSAGE("/start"), FORM_MESSAGE("/form_");
     private final String command;
 }

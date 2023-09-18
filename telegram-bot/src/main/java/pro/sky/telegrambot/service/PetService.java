@@ -7,11 +7,11 @@ import pro.sky.telegrambot.repository.PetsRepository;
 import java.util.Optional;
 
 @Service
-public class PetsService {
+public class PetService {
 
     private final PetsRepository petsRepository;
 
-    public PetsService(PetsRepository petsRepository) {
+    public PetService(PetsRepository petsRepository) {
         this.petsRepository = petsRepository;
     }
 

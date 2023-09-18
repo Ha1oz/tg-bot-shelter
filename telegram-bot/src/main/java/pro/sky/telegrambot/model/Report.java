@@ -15,14 +15,14 @@ public class Report {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Getter(AccessLevel.NONE)
-    @Setter(AccessLevel.NONE)
     private Long id;
     private String text;
     @OneToOne
     private Photo photo;
     @OneToOne
     private User user;
+    private String petType;
+    private int number;
 
     public Report() {
     }
@@ -47,6 +47,8 @@ public class Report {
                 ", text='" + text + '\'' +
                 ", photo=" + photo +
                 ", user=" + user +
+                ", petType='" + petType + '\'' +
+                ", number=" + number +
                 '}';
     }
 }

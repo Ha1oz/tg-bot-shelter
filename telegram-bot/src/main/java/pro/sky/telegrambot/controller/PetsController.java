@@ -5,7 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pro.sky.telegrambot.model.Pet;
-import pro.sky.telegrambot.service.PetsService;
+import pro.sky.telegrambot.service.PetService;
 
 import java.util.Optional;
 
@@ -18,15 +18,15 @@ import java.util.Optional;
 @RequestMapping("/pets")
 public class PetsController {
 
-    private final PetsService petsService;
+    private final PetService petService;
 
     /**
      * Конструктор контроллера, который принимает сервис для работы с питомцами.
      *
-     * @param petsService Сервис для работы с питомцами.
+     * @param petService Сервис для работы с питомцами.
      */
-    public PetsController(PetsService petsService) {
-        this.petsService = petsService;
+    public PetsController(PetService petService) {
+        this.petService = petService;
     }
 
     /**
@@ -37,7 +37,7 @@ public class PetsController {
      */
     @PostMapping("/add")
     public Pet addPet(@RequestBody Pet pet) {
-        Pet addPet = petsService.addPet(pet);
+        Pet addPet = petService.addPet(pet);
         return ResponseEntity.status(HttpStatus.CREATED).body(addPet).getBody();
     }
 
@@ -49,7 +49,7 @@ public class PetsController {
      */
     @GetMapping("/{id}")
     public ResponseEntity<Pet> findPetById(@PathVariable Long id) {
-        Optional<Pet> pet = petsService.findPetById(id);
+        Optional<Pet> pet = petService.findPetById(id);
 
         if (pet.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
@@ -66,7 +66,7 @@ public class PetsController {
      */
     @PutMapping("/{id}")
     public ResponseEntity<Pet> editPet(@RequestBody Pet pet, @PathVariable Long id) {
-        Pet foundPet = petsService.editPet(pet);
+        Pet foundPet = petService.editPet(pet);
 
         if (foundPet == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
@@ -82,7 +82,7 @@ public class PetsController {
      */
     @DeleteMapping("/{id}")
     public Pet deletePet(@PathVariable Long id) {
-        petsService.deletePet(id);
+        petService.deletePet(id);
         return (Pet) ResponseEntity.status(HttpStatus.OK);
     }
 
