@@ -10,8 +10,8 @@ import pro.sky.telegrambot.handler.api.MessageChainHandler;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-public class StartMessagePhoneHandlerImpl implements MessageChainHandler {
-    private Logger logger = LoggerFactory.getLogger(StartMessagePhoneHandlerImpl.class);
+public class StartMessagePhoneHandler implements MessageChainHandler {
+    private Logger logger = LoggerFactory.getLogger(StartMessagePhoneHandler.class);
 
     /**
      * Проверяет, соответствует ли сообщение команде /start.
@@ -24,7 +24,7 @@ public class StartMessagePhoneHandlerImpl implements MessageChainHandler {
     public boolean check(Update update) {
         Message message = update.message();
 
-        return message != null && message.text().startsWith("9");
+        return message != null && message.text() != null && message.text().startsWith("9");
 
     }
 

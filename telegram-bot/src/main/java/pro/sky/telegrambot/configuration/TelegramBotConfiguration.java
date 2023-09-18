@@ -21,8 +21,8 @@ import pro.sky.telegrambot.handler.callback_2_level.answer.*;
 
 import pro.sky.telegrambot.handler.message.ReportMessageHandler;
 
-import pro.sky.telegrambot.handler.message.StartMessageHandlerImpl;
-import pro.sky.telegrambot.handler.message.StartMessagePhoneHandlerImpl;
+import pro.sky.telegrambot.handler.message.StartMessageHandler;
+import pro.sky.telegrambot.handler.message.StartMessagePhoneHandler;
 
 import pro.sky.telegrambot.service.PhotoService;
 import pro.sky.telegrambot.service.ReportService;
@@ -69,8 +69,8 @@ public class TelegramBotConfiguration {
     @Bean
     public List<MessageChainHandler> messageChainHandlers() {
         return List.of(
-                new StartMessageHandlerImpl(),
-                new StartMessagePhoneHandlerImpl(),
+                new StartMessageHandler(),
+                new StartMessagePhoneHandler(),
                 new ReportMessageHandler(userService, photoService, reportService, telegramBot())
 
         );
