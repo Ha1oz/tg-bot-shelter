@@ -6,7 +6,7 @@ create table pets (
     id serial primary key ,
     name varchar,
     age integer check ( age > 0 ),
-    typeOfPet varchar not null ,
+    petType varchar not null ,
     breed varchar,
     isHealthy boolean
 );

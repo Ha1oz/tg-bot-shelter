@@ -1,9 +1,7 @@
 package pro.sky.telegrambot.service;
 
 import org.springframework.stereotype.Service;
-import pro.sky.telegrambot.model.Pet;
 import pro.sky.telegrambot.model.User;
-import pro.sky.telegrambot.repository.PetRepository;
 import pro.sky.telegrambot.repository.UserRepository;
 
 import java.util.Optional;
@@ -23,6 +21,10 @@ public class UserService {
 
     public Optional<User> findUserById(Long id) {
         return userRepository.findById(id);
+    }
+
+    public Optional<User> findUserByChatId(Long chatId) {
+        return userRepository.findByChatId(chatId);
     }
 
     public User editUser(User user) {

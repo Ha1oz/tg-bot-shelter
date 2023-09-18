@@ -26,6 +26,6 @@ public enum CommandType {
     REASON_FOR_REFUSAL("reasonsForRefusal_"),
 
     //MESSAGE
-    START_MESSAGE("/start"), FORM_MESSAGE("/form");
+    START_MESSAGE("/start"), FORM_MESSAGE("/form_");
     private final String command;
 }

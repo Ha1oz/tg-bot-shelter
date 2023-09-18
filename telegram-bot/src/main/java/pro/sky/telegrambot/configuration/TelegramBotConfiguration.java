@@ -2,6 +2,7 @@ package pro.sky.telegrambot.configuration;
 
 import com.pengrad.telegrambot.TelegramBot;
 import com.pengrad.telegrambot.model.DeleteMyCommands;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,9 +15,18 @@ import pro.sky.telegrambot.handler.api.CallbackChainHandler;
 import pro.sky.telegrambot.handler.callback_1_level.*;
 import pro.sky.telegrambot.handler.callback_1_level.answer.*;
 import pro.sky.telegrambot.handler.api.MessageChainHandler;
+
 import pro.sky.telegrambot.handler.callback_2_level.ShelterGetPetCallbackHandler;
 import pro.sky.telegrambot.handler.callback_2_level.answer.*;
+
+import pro.sky.telegrambot.handler.message.ReportMessageHandler;
+
 import pro.sky.telegrambot.handler.message.StartMessageHandlerImpl;
+import pro.sky.telegrambot.handler.message.StartMessagePhoneHandlerImpl;
+import pro.sky.telegrambot.repository.PhotoRepository;
+import pro.sky.telegrambot.service.PhotoService;
+import pro.sky.telegrambot.service.ReportService;
+import pro.sky.telegrambot.service.UserService;
 
 
 
@@ -27,6 +37,14 @@ import java.util.List;
  */
 @Configuration
 public class TelegramBotConfiguration {
+
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private ReportService reportService;
+    @Autowired
+    private PhotoService photoService;
+
 
     @Value("${telegram.bot.token}")
     private String token;
@@ -52,7 +70,9 @@ public class TelegramBotConfiguration {
     @Bean
     public List<MessageChainHandler> messageChainHandlers() {
         return List.of(
-                new StartMessageHandlerImpl()
+                new StartMessageHandlerImpl(),
+                new StartMessagePhoneHandlerImpl(),
+                new ReportMessageHandler(userService, photoService, reportService, telegramBot())
         );
     }
 

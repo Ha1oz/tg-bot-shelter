@@ -25,6 +25,7 @@ public class PetController {
      *
      * @param petService Сервис для работы с питомцами.
      */
+
     public PetController(PetService petService) {
         this.petService = petService;
     }
@@ -48,13 +49,14 @@ public class PetController {
      * @return Питомец с указанным идентификатором, если найден, в противном случае возвращает 404 ошибку.
      */
     @GetMapping("{id}")
-    public Pet findPetById(@PathVariable Long id) {
+
+    public ResponseEntity<Pet> findPetById(@PathVariable Long id) {
         Optional<Pet> pet = petService.findPetById(id);
 
         if (pet.isEmpty()) {
-            return (Pet) ResponseEntity.status(HttpStatus.NOT_FOUND).build().getBody();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
-        return ResponseEntity.status(HttpStatus.FOUND).body(findPetById(id)).getBody();
+        return ResponseEntity.status(HttpStatus.FOUND).body(pet.get());
     }
 
     /**
@@ -64,14 +66,15 @@ public class PetController {
      * @param id  Идентификатор редактируемого питомца.
      * @return Обновленный питомец, если редактирование выполнено успешно, в противном случаи возвращает 404 ошибку.
      */
+
     @PutMapping("{id}")
-    public Pet editPet(@RequestBody Pet pet, @PathVariable Long id) {
+    public ResponseEntity<Pet> editPet(@RequestBody Pet pet, @PathVariable Long id) {
         Pet foundPet = petService.editPet(pet);
 
         if (foundPet == null) {
-            return (Pet) ResponseEntity.status(HttpStatus.NOT_FOUND).build().getBody();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
-        return ResponseEntity.status(HttpStatus.FOUND).body(findPetById(id)).getBody();
+        return ResponseEntity.status(HttpStatus.FOUND).body(foundPet);
     }
 
     /**
