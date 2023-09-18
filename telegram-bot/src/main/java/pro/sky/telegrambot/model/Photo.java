@@ -24,6 +24,12 @@ public class Photo {
     private String mediaType;
     private byte[] data;
 
+    /**
+     * Проверяет, является ли указанный объект эквивалентным данной фотографии.
+     *
+     * @param o объект для сравнения
+     * @return true, если объекты эквивалентны, в противном случае - false
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -32,11 +38,21 @@ public class Photo {
         return Objects.equals(id, photo.id);
     }
 
+    /**
+     * Возвращает хэш-код данной фотографии.
+     *
+     * @return хэш-код фотографии
+     */
     @Override
     public int hashCode() {
         return Objects.hash(id);
     }
 
+    /**
+     * Возвращает строковое представление данной фотографии.
+     *
+     * @return строковое представление фотографии
+     */
     @Override
     public String toString() {
         return "Photo{" +

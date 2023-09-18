@@ -49,7 +49,9 @@ public class ReportController {
      * @return ResponseEntity с результатом выполненного запроса
      */
     @PostMapping(value = "/{userId}/data", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<String> addReport(@PathVariable Long userId, @RequestParam String text, @RequestParam MultipartFile photo)
+    public ResponseEntity<String> addReport(@PathVariable Long userId,
+                                            @RequestParam String text,
+                                            @RequestParam MultipartFile photo)
             throws IOException {
         reportService.uploadReport(userId, text, photo);
         return ResponseEntity.ok().build();

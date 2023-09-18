@@ -9,13 +9,26 @@ import pro.sky.telegrambot.entity.CommandType;
 import pro.sky.telegrambot.entity.PetType;
 import pro.sky.telegrambot.handler.api.CallbackChainHandler;
 
+/**
+ * Обработчик коллбэков для стартовой команды.  */
 public class AnswerStartCallbackHandler implements CallbackChainHandler {
+
+    /**
+     * Проверяет, соответствует ли коллбэк стартовой команде.      *
+     * @param update объект Update из Telegram
+     * @return true, если коллбэк соответствует стартовой команде, в противном случае - false
+     */
     @Override
     public boolean check(Update update) {
         CallbackQuery callbackQuery = update.callbackQuery();
         return callbackQuery != null && callbackQuery.data().startsWith(CommandType.START_CALLBACK.getCommand());
     }
 
+    /**
+     * Обрабатывает коллбэк для стартовой команды и возвращает сообщение для редактирования.
+     * @param update объект Update из Telegram
+     * @return объект EditMessageText для редактирования сообщения
+     */
     @Override
     public EditMessageText handle(Update update) {
         CallbackQuery callbackQuery = update.callbackQuery();

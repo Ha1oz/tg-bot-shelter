@@ -17,8 +17,6 @@ public interface MessageChainHandler {
      */
     boolean check(Update update);
 
-
-
     /**
      * Обрабатывает обновление и возвращает SendMessage объект с ответным сообщением или null, если обновление не
      * обрабатывается обработчиком.
@@ -27,6 +25,4 @@ public interface MessageChainHandler {
      * @return SendMessage объект с ответным сообщением или null, если обновление не обрабатывается обработчиком.
      */
     SendMessage handle(Update update);
-
-
 }

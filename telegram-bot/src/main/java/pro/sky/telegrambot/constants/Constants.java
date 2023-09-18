@@ -302,15 +302,6 @@ public class Constants {
                 "will not behave as usual. Only at home, having already established contact and trust with the\n " +
                 "animal, you will be able to establish good relations. ";
 
-
-
-
-
-
-
-
-
-
 }
 
 

@@ -63,10 +63,7 @@ public class TelegramBotUpdatesListener implements UpdatesListener {
                         EditMessageText message = h.handle(update);
                         telegramBot.execute(message);
                     });
-
-
         });
         return UpdatesListener.CONFIRMED_UPDATES_ALL;
     }
-
 }

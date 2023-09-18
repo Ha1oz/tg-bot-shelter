@@ -37,4 +37,16 @@ public class VolunteerService {
     public Collection<Volunteer> getAllVolunteer(){
         return volunteerRepository.findAll();
     }
+
+    public Optional<Volunteer> findVolunteerById(Long id) {
+        return volunteerRepository.findById(id);
+    }
+
+    public Volunteer editVolunteer(Volunteer volunteer) {
+        return volunteerRepository.save(volunteer);
+    }
+
+    public void deleteVolunteer(Long id) {
+        volunteerRepository.deleteById(id);
+    }
 }

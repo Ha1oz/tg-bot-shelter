@@ -6,6 +6,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.util.Objects;
 
+/**
+ * Модель приюта.
+ */
 @Entity(name = "shelter")
 public class Shelter {
 
@@ -38,11 +41,32 @@ public class Shelter {
 
     private String volunteerCall;
 
-
+    /**
+     * Создает новый экземпляр приюта.
+     */
     public Shelter() {
 
     }
 
+    /**
+     * Создает новый экземпляр приюта с заданными параметрами.
+     *
+     * @param id                      идентификатор приюта
+     * @param descriptionOfCatShelter описание приюта для кошек
+     * @param descriptionOfDogShelter описание приюта для собак
+     * @param workingTimeOfCatShelter рабочее время приюта для кошек
+     * @param workingTimeOfDogShelter рабочее время приюта для собак
+     * @param addressOfCatShelter     адрес приюта для кошек
+     * @param addressOfDogShelter     адрес приюта для собак
+     * @param arriveOfCatShelter      информация о приезде в приют для кошек
+     * @param arriveOfDogShelter      информация о приезде в приют для собак
+     * @param passOfCatShelter        информация о проходе в приют для кошек
+     * @param passOfDogShelter        информация о проходе в приют для собак
+     * @param safetyGuideOfCatShelter правила безопасности для посещения приюта для кошек
+     * @param safetyGuideOfDogShelter правила безопасности для посещения приюта для собак
+     * @param sendContact             отправить контакт приюта
+     * @param volunteerCall           вызвать волонтера
+     */
     public Shelter(Long id, String descriptionOfCatShelter, String descriptionOfDogShelter,
                    String workingTimeOfCatShelter, String workingTimeOfDogShelter, String
                            addressOfCatShelter, String addressOfDogShelter, String arriveOfCatShelter,
@@ -65,6 +89,11 @@ public class Shelter {
         this.volunteerCall = volunteerCall;
     }
 
+    /**
+     * Возвращает строковое представление данного приюта.
+     *
+     * @return строковое представление приюта
+     */
     @Override
     public String toString() {
         return "Shelter{" +
@@ -86,26 +115,56 @@ public class Shelter {
                 '}';
     }
 
+    /**
+     * Возвращает идентификатор приюта.
+     *
+     * @return идентификатор приюта
+     */
     public Long getId() {
         return id;
     }
 
+    /**
+     * Устанавливает идентификатор приюта.
+     *
+     * @param id идентификатор приюта
+     */
     public void setId(Long id) {
         this.id = id;
     }
 
+    /**
+     * Возвращает описание приюта для кошек.
+     *
+     * @return описание приюта для кошек
+     */
     public String getDescriptionOfCatShelter() {
         return descriptionOfCatShelter;
     }
 
+    /**
+     * Устанавливает описание приюта для кошек.
+     *
+     * @param descriptionOfCatShelter описание приюта для кошек
+     */
     public void setDescriptionOfCatShelter(String descriptionOfCatShelter) {
         this.descriptionOfCatShelter = descriptionOfCatShelter;
     }
 
+    /**
+     * Возвращает описание приюта для собак.
+     *
+     * @return описание приюта для собак
+     */
     public String getDescriptionOfDogShelter() {
         return descriptionOfDogShelter;
     }
 
+    /**
+     * Устанавливает описание приюта для собак.
+     *
+     * @param descriptionOfDogShelter описание приюта для собак
+     */
     public void setDescriptionOfDogShelter(String descriptionOfDogShelter) {
         this.descriptionOfDogShelter = descriptionOfDogShelter;
     }

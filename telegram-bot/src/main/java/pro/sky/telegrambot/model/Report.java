@@ -8,6 +8,9 @@ import javax.persistence.*;
 import java.util.Arrays;
 import java.util.Objects;
 
+/**
+ * Модель отчета.
+ */
 @Entity(name = "reports")
 @Getter
 @Setter
@@ -24,9 +27,18 @@ public class Report {
     private String petType;
     private int number;
 
+    /**
+     * Создает новый экземпляр отчета.
+     */
     public Report() {
     }
 
+    /**
+     * Проверяет, является ли указанный объект эквивалентным данному отчету.
+     *
+     * @param o объект для сравнения
+     * @return true, если объекты эквивалентны, в противном случае - false
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -35,11 +47,21 @@ public class Report {
         return id == report.id;
     }
 
+    /**
+     * Возвращает хэш-код данного отчета.
+     *
+     * @return хэш-код отчета
+     */
     @Override
     public int hashCode() {
         return Objects.hash(id);
     }
 
+    /**
+     * Возвращает строковое представление данного отчета.
+     *
+     * @return строковое представление отчета
+     */
     @Override
     public String toString() {
         return "Report{" +

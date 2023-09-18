@@ -31,6 +31,7 @@ import java.util.Optional;
 @AllArgsConstructor
 public class ReportMessageHandler implements MessageChainHandler {
     private final Logger logger = LoggerFactory.getLogger(ReportMessageHandler.class);
+
     private final UserService userService;
     private final PhotoService photoService;
     private final ReportService reportService;
