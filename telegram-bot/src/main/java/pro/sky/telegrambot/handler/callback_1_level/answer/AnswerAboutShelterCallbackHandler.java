@@ -7,6 +7,7 @@ import com.pengrad.telegrambot.model.request.InlineKeyboardMarkup;
 import com.pengrad.telegrambot.request.EditMessageText;
 import pro.sky.telegrambot.entity.CommandType;
 import pro.sky.telegrambot.entity.PetType;
+
 import pro.sky.telegrambot.constants.Constants;
 import pro.sky.telegrambot.handler.api.CallbackChainHandler;
 
@@ -45,13 +46,26 @@ public class AnswerAboutShelterCallbackHandler implements CallbackChainHandler {
         String[] params = callbackQuery.data().split("_");
 
         InlineKeyboardMarkup keyboard = new InlineKeyboardMarkup(
-                new InlineKeyboardButton("Back").callbackData(CommandType.INFO_CALLBACK.getCommand()
+                new InlineKeyboardButton("In previous menu").callbackData(CommandType.INFO_CALLBACK.getCommand()
                         + params[1])
         );
-        return processAnimal(params[1], chatId, messageId);
+
+        return processAnimal(params[1], chatId, messageId).replyMarkup(keyboard);
+//        InlineKeyboardMarkup keyboard = new InlineKeyboardMarkup(
+//                new InlineKeyboardButton("Back").callbackData(CommandType.INFO_CALLBACK.getCommand()
+//                        + params[1])
+//        );
+
+
     }
-    //TODO: из БД
-    private EditMessageText processAnimal(String petType, Long chatId,  Integer messageId) {
+
+
+//    EditMessageText editMessage = new EditMessageText(chatId, messageId, rulesText)
+//            .replyMarkup(keyboard);
+//
+//    return editMessage;
+//    //TODO: из БД
+    private EditMessageText processAnimal(String petType, Long chatId, Integer messageId )  {
 
         if (petType.equals(PetType.CAT.getPet())) {
             EditMessageText editMessage = new EditMessageText(
@@ -70,17 +84,3 @@ public class AnswerAboutShelterCallbackHandler implements CallbackChainHandler {
         return  null ;
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-

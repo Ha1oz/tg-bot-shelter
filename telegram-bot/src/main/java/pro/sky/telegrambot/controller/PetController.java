@@ -20,6 +20,7 @@ public class PetController {
 
     private final PetService petService;
 
+
     /**
      * Конструктор контроллера, который принимает сервис для работы с питомцами.
      *
@@ -88,6 +89,37 @@ public class PetController {
         petService.deletePet(id);
         return (Pet) ResponseEntity.status(HttpStatus.OK);
     }
+
+
+    @GetMapping("{type}")
+
+    public Object getPetType(@PathVariable String typeOfPet) {
+
+        Optional<Pet> pet = petService.findPetByType( typeOfPet ) ;
+
+        if (pet.isEmpty()) {
+            return (Pet) ResponseEntity.status(HttpStatus.NOT_FOUND).build().getBody();
+        }
+
+        return ResponseEntity.status(HttpStatus.FOUND).body(petService.findPetByType(typeOfPet)).getBody();
+
+    }
+
+//    @GetMapping("{id}")
+
+//    public ResponseEntity<Pet> getStudentInfo(@PathVariable Long id) {
+//
+//        Pet pet = petsService.findPet(id);
+//
+//        if (pet == null) {
+//
+//            return ResponseEntity.notFound().build();
+//
+//        }
+//
+//        return ResponseEntity.ok(pet);
+//
+//    }
 
     //TO DO
     // Возможно стоит добавить поиск по типу питомца (выводить только кошек или только собак)

@@ -8,6 +8,8 @@ import com.pengrad.telegrambot.request.EditMessageText;
 import pro.sky.telegrambot.entity.CommandType;
 import pro.sky.telegrambot.entity.PetType;
 import pro.sky.telegrambot.handler.api.CallbackChainHandler;
+import pro.sky.telegrambot.entity.PetType;
+import static pro.sky.telegrambot.constants.Constants.*;
 
 import static pro.sky.telegrambot.constants.Constants.*;
 
@@ -40,10 +42,11 @@ public class AnswerArriveCallbackHandler implements CallbackChainHandler {
         String[] params = callbackQuery.data().split("_");
 
         InlineKeyboardMarkup keyboard = new InlineKeyboardMarkup(
-                new InlineKeyboardButton("Back").callbackData(CommandType.INFO_CALLBACK.getCommand()
+                new InlineKeyboardButton("In previous menu").callbackData(CommandType.INFO_CALLBACK.getCommand()
                         + params[1])
         );
-        return processAnimal(params[1], chatId, messageId);
+
+        return processAnimal(params[1], chatId, messageId).replyMarkup(keyboard);
     }
 //TODO подтягивать текст об адресе из БД, в зависимости от выбранного варианта в меню (cat или dog)
 

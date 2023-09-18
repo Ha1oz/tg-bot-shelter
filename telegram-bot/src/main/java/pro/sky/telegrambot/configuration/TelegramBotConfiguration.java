@@ -23,11 +23,10 @@ import pro.sky.telegrambot.handler.message.ReportMessageHandler;
 
 import pro.sky.telegrambot.handler.message.StartMessageHandlerImpl;
 import pro.sky.telegrambot.handler.message.StartMessagePhoneHandlerImpl;
-import pro.sky.telegrambot.repository.PhotoRepository;
+
 import pro.sky.telegrambot.service.PhotoService;
 import pro.sky.telegrambot.service.ReportService;
 import pro.sky.telegrambot.service.UserService;
-
 
 
 import java.util.List;
@@ -73,6 +72,7 @@ public class TelegramBotConfiguration {
                 new StartMessageHandlerImpl(),
                 new StartMessagePhoneHandlerImpl(),
                 new ReportMessageHandler(userService, photoService, reportService, telegramBot())
+
         );
     }
 

@@ -41,11 +41,11 @@ public class AnswerPassCallbackHandler implements CallbackChainHandler {
         String[] params = callbackQuery.data().split("_");
 
         InlineKeyboardMarkup keyboard = new InlineKeyboardMarkup(
-                new InlineKeyboardButton("Back").callbackData(CommandType.INFO_CALLBACK.getCommand()
+                new InlineKeyboardButton("In previous menu").callbackData(CommandType.INFO_CALLBACK.getCommand()
                         + params[1])
         );
 
-        return processAnimal(params[1], chatId, messageId);
+        return processAnimal(params[1], chatId, messageId).replyMarkup(keyboard);
     }
 //TODO подтягивать текст
 

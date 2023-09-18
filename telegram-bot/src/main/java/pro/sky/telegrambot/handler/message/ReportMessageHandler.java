@@ -10,26 +10,18 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.reactive.function.client.WebClient;
 import pro.sky.telegrambot.entity.CommandType;
-import pro.sky.telegrambot.entity.PetType;
 import pro.sky.telegrambot.handler.api.MessageChainHandler;
 import pro.sky.telegrambot.model.Photo;
 import pro.sky.telegrambot.model.Report;
 import pro.sky.telegrambot.model.User;
-import pro.sky.telegrambot.repository.PhotoRepository;
-import pro.sky.telegrambot.repository.ReportRepository;
 import pro.sky.telegrambot.service.PhotoService;
 import pro.sky.telegrambot.service.ReportService;
 import pro.sky.telegrambot.service.UserService;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Arrays;
-import java.util.Objects;
 import java.util.Optional;
 /**
  * Обработчик для сообщений, содержащих команду <i>bot-mention</i> /form.
