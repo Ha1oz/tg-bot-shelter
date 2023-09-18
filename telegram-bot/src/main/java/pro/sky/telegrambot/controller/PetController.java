@@ -5,7 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pro.sky.telegrambot.model.Pet;
-import pro.sky.telegrambot.service.PetsService;
+import pro.sky.telegrambot.service.PetService;
 
 import java.util.Optional;
 
@@ -15,18 +15,20 @@ import java.util.Optional;
  * Включает основные CRUD-запросы.
  */
 @RestController
-@RequestMapping("/pets")
-public class PetsController {
+@RequestMapping("/pet")
+public class PetController {
 
-    private final PetsService petsService;
+    private final PetService petService;
+
 
     /**
      * Конструктор контроллера, который принимает сервис для работы с питомцами.
      *
-     * @param petsService Сервис для работы с питомцами.
+     * @param petService Сервис для работы с питомцами.
      */
-    public PetsController(PetsService petsService) {
-        this.petsService = petsService;
+
+    public PetController(PetService petService) {
+        this.petService = petService;
     }
 
     /**
@@ -37,7 +39,7 @@ public class PetsController {
      */
     @PostMapping("/add")
     public Pet addPet(@RequestBody Pet pet) {
-        Pet addPet = petsService.addPet(pet);
+        Pet addPet = petService.addPet(pet);
         return ResponseEntity.status(HttpStatus.CREATED).body(addPet).getBody();
     }
 
@@ -48,13 +50,14 @@ public class PetsController {
      * @return Питомец с указанным идентификатором, если найден, в противном случае возвращает 404 ошибку.
      */
     @GetMapping("{id}")
-    public Pet findPetById(@PathVariable Long id) {
-        Optional<Pet> pet = petsService.findPetById(id);
+
+    public ResponseEntity<Pet> findPetById(@PathVariable Long id) {
+        Optional<Pet> pet = petService.findPetById(id);
 
         if (pet.isEmpty()) {
-            return (Pet) ResponseEntity.status(HttpStatus.NOT_FOUND).build().getBody();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
-        return ResponseEntity.status(HttpStatus.FOUND).body(findPetById(id)).getBody();
+        return ResponseEntity.status(HttpStatus.FOUND).body(pet.get());
     }
 
     /**
@@ -64,14 +67,15 @@ public class PetsController {
      * @param id  Идентификатор редактируемого питомца.
      * @return Обновленный питомец, если редактирование выполнено успешно, в противном случаи возвращает 404 ошибку.
      */
+
     @PutMapping("{id}")
-    public Pet editPet(@RequestBody Pet pet, @PathVariable Long id) {
-        Pet foundPet = petsService.editPet(pet);
+    public ResponseEntity<Pet> editPet(@RequestBody Pet pet, @PathVariable Long id) {
+        Pet foundPet = petService.editPet(pet);
 
         if (foundPet == null) {
-            return (Pet) ResponseEntity.status(HttpStatus.NOT_FOUND).build().getBody();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
-        return ResponseEntity.status(HttpStatus.FOUND).body(findPetById(id)).getBody();
+        return ResponseEntity.status(HttpStatus.FOUND).body(foundPet);
     }
 
     /**
@@ -82,9 +86,40 @@ public class PetsController {
      */
     @DeleteMapping("{id}")
     public Pet deletePet(@PathVariable Long id) {
-        petsService.deletePet(id);
+        petService.deletePet(id);
         return (Pet) ResponseEntity.status(HttpStatus.OK);
     }
+
+
+    @GetMapping("{type}")
+
+    public Object getPetType(@PathVariable String typeOfPet) {
+
+        Optional<Pet> pet = petService.findPetByType( typeOfPet ) ;
+
+        if (pet.isEmpty()) {
+            return (Pet) ResponseEntity.status(HttpStatus.NOT_FOUND).build().getBody();
+        }
+
+        return ResponseEntity.status(HttpStatus.FOUND).body(petService.findPetByType(typeOfPet)).getBody();
+
+    }
+
+//    @GetMapping("{id}")
+
+//    public ResponseEntity<Pet> getStudentInfo(@PathVariable Long id) {
+//
+//        Pet pet = petsService.findPet(id);
+//
+//        if (pet == null) {
+//
+//            return ResponseEntity.notFound().build();
+//
+//        }
+//
+//        return ResponseEntity.ok(pet);
+//
+//    }
 
     //TO DO
     // Возможно стоит добавить поиск по типу питомца (выводить только кошек или только собак)

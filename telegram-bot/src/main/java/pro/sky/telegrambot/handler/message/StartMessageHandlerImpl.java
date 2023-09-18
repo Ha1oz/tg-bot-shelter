@@ -17,8 +17,6 @@ import pro.sky.telegrambot.listener.TelegramBotUpdatesListener;
  * Возвращает сообщение с клавиатурой выбора приюта для кошек или собак.
  */
 public class StartMessageHandlerImpl implements MessageChainHandler {
-    private Logger logger = LoggerFactory.getLogger(TelegramBotUpdatesListener.class);
-
     /**
      * Проверяет, соответствует ли сообщение команде /start.
      *
@@ -41,7 +39,6 @@ public class StartMessageHandlerImpl implements MessageChainHandler {
     public SendMessage handle(Update update) {
         Message message = update.message();
         Long chatId = message.chat().id();
-        String firstName = message.chat().firstName();
         InlineKeyboardMarkup inlineKeyboard = new InlineKeyboardMarkup(
                 new InlineKeyboardButton("Cats").callbackData(CommandType.SHELTER_CALLBACK.getCommand()
                         + PetType.CAT.getPet()),

@@ -6,9 +6,19 @@ import com.pengrad.telegrambot.model.request.InlineKeyboardButton;
 import com.pengrad.telegrambot.model.request.InlineKeyboardMarkup;
 import com.pengrad.telegrambot.request.EditMessageText;
 import pro.sky.telegrambot.entity.CommandType;
+import pro.sky.telegrambot.entity.PetType;
+
+import pro.sky.telegrambot.constants.Constants;
 import pro.sky.telegrambot.handler.api.CallbackChainHandler;
 
+import static pro.sky.telegrambot.constants.Constants.TEXTCATSHELTER;
+import static pro.sky.telegrambot.constants.Constants.TEXTDOGSHELTER;
+
 public class AnswerAboutShelterCallbackHandler implements CallbackChainHandler {
+
+    private PetType petType;
+    private Constants constants;
+
     /**
      * Проверяет, соответствует ли колбэк необходимым условиям обработчика волонтерства.
      *
@@ -36,25 +46,41 @@ public class AnswerAboutShelterCallbackHandler implements CallbackChainHandler {
         String[] params = callbackQuery.data().split("_");
 
         InlineKeyboardMarkup keyboard = new InlineKeyboardMarkup(
-                new InlineKeyboardButton("Back").callbackData(CommandType.INFO_CALLBACK.getCommand()
+                new InlineKeyboardButton("In previous menu").callbackData(CommandType.INFO_CALLBACK.getCommand()
                         + params[1])
         );
 
-        //TODO: из БД
-        String aboutShelterText = "Our shelter:\nYelets City Public Organization \"Fluffy cats\" " +
-                "we have good cats" +
-                "is a private shelter where ONE person helps animals and supports them for their money and charity," +
-                " and can also take them home.";
+        return processAnimal(params[1], chatId, messageId).replyMarkup(keyboard);
+//        InlineKeyboardMarkup keyboard = new InlineKeyboardMarkup(
+//                new InlineKeyboardButton("Back").callbackData(CommandType.INFO_CALLBACK.getCommand()
+//                        + params[1])
+//        );
 
-        EditMessageText editMessage = new EditMessageText(
-                chatId,
-                messageId,
-                aboutShelterText
-        ).replyMarkup(keyboard);
 
-        return editMessage;
+    }
+
+
+//    EditMessageText editMessage = new EditMessageText(chatId, messageId, rulesText)
+//            .replyMarkup(keyboard);
+//
+//    return editMessage;
+//    //TODO: из БД
+    private EditMessageText processAnimal(String petType, Long chatId, Integer messageId )  {
+
+        if (petType.equals(PetType.CAT.getPet())) {
+            EditMessageText editMessage = new EditMessageText(
+                    chatId,
+                    messageId,
+                    TEXTCATSHELTER);
+            return editMessage;
+
+        } else if (petType.equals(PetType.DOG.getPet())) {
+            EditMessageText editMessage = new EditMessageText(
+                    chatId,
+                    messageId,
+                    TEXTDOGSHELTER);
+            return editMessage;
+        }
+        return  null ;
     }
 }
-
-
-

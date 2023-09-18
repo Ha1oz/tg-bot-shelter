@@ -8,6 +8,8 @@ import com.pengrad.telegrambot.request.EditMessageText;
 import pro.sky.telegrambot.entity.CommandType;
 import pro.sky.telegrambot.handler.api.CallbackChainHandler;
 
+import static pro.sky.telegrambot.constants.Constants.PROVENDOGHANDLERS;
+
 /**
 * Обработчик для колбэков, связанных с рекомендациями по проверенным кинологам для дальнейшего обращения к ним.
 */
@@ -47,14 +49,10 @@ public EditMessageText handle(Update update) {
     );
 
     //TODO: из БД
-    String rulesText = "Если у Вас возникнут проблемы с Вашим питомцем, Вы всегда сможете обратиться к нашим проверенным " +
-            "кинологам:\n" +
-            "1. ... \n" +
-            "2. ... \n" +
-            "...\n" +
-            "n. ...";
 
-    EditMessageText editMessage = new EditMessageText(chatId, messageId, rulesText)
+
+    EditMessageText editMessage = new EditMessageText(chatId, messageId, PROVENDOGHANDLERS
+    )
             .replyMarkup(keyboard);
 
     return editMessage;

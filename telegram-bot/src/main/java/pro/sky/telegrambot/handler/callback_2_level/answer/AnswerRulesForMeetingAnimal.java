@@ -8,6 +8,8 @@ import com.pengrad.telegrambot.request.EditMessageText;
 import pro.sky.telegrambot.entity.CommandType;
 import pro.sky.telegrambot.handler.api.CallbackChainHandler;
 
+import static pro.sky.telegrambot.constants.Constants.RULESFORMEETING;
+
 /**
  * Обработчик для колбэков связанных с правилами знакомства с животными на встрече.
  */
@@ -45,13 +47,9 @@ public class AnswerRulesForMeetingAnimal implements CallbackChainHandler {
         );
 
         //TODO: из БД
-        String rulesText = "Некоторые правила знакомства с животным до того, как забрать его из приюта:\n" +
-                "1. ...\n" +
-                "2. ...\n" +
-                "...\n" +
-                "n. ...";
 
-        EditMessageText editMessage = new EditMessageText(chatId, messageId, rulesText)
+
+        EditMessageText editMessage = new EditMessageText(chatId, messageId, RULESFORMEETING )
                 .replyMarkup(keyboard);
 
         return editMessage;

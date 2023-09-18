@@ -6,7 +6,10 @@ import com.pengrad.telegrambot.model.request.InlineKeyboardButton;
 import com.pengrad.telegrambot.model.request.InlineKeyboardMarkup;
 import com.pengrad.telegrambot.request.EditMessageText;
 import pro.sky.telegrambot.entity.CommandType;
+import pro.sky.telegrambot.entity.PetType;
 import pro.sky.telegrambot.handler.api.CallbackChainHandler;
+
+import static pro.sky.telegrambot.constants.Constants.*;
 
 public class AnswerSafetyGuideCallbackHandler implements CallbackChainHandler {
     /**
@@ -37,28 +40,34 @@ public class AnswerSafetyGuideCallbackHandler implements CallbackChainHandler {
         String[] params = callbackQuery.data().split("_");
 
         InlineKeyboardMarkup keyboard = new InlineKeyboardMarkup(
-                new InlineKeyboardButton("Back").callbackData(CommandType.INFO_CALLBACK.getCommand()
+                new InlineKeyboardButton("In previous menu").callbackData(CommandType.INFO_CALLBACK.getCommand()
                         + params[1])
         );
 
-        //TODO: из БД
-        String safetyGuideText = "*General safety recommendations on the territory of the shelter*:\n " +
-                "\n" +
-                "\n" +
-                "\n" +"Visiting a shelter for children of preschool and primary school age unaccompanied by adults. "+"\n" +
-                "\n" +"The presence on the territory of the shelter of children of middle and high school " +
-                "age unaccompanied by adults or a written certificate-permission from parents or legal representatives" +"\n" +
-                "\n"+ "Independently enter the cattery without the permission of the shelter staff" +"\n";
+        return processAnimal(params[1], chatId, messageId).replyMarkup(keyboard);
+    }
+//TODO подтягивать текст
 
-        EditMessageText editMessage = new EditMessageText(
-                chatId,
-                messageId,
-                safetyGuideText
-        ).replyMarkup(keyboard);
-        return editMessage;
+
+    private EditMessageText processAnimal(String petType, Long chatId,  Integer messageId) {
+
+        if (petType.equals(PetType.CAT.getPet())) {
+            EditMessageText editMessage = new EditMessageText(
+                    chatId,
+                    messageId,
+                    TEXTCATSAFETYGUIDE);
+            return editMessage;
+
+        } else if (petType.equals(PetType.DOG.getPet())) {
+            EditMessageText editMessage = new EditMessageText(
+                    chatId,
+                    messageId,
+                    TEXTDOGSAFETYGUIDE);
+            return editMessage;
+        }
+        return  null;
     }
 }
-
 
 
 
