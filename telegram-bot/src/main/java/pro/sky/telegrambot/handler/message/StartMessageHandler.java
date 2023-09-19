@@ -23,7 +23,7 @@ public class StartMessageHandler implements MessageChainHandler {
     @Override
     public boolean check(Update update) {
         Message message = update.message();
-        return message != null && message.text().contains(CommandType.START_MESSAGE.getCommand());
+        return message != null && message.text() != null && message.text().contains(CommandType.START_MESSAGE.getCommand());
     }
 
     /**

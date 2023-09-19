@@ -19,14 +19,9 @@ import pro.sky.telegrambot.handler.api.MessageChainHandler;
 import pro.sky.telegrambot.handler.callback_2_level.ShelterGetPetCallbackHandler;
 import pro.sky.telegrambot.handler.callback_2_level.answer.*;
 
-import pro.sky.telegrambot.handler.message.ReportMessageHandler;
+import pro.sky.telegrambot.handler.message.*;
 
-import pro.sky.telegrambot.handler.message.StartMessageHandler;
-import pro.sky.telegrambot.handler.message.StartMessagePhoneHandler;
-
-import pro.sky.telegrambot.service.PhotoService;
-import pro.sky.telegrambot.service.ReportService;
-import pro.sky.telegrambot.service.UserService;
+import pro.sky.telegrambot.service.*;
 
 
 import java.util.List;
@@ -39,13 +34,12 @@ public class TelegramBotConfiguration {
 
     @Autowired
     private UserService userService;
-
     @Autowired
     private ReportService reportService;
-
     @Autowired
     private PhotoService photoService;
-
+    @Autowired
+    private ChattingService chattingService;
 
     @Value("${telegram.bot.token}")
     private String token;
@@ -73,7 +67,10 @@ public class TelegramBotConfiguration {
         return List.of(
                 new StartMessageHandler(),
                 new StartMessagePhoneHandler(),
-                new ReportMessageHandler(userService, photoService, reportService, telegramBot())
+                new ReportMessageHandler(userService, photoService, reportService, telegramBot()),
+                new CallVolunteerMessageHandler(chattingService, telegramBot()),
+                new AnswerClientMessageHandler(chattingService, telegramBot())
+
         );
     }
 

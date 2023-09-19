@@ -24,7 +24,7 @@ public class StartMessagePhoneHandler implements MessageChainHandler {
     public boolean check(Update update) {
         Message message = update.message();
 
-        return message != null && message.text().startsWith("9");
+        return message != null && message.text() != null && message.text().startsWith("9");
 
     }
 

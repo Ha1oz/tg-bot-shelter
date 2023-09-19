@@ -1,6 +1,7 @@
 package pro.sky.telegrambot.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import pro.sky.telegrambot.model.Pet;
 import pro.sky.telegrambot.model.Volunteer;
@@ -37,9 +38,15 @@ public class VolunteerService {
     public Collection<Volunteer> getAllVolunteer(){
         return volunteerRepository.findAll();
     }
-
     public Optional<Volunteer> findVolunteerById(Long id) {
         return volunteerRepository.findById(id);
+    }
+    public Optional<Volunteer> findVolunteerByChatId(Long id) {
+        return volunteerRepository.findByChatId(id);
+    }
+    public Optional<Volunteer> findVolunteerByRandom() {
+        //TODO: temporary solution
+        return volunteerRepository.findFirst();
     }
 
     public Volunteer editVolunteer(Volunteer volunteer) {

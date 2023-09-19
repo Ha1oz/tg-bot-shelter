@@ -27,11 +27,9 @@ import java.util.Optional;
  * Обработчик для сообщений, содержащих команду <i>bot-mention</i> /form.
  * Возвращает результат отправки отчёта.
  */
-@Component
+
 @AllArgsConstructor
 public class ReportMessageHandler implements MessageChainHandler {
-    private final Logger logger = LoggerFactory.getLogger(ReportMessageHandler.class);
-
     private final UserService userService;
     private final PhotoService photoService;
     private final ReportService reportService;
@@ -51,10 +49,12 @@ public class ReportMessageHandler implements MessageChainHandler {
             return false;
         }
         MessageEntity[] messageEntity = message.captionEntities();
+        if (messageEntity == null) {
+            return false;
+        }
         if (Arrays.stream(messageEntity).noneMatch(e-> e.type().equals(MessageEntity.Type.mention))) {
             return false;
         }
-
         return message.caption().contains(CommandType.FORM_MESSAGE.getCommand());
     }
     /**

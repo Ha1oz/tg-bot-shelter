@@ -1,5 +1,6 @@
 package pro.sky.telegrambot.service;
 
+import lombok.SneakyThrows;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -15,6 +16,7 @@ import pro.sky.telegrambot.repository.PhotoRepository;
 import pro.sky.telegrambot.repository.ReportRepository;
 import pro.sky.telegrambot.repository.UserRepository;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -64,12 +66,26 @@ class ReportServiceTest {
     }
 
     @Test
+    @SneakyThrows
     void uploadReport() {
         when(reportRepositoryMock.save(any(Report.class))).thenReturn(report);
         when(userRepositoryMock.findByChatId(any(Long.class))).thenReturn(Optional.of(user));
         when(photoRepositoryMock.save(any(Photo.class))).thenReturn(photo);
         when(reportRepositoryMock.getCountFromUser(any(Long.class))).thenReturn(1);
-        // TODO: should continue testing
+
+
+        MultipartFile multipartFile = mock(MultipartFile.class);
+        byte[] data = {1,2,3};
+        when(multipartFile.getBytes()).thenReturn(data);
+        when(multipartFile.getSize()).thenReturn((long)data.length);
+        when(multipartFile.getContentType()).thenReturn("type");
+
+        reportService.uploadReport(user.getChatId(), "text", multipartFile);
+
+        verify(reportRepositoryMock, times(1)).save(any(Report.class));
+        verify(userRepositoryMock, times(1)).findByChatId(any(Long.class));
+        verify(photoRepositoryMock, times(1)).save(any(Photo.class));
+        verify(reportRepositoryMock, times(1)).getCountFromUser(any(Long.class));
     }
 
     @Test

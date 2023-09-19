@@ -14,14 +14,14 @@ import java.util.Optional;
  * Включает основные CRUD-запросы.
  */
 @RestController
-@RequestMapping("/volunteers")
+@RequestMapping("/volunteer")
 public class VolunteerController {
 
 
     private final VolunteerService volunteerService;
 
-    public VolunteerController(VolunteerService volunteerService) {
-        this.volunteerService = volunteerService;
+    public VolunteerController(VolunteerService volunteersService) {
+        this.volunteerService = volunteersService;
     }
 
 
