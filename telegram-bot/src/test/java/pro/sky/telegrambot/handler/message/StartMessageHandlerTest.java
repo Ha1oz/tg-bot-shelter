@@ -16,7 +16,7 @@ public class StartMessageHandlerTest {
         when(update.message()).thenReturn(message);
         when(message.text()).thenReturn("/start");
 
-        StartMessageHandlerImpl handler = new StartMessageHandlerImpl();
+        StartMessageHandler handler = new StartMessageHandler();
         boolean result = handler.check(update);
 
         assertEquals(true, result);
@@ -29,7 +29,7 @@ public class StartMessageHandlerTest {
         when(update.message()).thenReturn(message);
         when(message.text()).thenReturn("Hello");
 
-        StartMessageHandlerImpl handler = new StartMessageHandlerImpl();
+        StartMessageHandler handler = new StartMessageHandler();
         boolean result = handler.check(update);
 
         assertEquals(false, result);
