@@ -3,9 +3,8 @@ package pro.sky.telegrambot.controller;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pro.sky.telegrambot.model.Pet;
 import pro.sky.telegrambot.model.Volunteer;
-import pro.sky.telegrambot.service.VolunteersService;
+import pro.sky.telegrambot.service.VolunteerService;
 
 import java.util.Optional;
 
@@ -15,14 +14,14 @@ import java.util.Optional;
  * Включает основные CRUD-запросы.
  */
 @RestController
-@RequestMapping("/volunteers")
-public class VolunteersController {
+@RequestMapping("/volunteer")
+public class VolunteerController {
 
 
-    private final VolunteersService volunteersService;
+    private final VolunteerService volunteerService;
 
-    public VolunteersController(VolunteersService volunteersService) {
-        this.volunteersService = volunteersService;
+    public VolunteerController(VolunteerService volunteersService) {
+        this.volunteerService = volunteersService;
     }
 
 
@@ -41,7 +40,7 @@ public class VolunteersController {
      */
     @PostMapping("/add")
     public Volunteer addVolunteer(@RequestBody Volunteer volunteer) {
-        Volunteer addVolunteer = volunteersService.addVolunteer(volunteer);
+        Volunteer addVolunteer = volunteerService.addVolunteer(volunteer);
         return ResponseEntity.status(HttpStatus.CREATED).body(addVolunteer).getBody();
     }
 
@@ -53,7 +52,7 @@ public class VolunteersController {
      */
     @GetMapping("{id}")
     public Volunteer findVolunteerById(@PathVariable Long id) {
-        Optional<Volunteer> volunteer = volunteersService.findVolunteerById(id);
+        Optional<Volunteer> volunteer = volunteerService.findVolunteerById(id);
 
         if (volunteer.isEmpty()) {
             return (Volunteer) ResponseEntity.status(HttpStatus.NOT_FOUND).build().getBody();
@@ -70,7 +69,7 @@ public class VolunteersController {
      */
     @PutMapping("{id}")
     public Volunteer editVolunteer(@RequestBody Volunteer volunteer, @PathVariable Long id) {
-        Volunteer foundVolunteer = volunteersService.editVolunteer(volunteer);
+        Volunteer foundVolunteer = volunteerService.editVolunteer(volunteer);
 
         if (foundVolunteer == null) {
             return (Volunteer) ResponseEntity.status(HttpStatus.NOT_FOUND).build().getBody();
@@ -86,7 +85,7 @@ public class VolunteersController {
      */
     @DeleteMapping("{id}")
     public Volunteer deleteVolunteer(@PathVariable Long id) {
-        volunteersService.deleteVolunteer(id);
+        volunteerService.deleteVolunteer(id);
         return (Volunteer) ResponseEntity.status(HttpStatus.OK);
     }
 }
