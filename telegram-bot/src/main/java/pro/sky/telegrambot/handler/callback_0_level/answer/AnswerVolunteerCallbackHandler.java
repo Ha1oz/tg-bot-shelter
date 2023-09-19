@@ -41,13 +41,16 @@ public class AnswerVolunteerCallbackHandler implements CallbackChainHandler {
         String backParam = callbackQuery.data().substring(CommandType.VOLUNTEER_CALLBACK.getCommand().length());
 
         InlineKeyboardMarkup keyboard = new InlineKeyboardMarkup(
-            new InlineKeyboardButton("Back").callbackData(backParam)
+            new InlineKeyboardButton("Form").switchInlineQueryCurrentChat(CommandType.SEND_QUESTION_MESSAGE.getCommand()
+                    + "\n"
+                    + "[Insert text message here]")
         );
+        keyboard.addRow(new InlineKeyboardButton("In previous menu").callbackData(backParam));
 
         EditMessageText editMessage = new EditMessageText(
                 chatId,
                 messageId,
-                "Contact:\nSome info about the contact. Like phone number, email address etc."
+                "Write text message in form. Please dont delete commands. You can send only text messages."
         ).replyMarkup(keyboard);
 
         return editMessage;
