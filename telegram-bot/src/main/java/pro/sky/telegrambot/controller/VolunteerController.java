@@ -76,12 +76,23 @@ public class VolunteerController {
         }
         return ResponseEntity.status(HttpStatus.FOUND).body(findVolunteerById(id)).getBody();
     }
-
     /**
-     * Обрабатывает DELETE-запрос для удаления волонтера.
+     * Обрабатывает POST-запрос для изменения статуса занятости волонтера
      *
-     * @param id Идентификатор волонтера для удаления.
-     * @return Подтверждение успешного удаления волонтера.
+     * @param userId Идентификатор волонтера для установления занятости
+     * @param busy Идентификатор для установки занятости (<code>true</code> - занят, <code>false</code> - не занят)
+     * @return Подтверждение успешного изменения статуса занятости волонтера
+     */
+    @PostMapping("{userId}")
+    public Volunteer setVolunteerBusy(@PathVariable Long userId, Boolean busy) {
+        Volunteer setVolunteer = volunteerService.keepVolunteerBusy(userId, busy);
+        return ResponseEntity.status(HttpStatus.FOUND).body(setVolunteer).getBody();
+    }
+    /**
+     * Обрабатывает DELETE-запрос для удаления волонтера
+     *
+     * @param id Идентификатор волонтера для удаления
+     * @return Подтверждение успешного удаления волонтера
      */
     @DeleteMapping("{id}")
     public Volunteer deleteVolunteer(@PathVariable Long id) {

@@ -66,9 +66,9 @@ public class CallVolunteerMessageHandler implements MessageChainHandler {
             return new SendMessage(chatId, "Call volunteers doesn't available now. Please try again later.").replyMarkup(keyboardMarkup);
         }
 
-        ResponseModel question = new Question(chatId, volunteer.getChatId(), textReport);
+        Question question = new Question(chatId, volunteer.getChatId(), textReport);
 
-        telegramBot.execute(service.getSMFromResponse(question));
+        telegramBot.execute(service.getSMFromQuestion(question));
 
         return new SendMessage(chatId, "Volunteer is called. Please wait his response.").replyMarkup(keyboardMarkup);
     }

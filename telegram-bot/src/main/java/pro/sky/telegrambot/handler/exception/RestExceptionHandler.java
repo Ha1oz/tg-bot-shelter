@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import pro.sky.telegrambot.error.ReportNotFoundException;
 import pro.sky.telegrambot.error.UserNotFoundException;
+import pro.sky.telegrambot.error.VolunteerNotFoundException;
 
 import java.io.IOException;
 
@@ -29,5 +30,10 @@ public class RestExceptionHandler {
     public ResponseEntity<Object> handleUserNotFoundException(UserNotFoundException e) {
         LOGGER.error(e.toString());
         return new ResponseEntity<>("User is not found.", HttpStatus.NOT_FOUND);
+    }
+    @ExceptionHandler(VolunteerNotFoundException.class)
+    public ResponseEntity<Object> handleVolunteerNotFoundException(VolunteerNotFoundException e) {
+        LOGGER.error(e.toString());
+        return new ResponseEntity<>("Volunteer is not found.", HttpStatus.NOT_FOUND);
     }
 }

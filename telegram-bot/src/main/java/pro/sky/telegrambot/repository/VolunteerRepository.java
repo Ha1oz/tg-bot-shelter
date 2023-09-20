@@ -17,4 +17,5 @@ public interface VolunteerRepository extends JpaRepository<Volunteer, Long> {
             nativeQuery = true
     )
     Optional<Volunteer> findFirst();
+    Optional<Volunteer> findFirstByIsBusy(boolean bool);
 }
