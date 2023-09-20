@@ -1,6 +1,7 @@
 package pro.sky.telegrambot.configuration;
 
 import com.pengrad.telegrambot.TelegramBot;
+import com.pengrad.telegrambot.UpdatesListener;
 import com.pengrad.telegrambot.model.DeleteMyCommands;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -44,6 +45,8 @@ public class TelegramBotConfiguration {
     @Value("${telegram.bot.token}")
     private String token;
 
+//    @Value("${telegram.volunteer.chatId}")
+//    private String volunteerChatId;
 
     /**
      * Создает и настраивает экземпляр Telegram бота.

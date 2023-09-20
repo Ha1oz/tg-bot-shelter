@@ -15,10 +15,20 @@ import pro.sky.telegrambot.service.ChattingService;
 
 import java.util.Arrays;
 
+/**
+ * Обработчик сообщений для отправки ответов на вопросы клиентов.
+ */
 @AllArgsConstructor
 public class AnswerClientMessageHandler implements MessageChainHandler {
     private final ChattingService service;
     private final TelegramBot telegramBot;
+
+    /**
+     * Проверяет, соответствует ли сообщение условиям для обработки.
+     *
+     * @param update Объект с обновлением от Telegram.
+     * @return true, если сообщение подходит для обработки, иначе false.
+     */
     @Override
     public boolean check(Update update) {
         Message message = update.message();
@@ -37,6 +47,12 @@ public class AnswerClientMessageHandler implements MessageChainHandler {
         return message.text().contains(CommandType.ANSWER_QUESTION_MESSAGE.getCommand());
     }
 
+    /**
+     * Обрабатывает сообщение и отправляет ответ клиенту.
+     *
+     * @param update Объект с обновлением от Telegram.
+     * @return Объект SendMessage, представляющий ответ на сообщение.
+     */
     @Override
     public SendMessage handle(Update update) {
         Message message = update.message();

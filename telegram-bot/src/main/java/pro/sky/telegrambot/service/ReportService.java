@@ -64,7 +64,7 @@ public class ReportService {
     public List<Report> getAllReportsByOneUser(long userId) {
         return reportRepository.getAllFromUser(userId);
     }
-    private String getExtensions(String fileName) {
+    public String getExtensions(String fileName) {
         return fileName.substring(fileName.lastIndexOf(".") + 1);
     }
 }

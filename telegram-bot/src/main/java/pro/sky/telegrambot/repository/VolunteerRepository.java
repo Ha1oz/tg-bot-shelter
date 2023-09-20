@@ -6,6 +6,9 @@ import pro.sky.telegrambot.model.Volunteer;
 
 import java.util.Optional;
 
+/**
+ * Репозиторий для работы с сущностью Volunteer.
+ */
 public interface VolunteerRepository extends JpaRepository<Volunteer, Long> {
     Optional<Volunteer> findByChatId(Long id);
     //TODO: something better then emul random Volunteer, temporary solution
