@@ -44,19 +44,16 @@ public class StartMessagePhoneHandlerImpl implements MessageChainHandler {
                 + "|^(\\+\\d{1,3}( )?)?(\\d{3}[ ]?)(\\d{2}[ ]?){2}\\d{2}$");
 
         Matcher matcher = pattern.matcher( message.toString());
-
         try {
             if (!matcher.find()    &&  (message.text().length()>10) || (message.text().length()<10) ) {
                 throw new IllegalStateException("Not a perfect string");
             }
         } catch (IllegalStateException e) {
             logger.error("Could not parse MAT date {}, expected format [{}].", matcher, message);
-            SendMessage sendMessage = new SendMessage(chatId, "Contact not saved: invalid characters or invalid number of characters");
-            return sendMessage;
-        }
-
+            SendMessage sendMessage = new SendMessage(chatId,
+                    "Contact not saved: invalid characters or invalid number of characters");
+            return sendMessage; }
         SendMessage sendMessage = new SendMessage(chatId, "OK, the contact is saved");
-
         return sendMessage;
     }
 }
