@@ -18,6 +18,7 @@ public class Volunteer {
 
     private Long chatId;
     private String name;
+    private Boolean isBusy;
 
     public Volunteer() {
     }
@@ -103,11 +104,20 @@ public class Volunteer {
         return Objects.hash(id);
     }
 
+    public Boolean getBusy() {
+        return isBusy;
+    }
+
+    public void setBusy(Boolean busy) {
+        isBusy = busy;
+    }
+
     /**
      * Возвращает строковое представление объекта Volunteer.
      *
      * @return Строковое представление объекта Volunteer.
      */
+
     @Override
     public String toString() {
         return "Volunteer{" +

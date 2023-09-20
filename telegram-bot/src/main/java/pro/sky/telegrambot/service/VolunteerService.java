@@ -3,6 +3,7 @@ package pro.sky.telegrambot.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import pro.sky.telegrambot.error.VolunteerNotFoundException;
 import pro.sky.telegrambot.model.Pet;
 import pro.sky.telegrambot.model.Volunteer;
 import pro.sky.telegrambot.repository.PetRepository;
@@ -41,12 +42,21 @@ public class VolunteerService {
     public Optional<Volunteer> findVolunteerById(Long id) {
         return volunteerRepository.findById(id);
     }
-    public Optional<Volunteer> findVolunteerByChatId(Long id) {
-        return volunteerRepository.findByChatId(id);
+    public Optional<Volunteer> findVolunteerByChatId(Long chatId) {
+        return volunteerRepository.findByChatId(chatId);
     }
-    public Optional<Volunteer> findVolunteerByRandom() {
-        //TODO: temporary solution
-        return volunteerRepository.findFirst();
+    public Optional<Volunteer> findFreeVolunteer() {
+        return volunteerRepository.findFirstByIsBusy(false);
+    }
+    public Volunteer keepVolunteerBusy(Long chatId, Boolean isBusy) {
+        Optional<Volunteer> volunteerOptional = findVolunteerByChatId(chatId);
+        if (volunteerOptional.isEmpty()) {
+            throw new VolunteerNotFoundException();
+        }
+        Volunteer volunteer = volunteerOptional.get();
+        volunteer.setBusy(isBusy);
+
+        return editVolunteer(volunteer);
     }
 
     public Volunteer editVolunteer(Volunteer volunteer) {
