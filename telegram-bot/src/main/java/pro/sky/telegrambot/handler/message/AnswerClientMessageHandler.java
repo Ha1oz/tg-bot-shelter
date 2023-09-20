@@ -56,7 +56,7 @@ public class AnswerClientMessageHandler implements MessageChainHandler {
 
         SendMessage sendMessage = new SendMessage(chatId, "Answer is sent. Nice work.");
 
-        Answer answer = new Answer(toId, textReport);
+        Answer answer = new Answer(chatId, toId, textReport);
 
         telegramBot.execute(service.getSMFromAnswer(answer));
 

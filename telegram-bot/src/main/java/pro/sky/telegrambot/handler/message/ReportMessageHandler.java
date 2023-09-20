@@ -135,7 +135,8 @@ public class ReportMessageHandler implements MessageChainHandler {
         MediaType mediaType = MediaType.IMAGE_JPEG;
 
         byte[] bytes = webClient
-                .get().accept(mediaType)
+                .get()
+                .accept(mediaType)
                 .retrieve()
                 .bodyToMono(byte[].class)
                 .block();
