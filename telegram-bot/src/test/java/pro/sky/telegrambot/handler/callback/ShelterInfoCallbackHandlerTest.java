@@ -9,12 +9,11 @@ import com.pengrad.telegrambot.model.request.InlineKeyboardMarkup;
 import com.pengrad.telegrambot.request.EditMessageText;
 import org.testng.annotations.Test;
 import org.mockito.Mockito;
-import pro.sky.telegrambot.handler.callback_0_level.ShelterCallbackHandler;
 import pro.sky.telegrambot.handler.callback_1_level.ShelterInfoCallbackHandler;
 
 import static org.junit.Assert.*;
 
-public class ShelterInfoCallbackHandlerTest {
+public class ShelterInfoCallbackHandlerTest  {
 
     @Test
     public void testCheckMethod() {

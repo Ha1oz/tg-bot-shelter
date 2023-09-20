@@ -14,7 +14,7 @@ import pro.sky.telegrambot.handler.callback_2_level.ShelterGetPetCallbackHandler
 
 import static org.junit.Assert.*;
 
-public class ShelterGetPetCallbackHandlerTest {
+public class ShelterGetPetCallbackHandlerTest  {
 
     @Test
     public void testCheckMethod() {
@@ -54,3 +54,4 @@ public class ShelterGetPetCallbackHandlerTest {
         assertNotNull(result.replyMarkup(new InlineKeyboardMarkup())); // Исправленный метод replyMarkup()
     }
 }
+

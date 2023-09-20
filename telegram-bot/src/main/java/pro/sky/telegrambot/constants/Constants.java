@@ -1,6 +1,7 @@
 package pro.sky.telegrambot.constants;
 
-public class Constants {
+
+public class Constants  {
     public final static String  TEXTCATSHELTER = "Our shelter:\nYelets City Public Organization \"Fluffy cats\" " +
             "we have good cats" +
             "is a private shelter where ONE person helps animals and supports them for their money and charity," +
@@ -92,7 +93,7 @@ public class Constants {
     // constants_2_level
 
     public final static String TEXTADVICEFROMDOG  =  "Tips from dog handlers:\n" +
-            "1. Be reliable\n" +
+            "1.Be reliable\n" +
             "A dog is a mirror of the owner. How you will treat her, so she will reflect this attitude \n" +
             "towards you. It is important to be reliable and predictable for your pet: you do not need to\n " +
             "shout at the dog during training, set rules, and then change them, constantly change the schedule" +
@@ -112,7 +113,6 @@ public class Constants {
     public final static String TEXTARRANGEFORANADULT  = "To arrange a home for adult animals, use the following recommendations :\n" +
             "\n" +
             "Placement:\n" +
-            "\n" +
             "a) dogs separately from cats;\n" +
             "b) sick and crippled - separately from healthy;\n" +
             "c) puppies and kittens - separately from adult animals;\n" +
@@ -219,13 +219,13 @@ public class Constants {
 
     public final static String DOCUMENTSFORADOPT =
             "To take an animal from a shelter, you need to prepare the following documents :\n" +
-            "1. Fill out the electronic questionnaire of the potential owner \n" +
-            "The questionnaire is located at the link - https://forms .zohopublic.com/priut/form/animalrequest/\n " +
-            "Acquaintance with animals occurs after the approval of the questionnaire.\n" +
-            "2. We need up to 48 hours to wait for a call from the shelter \n" +
-            "to review the questionnaire.\n" +
-            "bilateral animal transfer agreement\n"+
-            "3.Don't forget to bring your passport. ";
+                    "1. Fill out the electronic questionnaire of the potential owner \n" +
+                    "The questionnaire is located at the link - https://forms .zohopublic.com/priut/form/animalrequest/\n " +
+                    "Acquaintance with animals occurs after the approval of the questionnaire.\n" +
+                    "2. We need up to 48 hours to wait for a call from the shelter \n" +
+                    "to review the questionnaire.\n" +
+                    "bilateral animal transfer agreement\n"+
+                    "3.Don't forget to bring your passport.";
 
 
 
@@ -249,58 +249,58 @@ public class Constants {
 
     public final static String REASONFORREFUSAL =
             "Reasons why you may be refused and not allowed to pick up an animal from a shelter:\n" +
-            "1.A large number of animals \n" +
-            "2.Unstable relationships in the family Since the workers of shelters are not able to predict what\n " +
-            "the development of the situation will be, they prefer to give pets only to people who are in\n " +
-            "a strong and happy marriage. \n" +
-            "3.The presence of small children. Families with children under 5 years old find it difficult\n" +
-            "to take an animal from a shelter for two reasons at once. Firstly, there is a risk that a\n " +
-            "dog or cat will show aggression towards a small person. Secondly, children themselves often provoke\n " +
-            "conflict. \n" +
-            "4.Rental housing Not all homeowners allow tenants to have pets. \n" +
-            "5.An animal as a gift or for work. The new owner can change his mind and simply get rid of such\n" +
-            "a \"burden\"\n  " +
-            "6.It's good if the animal is returned back to the shelter or given into good hands, but,\n" +
-            "as practice shows, unnecessary pets are simply put out the door.\n";
+                    "1.A large number of animals \n" +
+                    "2.Unstable relationships in the family Since the workers of shelters are not able to predict what\n " +
+                    "the development of the situation will be, they prefer to give pets only to people who are in\n " +
+                    "a strong and happy marriage. \n" +
+                    "3.The presence of small children. Families with children under 5 years old find it difficult\n" +
+                    "to take an animal from a shelter for two reasons at once. Firstly, there is a risk that a\n " +
+                    "dog or cat will show aggression towards a small person. Secondly, children themselves often provoke\n " +
+                    "conflict. \n" +
+                    "4.Rental housing Not all homeowners allow tenants to have pets. \n" +
+                    "5.An animal as a gift or for work. The new owner can change his mind and simply get rid of such   \"a \\\"burden\\\"\n" +
+                    "6.It's good if the animal is returned back to the shelter or given into good hands, but,\n" +
+                    "as practice shows, unnecessary pets are simply put out the door.\n";
 
     public final static String RECOMMENDATIONS =
             "To transport your pet, use the following recommendations:\n" +
-            "1.Transportation of pets according to traffic regulations is equivalent to cargo transportation.\n" +
-            "Therefore, it is necessary  to find a compromise between these two conditions.\n" +
-            "2. Trunk\n" +
-            "Being in the trunk gives a certain amount of freedom to the animal, but deprives access to oxygen. \n" +
-            "3.Rear seat\n" +
-            "According to the traffic regulations, the luggage must be secured. \n" +
-            "Example of fastening a dog with a rear seat belt\n" +
-            "If you don't want to fasten it, you can use a mesh. \n" +
-            "The mesh can be attached to the backs of the front seats or to the rear to isolate the animal in the trunk\n" +
-            "Hammock for animals\n" +
-            "Especially well suited for transporting dogs in the car. The resulting cradle is suitable for animals of different sizes. \n" +
-            "Autogamak protects seat upholstery and door cards\n" +
-            "4.Carrying\n" +
-            "A universal way for small animals. it must be securely fixed – fastened with a safety belt through the appropriate slots or fixed with a harness.\n" +
-            "Insert the seat belt into the special slots\n" +
-            "But on the front but you can't carry a pet in the front seat. Funny, but not safe. In case of triggering the airbag, the animal will receive severe injuries.\n" +
-            "General recommendations for the transportation of pets\n" +
-            "According to the recommendations of veterinarians, the animal should not be fed much before the trip. But you need to give a snack.\n" +
-            "5.Provide fresh air to the animal. \n" +
-            "Make regular stops to walk your pet and give him a drink \n" +
-            "If necessary, leave the animal in the car, you need to choose a place in the shade.";
+                    "1.Transportation of pets according to traffic regulations is equivalent to cargo transportation.\n" +
+                    "Therefore, it is necessary  to find a compromise between these two conditions.\n" +
+                    "2. Trunk\n" +
+                    "Being in the trunk gives a certain amount of freedom to the animal, but deprives access to oxygen. \n" +
+                    "3.Rear seat\n" +
+                    "According to the traffic regulations, the luggage must be secured. \n" +
+                    "Example of fastening a dog with a rear seat belt\n" +
+                    "If you don't want to fasten it, you can use a mesh. \n" +
+                    "The mesh can be attached to the backs of the front seats or to the rear to isolate the animal in the trunk\n" +
+                    "Hammock for animals\n" +
+                    "Especially well suited for transporting dogs in the car. The resulting cradle is suitable for animals of different sizes. \n" +
+                    "Autogamak protects seat upholstery and door cards\n" +
+                    "4.Carrying\n" +
+                    "A universal way for small animals. it must be securely fixed – fastened with a safety belt through the appropriate slots or fixed with a harness.\n" +
+                    "Insert the seat belt into the special slots\n" +
+                    "But on the front but you can't carry a pet in the front seat. Funny, but not safe. In case of triggering the airbag, the animal will receive severe injuries.\n" +
+                    "General recommendations for the transportation of pets\n" +
+                    "According to the recommendations of veterinarians, the animal should not be fed much before the trip. But you need to give a snack.\n" +
+                    "5.Provide fresh air to the animal. \n" +
+                    "Make regular stops to walk your pet and give him a drink \n" +
+                    "If necessary, leave the animal in the car, you need to choose a place in the shade.";
 
 
 
     public final static String RULESFORMEETING = "Some rules for getting to know an animal before picking it up from a shelter:\n" +
-                "1. Choose an animal to your liking, and not just because you feel sorry for him or on the\n " +
-                "principle of  he needs it more.\n  " +
-                "2.And you also need to take into account your lifestyle and\n" +
-                "conditions,  advises Amal Bayeva. — If you lead an active lifestyle yourself, like walking in\n" +
-                "the fresh air, then take an active, playful dog. If all this is not for you, then take a quiet one.\n" +
-                "3.The same applies to cats. If there are children, it is better to take a less characteristic animal,\n " +
-                "such a pet will not tolerate unsolicited squeezing and will not play at the first invitation.\n" +
-                "4.Keep in mind that you will not be able to find out the nature of the animal in one walk.\n" +
-                "5.New visitors for shelter animals are stressful, and even during several meetings the pet\n" +
-                "will not behave as usual. Only at home, having already established contact and trust with the\n" +
-                "animal, you will be able to establish good relations.";
+            "1. Choose an animal to your liking, and not just because you feel sorry for him or on the\n " +
+            "principle of  he needs it more.\n  " +
+            "2.And you also need to take into account your lifestyle and\n" +
+            "conditions,  advises Amal Bayeva. — If you lead an active lifestyle yourself, like walking in\n" +
+            "the fresh air, then take an active, playful dog. If all this is not for you, then take a quiet one.\n" +
+            "3.The same applies to cats. If there are children, it is better to take a less characteristic animal,\n " +
+            "such a pet will not tolerate unsolicited squeezing and will not play at the first invitation.\n" +
+            "4.Keep in mind that you will not be able to find out the nature of the animal in one walk.\n" +
+            "5.New visitors for shelter animals are stressful, and even during several meetings the pet\n" +
+            "will not behave as usual. Only at home, having already established contact and trust with the\n" +
+            "animal, you will be able to establish good relations.";
 }
+
 
 

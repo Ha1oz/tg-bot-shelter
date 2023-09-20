@@ -3,7 +3,6 @@ package pro.sky.telegrambot.handler.message;
 
 import com.pengrad.telegrambot.model.Message;
 import com.pengrad.telegrambot.model.Update;
-import com.pengrad.telegrambot.request.SendMessage;
 import org.junit.jupiter.api.Test;
 
 import java.util.regex.Matcher;
@@ -13,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class StartMessagePhoneHandlerImplTest {
+public class StartMessagePhoneHandlerImplTest  {
     @Test
     public void testCheckStart() {
         Update update = mock(Update.class);
@@ -39,7 +38,6 @@ public class StartMessagePhoneHandlerImplTest {
 
         assertEquals(false, result);
     }
-
     @Test
     public void whenMatchesPhoneNumber_thenCorrect() {
         String patterns
@@ -56,10 +54,7 @@ public class StartMessagePhoneHandlerImplTest {
             Matcher matcher = pattern.matcher(phoneNumber);
             assertTrue(matcher.matches());
         }
-
-
     }
-
     @Test
     void whenAssertingException() {
         Throwable exception = assertThrows(
@@ -71,9 +66,6 @@ public class StartMessagePhoneHandlerImplTest {
         assertEquals("Contact not saved: invalid characters or invalid number of characters", exception.getMessage());
     }
 }
-
-
-
 
 
 
