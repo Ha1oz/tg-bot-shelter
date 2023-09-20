@@ -27,7 +27,7 @@ import java.util.Optional;
  * Обработчик для сообщений, содержащих команду <i>bot-mention</i> /form.
  * Возвращает результат отправки отчёта.
  */
-@Component
+
 @AllArgsConstructor
 public class ReportMessageHandler implements MessageChainHandler {
     private final Logger logger = LoggerFactory.getLogger(ReportMessageHandler.class);
@@ -39,6 +39,8 @@ public class ReportMessageHandler implements MessageChainHandler {
 
     /**
      * Проверяет, соответствует ли сообщение команде <i>bot-mention</i> /form.
+     * Свойство-список captionEntities, содержащее сведения о форматировании.
+     * noneMatch(Predicate<? super T> predicate): возвращает true, если ни один из элементов в потоке не удовлетворяет условию в предикате
      *
      * @param update Обновление от Telegram API
      * @return true, если сообщение содержит команду <i>bot-mention</i> /form, иначе false.
@@ -107,6 +109,11 @@ public class ReportMessageHandler implements MessageChainHandler {
     }
     /**
      * Вспомогательный метод, для получения модели <code>Photo</code> из <code>PhotoSize[]</code>
+     * getFile() - метод представляет объект JSON (ответ размером 1,7 КБ), который содержит данные для доступа к вашему файлу изображения.
+     * WebClient - новый усовершенствованный механизм Spring для отправки запросов на стороне клиента и для загрузки файла произвольного размера
+     * метод retrieve() является кратчайшим путем к прямой выборке тела
+     * метод bodyToMono(), чтобы получить моно<байт[]> с сервера
+     * мы извлекаем все содержимое ответа в байт[]  (эти байты записываются в наш path)
      *
      * @param photoSize объект из Telegram Api
      * @return Photo модель
@@ -134,4 +141,5 @@ public class ReportMessageHandler implements MessageChainHandler {
 
         return photo;
     }
+
 }

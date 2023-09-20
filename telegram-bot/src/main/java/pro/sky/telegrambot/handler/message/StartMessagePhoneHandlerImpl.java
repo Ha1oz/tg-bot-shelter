@@ -47,15 +47,15 @@ public class StartMessagePhoneHandlerImpl implements MessageChainHandler {
 
         try {
             if (!matcher.find()    &&  (message.text().length()>10) || (message.text().length()<10) ) {
-                throw new IllegalStateException("Не идеальная строка");
+                throw new IllegalStateException("Not a perfect string");
             }
         } catch (IllegalStateException e) {
             logger.error("Could not parse MAT date {}, expected format [{}].", matcher, message);
-            SendMessage sendMessage = new SendMessage(chatId, "Контакт не сохранен: недопустимые символы или неверно введен номер телефона ");
+            SendMessage sendMessage = new SendMessage(chatId, "Contact not saved: invalid characters or invalid number of characters");
             return sendMessage;
         }
 
-        SendMessage sendMessage = new SendMessage(chatId, "Хорошо, контакт сохранен");
+        SendMessage sendMessage = new SendMessage(chatId, "OK, the contact is saved");
 
         return sendMessage;
     }

@@ -168,52 +168,52 @@ public class Constants {
     public final static String ARRANGEFORKITTEN = "To arrange a house for kittens, use the following recommendations:\n" +
             "1.Immediately after moving, the kitten will feel insecure away from brothers, sisters and mom, so he will \n" +
             "try to find a secluded and cozy place that gives a sense of security and comfort. Let the baby explore the\n" +
-            " space and choose a suitable shelter for himself. It is there that it is worth organizing a place for a kitten\n" +
-            " to sleep. But you can do it in different ways.\n" +
+            "space and choose a suitable shelter for himself. It is there that it is worth organizing a place for a kitten\n" +
+            "to sleep. But you can do it in different ways.\n" +
             "\n" +
             "2.COZY BOX\n" +
             "A crib for a pet can be arranged in a regular shoe box by removing the lid from it. Or you can use a larger\n" +
-            " closed box and cut a round \"window\" in it so that the baby can climb in there and relax\n" +
-            " in a pleasant semi—darkness - then it will be an ideal place for a kitten to sleep alone. It is better\n" +
-            " to put a soft pillow or other bedding in the box so that the little household can sleep comfortably and comfortably.\n" +
+            "closed box and cut a round \"window\" in it so that the baby can climb in there and relax\n" +
+            "in a pleasant semi—darkness - then it will be an ideal place for a kitten to sleep alone. It is better\n" +
+            "to put a soft pillow or other bedding in the box so that the little household can sleep comfortably and comfortably.\n" +
             "\n" +
             "3.TRAVEL COT\n" +
             "An ordinary carrier can also be an excellent option. If the kitten perceives it as his home, then on trips\n" +
-            " to the country or to the veterinarian, he will feel feel calm and confident.\n" +
+            "to the country or to the veterinarian, he will feel feel calm and confident.\n" +
             "\n" +
             "Two types of carriers are best suited for this: plastic or frame. The entrance should be located\n" +
-            " on the side so that it is convenient for the baby to enter it. If there is no pillow in the carrier,\n" +
-            " be sure to put something to ensure a sweet sleep for the kitten!\n" +
+            "on the side so that it is convenient for the baby to enter it. If there is no pillow in the carrier,\n" +
+            "be sure to put something to ensure a sweet sleep for the kitten!\n" +
             "\n" +
             "The third option is suitable for aesthetes: any interior will be decorated with a wicker carrier,\n" +
-            " which will look good both in the house and on the street. Its advantages are excellent ventilation\n" +
-            " and environmental cleanliness of the material, which means that nothing will threaten the baby's health.\n" +
+            "which will look good both in the house and on the street. Its advantages are excellent ventilation\n" +
+            "and environmental cleanliness of the material, which means that nothing will threaten the baby's health.\n" +
             "\n" +
             "4.A HOUSE FOR A BABY\n" +
             "Of course, you can buy a baby a basket, a couch or a small soft house. The main thing is to remember\n" +
-            " that one day the kitten will grow into a healthy and beautiful cat, so you can take care in advance\n" +
-            " that the size of the shelter is suitable" +
-            " for an adult pet. The widest range of such accessories is presented in any large pet store,\n" +
-            " so you will definitely find a house for your kitten that he will like!\n";
+            "that one day the kitten will grow into a healthy and beautiful cat, so you can take care in advance\n" +
+            "that the size of the shelter is suitable" +
+            "for an adult pet. The widest range of such accessories is presented in any large pet store,\n" +
+            "so you will definitely find a house for your kitten that he will like!\n";
 
 
     public final static String ARRANGEFORPUPPY =  " Equipment of a place for a puppy\n" +
             "1.The place for the puppy must meet certain requirements. First of all, you need to\n " +
             "make sure that the baby is protected from drafts and can sleep peacefully: you should not arrange\n" +
-            " it in the corridor or where they constantly walk. " +
+            "it in the corridor or where they constantly walk. " +
             "2.Then they check that there\n " +
             "is enough light and the puppy can inspect the territory. " +
             "3.It should be remembered that \n" +
             "the place for the dog is chosen once and for all, so you need to arrange everything in advance \n" +
             "so that the puppy has space for games, and the\n" +
-            " adult dog can move freely in its place.\n" +
+            "adult dog can move freely in its place.\n" +
             "\n" +
             "4.You should not arrange a puppy at the battery, otherwise it will grow too pampered.\n" +
             "\n" +
             "5.For a small breed puppy, a warm, soft basket with a faux fur litter that can be washed is suitable.\n" +
             "6. You can put a plastic  trough with a mattress for such a puppy. This is very hygienic, and \n" +
             "the puppy will gnaw the edges of the trough during the change of teeth, not the furniture.\n" +
-            " For a large, fast-growing puppy, it is better to lay a small rug.";
+            "For a large, fast-growing puppy, it is better to lay a small rug.";
 
 
 
@@ -223,8 +223,8 @@ public class Constants {
             "The questionnaire is located at the link - https://forms .zohopublic.com/priut/form/animalrequest/\n " +
             "Acquaintance with animals occurs after the approval of the questionnaire.\n" +
             "2. We need up to 48 hours to wait for a call from the shelter \n" +
-            " to review the questionnaire.\n" +
-            " bilateral animal transfer agreement\n"+
+            "to review the questionnaire.\n" +
+            "bilateral animal transfer agreement\n"+
             "3.Don't forget to bring your passport. ";
 
 
@@ -233,17 +233,18 @@ public class Constants {
     public final static String PROVENDOGHANDLERS = "If you have any problems with your pet, you can always contact our trusted  dog handlers: \n" +
             "1. Experienced instructors of the Canine Center \"Smart Dog\" will not only help to correct" +
             "the situation, but also advise how to behave and what needs to be done to prevent mental disorders" +
-            " and, as a result, problematic behavior of the dog.\n" +
+            "and, as a result, problematic behavior of the dog.\n" +
             "\n" +
             "2.Our zoopsychologists consider each case individually, find out and trace the chain of events that" +
-            " led to mental problems and undesirable actions. Just like a human psychologist, a zoopsychologist " +
+            "led to mental problems and undesirable actions. Just like a human psychologist, a zoopsychologist " +
             "carefully eliminates disturbances in the dog's psyche and brings it to a normal psychological state.\n" +
             "\n" +
             "3.Below we will look at what causes lead to deviant (deviant from the norm) behavior of dogs.\n" +
             "\n" +
             "4.Influence of external factors\n" +
+            "\n" +
             "5.Problematic behavior in a dog can be caused by various reasons, but, basically, the dog shows" +
-            " incorrect behavior due to various fears. ";
+            "incorrect behavior due to various fears.";
 
 
     public final static String REASONFORREFUSAL =
@@ -257,18 +258,17 @@ public class Constants {
             "dog or cat will show aggression towards a small person. Secondly, children themselves often provoke\n " +
             "conflict. \n" +
             "4.Rental housing Not all homeowners allow tenants to have pets. \n" +
-            "\n" +
             "5.An animal as a gift or for work. The new owner can change his mind and simply get rid of such\n" +
-            " a \"burden\"\n. " +
+            "a \"burden\"\n  " +
             "6.It's good if the animal is returned back to the shelter or given into good hands, but,\n" +
-            " as practice shows, unnecessary pets are simply put out the door.\n";
+            "as practice shows, unnecessary pets are simply put out the door.\n";
 
     public final static String RECOMMENDATIONS =
             "To transport your pet, use the following recommendations:\n" +
             "1.Transportation of pets according to traffic regulations is equivalent to cargo transportation.\n" +
-            " Therefore, it is necessary  to find a compromise between these two conditions.\n" +
+            "Therefore, it is necessary  to find a compromise between these two conditions.\n" +
             "2. Trunk\n" +
-            " Being in the trunk gives a certain amount of freedom to the animal, but deprives access to oxygen. \n" +
+            "Being in the trunk gives a certain amount of freedom to the animal, but deprives access to oxygen. \n" +
             "3.Rear seat\n" +
             "According to the traffic regulations, the luggage must be secured. \n" +
             "Example of fastening a dog with a rear seat belt\n" +
@@ -293,24 +293,14 @@ public class Constants {
                 "1. Choose an animal to your liking, and not just because you feel sorry for him or on the\n " +
                 "principle of  he needs it more.\n  " +
                 "2.And you also need to take into account your lifestyle and\n" +
-                " conditions,  advises Amal Bayeva. — If you lead an active lifestyle yourself, like walking in\n " +
+                "conditions,  advises Amal Bayeva. — If you lead an active lifestyle yourself, like walking in\n" +
                 "the fresh air, then take an active, playful dog. If all this is not for you, then take a quiet one.\n" +
                 "3.The same applies to cats. If there are children, it is better to take a less characteristic animal,\n " +
-               "such a pet will not tolerate unsolicited squeezing and will not play at the first invitation.\n" +
-               "4.Keep in mind that you will not be able to find out the nature of the animal in one walk.\n " +
-                "5.New visitors for shelter animals are stressful, and even during several meetings the pet\n " +
-                "will not behave as usual. Only at home, having already established contact and trust with the\n " +
-                "animal, you will be able to establish good relations. ";
-
-
-
-
-
-
-
-
-
-
+                "such a pet will not tolerate unsolicited squeezing and will not play at the first invitation.\n" +
+                "4.Keep in mind that you will not be able to find out the nature of the animal in one walk.\n" +
+                "5.New visitors for shelter animals are stressful, and even during several meetings the pet\n" +
+                "will not behave as usual. Only at home, having already established contact and trust with the\n" +
+                "animal, you will be able to establish good relations.";
 }
 
 
