@@ -7,13 +7,13 @@ import lombok.Getter;
 import pro.sky.telegrambot.entity.CommandType;
 
 public class Answer extends ResponseModel{
-    public Answer(Long userId, String textMessage) {
-        super(userId, textMessage);
+    public Answer(Long fromId, Long toId, String textMessage) {
+        super(fromId, toId, textMessage);
     }
 
     @Override
     public SendMessage formatMessage() {
-        return new SendMessage(this.userId, toStringMessageStructure());
+        return new SendMessage(this.toId, toStringMessageStructure());
     }
 
     @Override

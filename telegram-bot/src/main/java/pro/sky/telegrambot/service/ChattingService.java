@@ -15,11 +15,11 @@ public class ChattingService {
     private final VolunteerService volunteerService;
 
     public SendMessage getSMFromQuestion(Question response) {
-        volunteerService.keepVolunteerBusy(response.getUserId(), true);
+        volunteerService.keepVolunteerBusy(response.getToId(), true);
         return response.formatMessage();
     }
     public SendMessage getSMFromAnswer(Answer response) {
-        volunteerService.keepVolunteerBusy(response.getUserId(), false);
+        volunteerService.keepVolunteerBusy(response.getFromId(), false);
         return response.formatMessage();
     }
 

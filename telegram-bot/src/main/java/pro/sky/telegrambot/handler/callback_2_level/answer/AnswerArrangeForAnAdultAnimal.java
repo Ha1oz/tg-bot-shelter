@@ -50,9 +50,7 @@ public EditMessageText handle(Update update) {
 
     //TODO: из БД
 
-
-
-            EditMessageText editMessage = new EditMessageText(chatId, messageId, TEXTARRANGEFORANADULT)
+    EditMessageText editMessage = new EditMessageText(chatId, messageId, TEXTARRANGEFORANADULT)
             .replyMarkup(keyboard);
 
     return editMessage;

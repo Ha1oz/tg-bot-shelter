@@ -79,8 +79,6 @@ public class Constants  {
                     "*WITH A BREAK FOR LUNCH EVERY DAY (13.00-14.00)!*";
 
     public final static String TEXTDOGWORKINGTIME =
-
-
             "Schedule:\nMonday:  " + "07:30–19:30\n" +
                     "Tuesday:  " + "07:30–19:30\n" +
                     "Wednesday:  " + "07:30–19:30\n" +

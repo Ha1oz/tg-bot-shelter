@@ -6,10 +6,8 @@ import com.pengrad.telegrambot.request.SendMessage;
 import lombok.Getter;
 import pro.sky.telegrambot.entity.CommandType;
 public class Question extends ResponseModel {
-    private final Long fromId;
     public Question(Long fromId, Long toId, String textMessage) {
-        super(toId, textMessage);
-        this.fromId = fromId;
+        super(fromId, toId, textMessage);
     }
 
     //TODO: add some parameters like questionTime for more details
@@ -24,7 +22,7 @@ public class Question extends ResponseModel {
                                 "[Write answer for question]"
                 )
         );
-        SendMessage sendMessage = new SendMessage(this.userId, toStringMessageStructure())
+        SendMessage sendMessage = new SendMessage(this.toId, toStringMessageStructure())
                 .replyMarkup(keyboardMarkup);
 
         return sendMessage;
