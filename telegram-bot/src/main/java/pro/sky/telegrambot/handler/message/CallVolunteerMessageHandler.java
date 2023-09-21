@@ -53,16 +53,14 @@ public class CallVolunteerMessageHandler implements MessageChainHandler {
         Long userId = message.chat().id();
         String textReport = message.text().substring(commandEntity.offset() + commandEntity.length());
 
-        InlineKeyboardMarkup keyboardMarkup = new InlineKeyboardMarkup(
-                new InlineKeyboardButton("Back").callbackData(CommandType.START_CALLBACK.getCommand())
-        );
-
-
 
         // TODO: queue of questions and do uniform distribution for volunteers
         Volunteer volunteer = service.getFreeVolunteer();
 
         if (volunteer == null) {
+            InlineKeyboardMarkup keyboardMarkup = new InlineKeyboardMarkup(
+                    new InlineKeyboardButton("Back").callbackData(CommandType.START_CALLBACK.getCommand())
+            );
             return new SendMessage(chatId, "Call volunteers doesn't available now. Please try again later.").replyMarkup(keyboardMarkup);
         }
 
@@ -70,7 +68,7 @@ public class CallVolunteerMessageHandler implements MessageChainHandler {
 
         telegramBot.execute(service.getSMFromQuestion(question));
 
-        return new SendMessage(chatId, "Volunteer is called. Please wait his response.").replyMarkup(keyboardMarkup);
+        return new SendMessage(chatId, "Volunteer is called. Please wait his response.");
     }
 
 }
