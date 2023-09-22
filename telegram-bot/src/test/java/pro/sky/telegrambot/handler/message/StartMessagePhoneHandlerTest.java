@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class StartMessagePhoneHandlerImplTest  {
+public class StartMessagePhoneHandlerTest {
     @Test
     public void testCheckStart() {
         Update update = mock(Update.class);
@@ -20,7 +20,7 @@ public class StartMessagePhoneHandlerImplTest  {
         when(update.message()).thenReturn(message);
         when(message.text()).thenReturn("9");
 
-        StartMessagePhoneHandlerImpl handler = new StartMessagePhoneHandlerImpl();
+        StartMessagePhoneHandler handler = new StartMessagePhoneHandler();
         boolean result = handler.check(update);
 
         assertEquals(true, result);
@@ -33,7 +33,7 @@ public class StartMessagePhoneHandlerImplTest  {
         when(update.message()).thenReturn(message);
         when(message.text()).thenReturn("8");
 
-        StartMessagePhoneHandlerImpl handler = new StartMessagePhoneHandlerImpl();
+        StartMessagePhoneHandler handler = new StartMessagePhoneHandler();
         boolean result = handler.check(update);
 
         assertEquals(false, result);
